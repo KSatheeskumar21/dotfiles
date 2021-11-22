@@ -128,7 +128,7 @@ font-3 = "JetBrains Mono:size=8;0"
 
 modules-left = i3 xwindow
 modules-center = kernel
-modules-right = memory2 cpu2 date
+modules-right = battery date
 
 separator = |
 
