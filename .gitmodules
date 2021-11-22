@@ -1,0 +1,3 @@
+[submodule "/home/kishore/.doom.d"]
+	path = /home/kishore/.doom.d
+	url = https://github.com/KSatheeskumar21/doom-emacs-config
