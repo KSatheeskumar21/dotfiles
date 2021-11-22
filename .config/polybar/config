@@ -68,7 +68,7 @@ format-offset =
 ;alert = #bd2c40
 
 ; Tokyo Night theme =========
-background = #aa1a1b26
+background = #1a1b26
 foreground = #f8f8f2
 background-alt = #7aa2f7
 foreground-alt = #f8f8f2
@@ -126,8 +126,7 @@ font-1 = "FontAwesome:size=8;0"
 font-2 = "JetBrains Mono:size=8;0"
 font-3 = "JetBrains Mono:size=8;0"
 
-;modules-left = i3 xwindow
-modules-left = ewmh xwindow
+modules-left = i3 xwindow
 modules-center = kernel
 modules-right = memory2 cpu2 date
 
