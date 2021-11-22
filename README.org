@@ -1,1 +1,6 @@
 * Dotfiles
+
+This is my new repo for my dotfiles, because I want to move everything from GitLab over to GitHub.
+
+Here you'll find my i3 config, my spectrwm config, and a new LeftWM theme because I wasn't happy with my previous theme.
+I also have my [[https://github.com/hlissner/doom-emacs][Doom Emacs]] config [[https://github.com/KSatheeskumar21][here.]]

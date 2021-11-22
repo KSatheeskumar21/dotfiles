@@ -1,0 +1,5 @@
+#+TITLE: Readme
+
+* My i3 Config
+
+Pretty standard i3 config. I'm using Polybar as my status bar, [[github.com/xrelkd/clipcat][Clipcat]] to manage my clipboard.

@@ -1,0 +1,5 @@
+#+TITLE: Readme
+
+* My SpectrWM Config
+
+Like my i3 Config, I'm using [[https://github.com/xrelkd/clipcat][Clipcat]] to manage my clipboard, but my bar is a seprate script, the baraction script in this directory.
