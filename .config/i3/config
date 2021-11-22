@@ -744,3 +744,4 @@ client.background       #242424
 #
 # Clipboard
 exec_always --no-startup-id klipper
+exec_always --no-startup-id clipcatctl
