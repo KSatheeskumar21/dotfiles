@@ -743,4 +743,4 @@ client.background       #242424
 # exec --no-startup-id unclutter
 #
 # Clipboard
-exec --no-startup-id klipper
+exec_always --no-startup-id klipper
