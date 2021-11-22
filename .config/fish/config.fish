@@ -30,7 +30,7 @@ alias ls="exa -lahF"
 alias code="codium"
 
 ## Git Bare repo alias
-alias config="/usr/bin/git --git-dir=$HOME/.cfg --work-tree=$HOME"
+# alias config="/usr/bin/git --git-dir=$HOME/.cfg --work-tree=$HOME"
 
 # Doom alias
 alias doom="~/.emacs.d/bin/doom"
