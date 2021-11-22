@@ -116,6 +116,8 @@ bindsym mod1+F3 exec --no-startup-id xfce4-appfinder
 ################# Emacs
 bindsym $mod+shift+e exec --no-startup-id emacsclient -c -a 'emacs'
 
+################# Clipcat
+bindsym mod1+shift+c exec --no-startup-id clipcat-menu
 
 ################# how to exit, logoff, suspend, ...
 
