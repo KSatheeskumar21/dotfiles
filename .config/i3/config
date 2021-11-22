@@ -741,3 +741,6 @@ client.background       #242424
 
 # get the mouse out of the way with unclutter
 # exec --no-startup-id unclutter
+#
+# Clipboard
+exec --no-startup-id klipper
