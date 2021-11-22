@@ -3,6 +3,9 @@ set TERM "xterm-256color"
 set EDITOR "emacsclient -c -a emacs"
 set VISUAL "emacsclient -c -a emacs"
 
+# Fish Vi keybindings
+fish_vi_key_bindings
+
 # PATH variable
 export PATH="$HOME/bin:/usr/local/bin:/usr/bin:$PATH"
 
