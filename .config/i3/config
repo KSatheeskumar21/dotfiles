@@ -113,6 +113,10 @@ bindsym mod1+F3 exec --no-startup-id xfce4-appfinder
 # start xlunch app launcher
 # bindsym mod1+F5 exec --no-startup-id xlunch --config ~/.config/xlunch/default.conf --input ~/.config/xlunch/entries.dsv
 
+################# Emacs
+bindsym $mod+shift+e exec --no-startup-id emacsclient -c -a 'emacs'
+
+
 ################# how to exit, logoff, suspend, ...
 
 # Backup exit
@@ -744,4 +748,5 @@ client.background       #242424
 #
 # Clipboard
 exec_always --no-startup-id klipper
-exec_always --no-startup-id clipcatctl
+exec_always --no-startup-id clipcatd
+exec_always --no-startup-id /usr/bin/emacs --daemon
