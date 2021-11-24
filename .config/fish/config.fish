@@ -1,7 +1,7 @@
 # Setting Editor and Visual variables
 set TERM "xterm-256color"
-set EDITOR "emacsclient -c -a emacs"
-set VISUAL "emacsclient -c -a emacs"
+set EDITOR "emacs"
+set VISUAL "emacs"
 
 # Fish Vi keybindings
 fish_vi_key_bindings
