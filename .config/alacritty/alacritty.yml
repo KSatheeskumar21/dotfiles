@@ -100,6 +100,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
+    family: Source Code Pro
     # family: JetBrains Mono
     # family: CodeNewRoman Nerd Font
     # family: RobotoMono Nerd Font
@@ -108,7 +109,7 @@ font:
     # family: UbuntuMono Nerd Font
     # family: Monofur Nerd Font
     # family: TerminessTTF Nerd Font
-    family: Mononoki Nerd Font
+    # family: Mononoki Nerd Font
     # The `style` can be specified to pick a specific face.
     style: Regular
 
@@ -118,6 +119,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
+    family: Source Code Pro
     # family: JetBrains Mono
     # family: CodeNewRoman Nerd Font
     # family: RobotoMono Nerd Font
@@ -126,7 +128,7 @@ font:
     # family: UbuntuMono Nerd Font
     # family: Monofur Nerd Font
     # family: TerminessTTF Nerd Font
-    family: Mononoki Nerd Font
+    # family: Mononoki Nerd Font
     # The `style` can be specified to pick a specific face.
     style: Bold
 
@@ -136,6 +138,7 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
+    family: Source Code Pro
     # family: JetBrains Mono
     # family: CodeNewRoman Nerd Font
     # family: RobotoMono Nerd Font
@@ -144,7 +147,7 @@ font:
     # family: UbuntuMono Nerd Font
     # family: Monofuritalic Nerd Font Mono
     # family: TerminessTTF Nerd Font
-    family: Mononoki Nerd Font
+    # family: Mononoki Nerd Font
     # The `style` can be specified to pick a specific face.
     style: Italic
 
@@ -162,7 +165,8 @@ font:
     # family: UbuntuMono Nerd Font
     # family: Monofuritalic Nerd Font Mono
     # family: TerminessTTF Nerd Font
-    family: Mononoki Nerd Font
+    # family: Mononoki Nerd Font
+    family: Source Code Pro
     # The `style` can be specified to pick a specific face.
     style: Bold Italic
 
@@ -366,7 +370,7 @@ colors: *tokyo-night
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
 background_opacity: 1.0
-# background_opacity: 0.80
+# background_opacity: 0.6
 #selection:
 #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
 # When set to `true`, selected text will be copied to the primary clipboard.
