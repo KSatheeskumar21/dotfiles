@@ -368,7 +368,7 @@ schemes:
 # *dracula
 # *tokyo-night
 # *doom-city-lights
-colors: *doom-city-lights
+colors: *doom-one
 
 #######################################
 ##       END OF COLOR SCHEMES        ##
