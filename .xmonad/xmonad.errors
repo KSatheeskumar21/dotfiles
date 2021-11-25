@@ -1,14 +1,14 @@
 
-xmonad.hs:206:16: warning: [-Wdeprecations]
+xmonad.hs:209:16: warning: [-Wdeprecations]
     In the use of ‘spacing’ (imported from XMonad.Layout.Spacing):
     Deprecated: "Use spacingRaw instead."
     |
-206 |      tiled   = spacing 5 $ Tall nmaster delta ratio
+209 |      tiled   = spacing 5 $ Tall nmaster delta ratio
     |                ^^^^^^^
 
-xmonad.hs:268:1: warning: [-Wtabs]
-    Tab character found here, and in five further locations.
+xmonad.hs:272:1: warning: [-Wtabs]
+    Tab character found here, and in six further locations.
     Please use spaces instead.
     |
-268 |         spawn "dunst"
+272 |         spawn "/usr/bin/emacs --daemon &"
     | ^^^^^^^^

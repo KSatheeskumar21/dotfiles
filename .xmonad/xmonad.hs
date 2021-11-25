@@ -33,7 +33,7 @@ myLauncher = "dmenu_run -p 'Run:' -h 24"
 myBrowser = "brave"
 
 -- Preferred Text editor
-myEditor = spawn "emacs"
+myEditor = spawn "emacsclient -c -a 'emacs'"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -131,6 +131,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Spawn Emacsclient
     , ((modm .|. shiftMask, xK_e), myEditor)
+
+    -- Spawn Thunar
+    , ((modm .|. shiftMask, xK_f), spawn "thunar")
 
     -- Clipcat-menu
     , ((modm .|. shiftMask, xK_o), spawn "clipcat-menu")
@@ -232,7 +235,8 @@ myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
-    , className =? "mpv"            --> doFloat
+    -- , className =? "mpv"            --> doFloat
+    -- , className =? "Thunar"         --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 
@@ -265,7 +269,8 @@ myLogHook = return ()
 -- By default, do nothing.
 myStartupHook = do
         spawnOnce "nitrogen --restore &"
-	spawn "dunst"
+	spawn "/usr/bin/emacs --daemon &"
+	spawn "dunst &"
 	spawn "clipcatd"
 	spawn "~/.config/polybar/launch.sh"
 	spawn "volumeicon &"
