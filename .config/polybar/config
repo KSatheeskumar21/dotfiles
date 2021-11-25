@@ -84,6 +84,9 @@ background-alt = #3E4456
 primary = #1a12b6
 secondary = #2ac3de
 alert = #bd2c40
+volume-min = #2aa889
+volume-med = #edb443
+volume-max = #c23127
 
 ################################################################################
 ################################################################################
@@ -676,7 +679,7 @@ monitor = ${env:MONITOR}
 monitor-strict = false
 override-redirect = false
 width = 100%
-height = 30
+height = 24
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0.0
@@ -715,7 +718,7 @@ font-3 = "Noto Sans Mono:size=10;0"
 font-4 = "FontAwesome5Brands:size=13;0"
 
 modules-left = ewmh
-modules-center = kernel
+;modules-center = kernel
 modules-right = pavolume memory2 cpu2 date
 
 tray-detached = false
@@ -725,7 +728,7 @@ tray-padding = 2
 tray-maxsize = 20
 tray-scale = 1.0
 tray-position = right
-tray-background = ${colors.background}
+tray-background = ${colors.background-alt}
 
 
 ################################################################################
