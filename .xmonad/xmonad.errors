@@ -7,8 +7,8 @@ xmonad.hs:209:16: warning: [-Wdeprecations]
     |                ^^^^^^^
 
 xmonad.hs:272:1: warning: [-Wtabs]
-    Tab character found here, and in six further locations.
+    Tab character found here, and in 7 further locations.
     Please use spaces instead.
     |
-272 |         spawn "/usr/bin/emacs --daemon &"
+272 |         spawnOnce "picom --experimental-backends &"
     | ^^^^^^^^

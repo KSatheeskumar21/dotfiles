@@ -269,10 +269,11 @@ myLogHook = return ()
 -- By default, do nothing.
 myStartupHook = do
         spawnOnce "nitrogen --restore &"
+	spawnOnce "picom --experimental-backends &"
 	spawn "/usr/bin/emacs --daemon &"
 	spawn "dunst &"
 	spawn "clipcatd"
-	spawn "~/.config/polybar/launch.sh"
+	-- spawn "~/.config/polybar/launch.sh"
 	spawn "volumeicon &"
 	spawn "nm-applet &"
 
@@ -281,7 +282,9 @@ myStartupHook = do
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = xmonad $ ewmh $ docks defaults
+main = do
+  xmproc0 <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/doom-one-xmobarrc"
+  xmonad $ ewmh $ docks defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
