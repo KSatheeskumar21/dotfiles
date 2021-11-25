@@ -335,7 +335,7 @@ schemes:
 # *doom-one
 # *dracula
 # *tokyo-night
-colors: *tokyo-night
+colors: *doom-one
 
 #######################################
 ##       END OF COLOR SCHEMES        ##
