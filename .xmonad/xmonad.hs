@@ -273,7 +273,7 @@ myStartupHook = do
 	spawn "/usr/bin/emacs --daemon &"
 	spawn "dunst &"
 	spawn "clipcatd"
-	-- spawn "~/.config/polybar/launch.sh"
+	spawn "~/.config/polybar/launch.sh"
 	spawn "volumeicon &"
 	spawn "nm-applet &"
 
@@ -283,8 +283,8 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-  xmproc0 <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/doom-one-xmobarrc"
-  xmonad $ ewmh $ docks defaults
+       -- xmproc0 <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/doom-one-xmobarrc"
+       xmonad $ ewmh $ docks defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
