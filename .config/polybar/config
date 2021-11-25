@@ -77,7 +77,7 @@ format-offset =
 ;alert = #bd2c40
 
 ; Doom Once theme ===========
-background = #22262a
+background = #282c34
 foreground = #c7c0b3
 foreground-alt = #c7c0b3
 background-alt = #3E4456
@@ -728,7 +728,7 @@ tray-padding = 8
 tray-maxsize = 20
 tray-scale = 1.0
 tray-position = right
-tray-background = ${colors.background-alt}
+tray-background = ${colors.background}
 
 
 ################################################################################
