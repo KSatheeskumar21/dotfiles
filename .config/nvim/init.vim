@@ -15,6 +15,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin('~/.config/nvim/plugged')
 	
 	Plug 'ghifarit53/tokyonight-vim'
+    Plug 'romgrk/doom-one.vim'
 	Plug 'vim-airline/vim-airline'
 	Plug 'mhinz/vim-startify'
 	Plug 'preservim/nerdtree'
@@ -25,13 +26,12 @@ call plug#end()
 
 set termguicolors
 
-let g:tokyonight_style = 'night' 
+let g:tokyonight_style = 'night'
 let g:tokyonight_enable_italic = 1
 let g:airline_theme = "tokyonight"
 let g:airline_powerline_fonts = 1
 
-colorscheme tokyonight
-
+colorscheme doom-one
 
 " Remapping Splits
 nnoremap <C-h> <C-w>h
