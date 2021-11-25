@@ -68,11 +68,20 @@ format-offset =
 ;alert = #bd2c40
 
 ; Tokyo Night theme =========
-background = #1a1b26
-foreground = #f8f8f2
-background-alt = #7aa2f7
-foreground-alt = #f8f8f2
-primary = #1a1b26
+;background = #1a1b26
+;foreground = #f8f8f2
+;background-alt = #7aa2f7
+;foreground-alt = #f8f8f2
+;primary = #1a1b26
+;secondary = #2ac3de
+;alert = #bd2c40
+
+; Doom Once theme ===========
+background = #22262a
+foreground = #c7c0b3
+foreground-alt = #c7c0b3
+background-alt = #3E4456
+primary = #1a12b6
 secondary = #2ac3de
 alert = #bd2c40
 
