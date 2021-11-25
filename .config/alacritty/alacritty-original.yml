@@ -293,7 +293,6 @@ schemes:
       cyan: '#59dffc'
       white: '#e6e6d1'
 
-### Tokyo Night ###
   tokyo-night:
     &tokyo-night
     name: TokyoNight Night
@@ -329,37 +328,6 @@ schemes:
       - { index: 16, color: '0xff9e64' }
       - { index: 17, color: '0xdb4b4b' }
 
-### Doom City Lights ###
-    doom-city-lights:
-      &doom-city-lights
-      primary:
-        background: '#1D252C'
-        foreground: '#A0B3C5'
-      cursor:
-        text: CellBackground
-        cursor: '#528bff'
-      selection:
-        text: CellForeground
-        background: '#3e4451'
-      normal:
-        black: '#111122'
-        red: '#ff6655'
-        green: '#99bb66'
-        yellow: '#EEBB88'
-        blue: '#55CCFF'
-        magenta: '#EE7788'
-        cyan: '#008899'
-        white: '#AABBCC'
-      bright:
-        black: '#222222'
-        red: '#dd8844'
-        green: '#99bb66'
-        yellow: '#EEBB88'
-        blue: '#55CCFF'
-        magenta: '#BB2266'
-        cyan: '#77EEEE'
-        white: '#7788AA'
-
 ######################################################################
 ## SET THEME: Choose ONE color scheme from those in the above list. ##
 ## ###################################################################
@@ -367,8 +335,7 @@ schemes:
 # *doom-one
 # *dracula
 # *tokyo-night
-# *doom-city-lights
-colors: *doom-city-lights
+colors: *doom-one
 
 #######################################
 ##       END OF COLOR SCHEMES        ##
