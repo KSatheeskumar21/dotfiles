@@ -25,7 +25,7 @@ alias pacmanedit="sudoedit /etc/pacman.conf"
 alias vim="nvim"
 
 ## ls alias
-alias ls="exa -lahF"
+alias ls="exa -lahF --icons"
 
 alias code="codium"
 
