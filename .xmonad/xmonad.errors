@@ -6,9 +6,9 @@ xmonad.hs:206:16: warning: [-Wdeprecations]
 206 |      tiled   = spacing 5 $ Tall nmaster delta ratio
     |                ^^^^^^^
 
-xmonad.hs:267:1: warning: [-Wtabs]
+xmonad.hs:268:1: warning: [-Wtabs]
     Tab character found here, and in five further locations.
     Please use spaces instead.
     |
-267 |         spawn "dunst"
+268 |         spawn "dunst"
     | ^^^^^^^^

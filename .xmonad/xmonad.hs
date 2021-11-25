@@ -33,7 +33,7 @@ myLauncher = "dmenu_run -p 'Run:' -h 24"
 myBrowser = "brave"
 
 -- Preferred Text editor
-myEditor = "emacs"
+myEditor = spawn "emacs"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -130,7 +130,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
     -- Spawn Emacsclient
-    , ((modm .|. shiftMask, xK_e), spawn myEditor)
+    , ((modm .|. shiftMask, xK_e), myEditor)
 
     -- Clipcat-menu
     , ((modm .|. shiftMask, xK_o), spawn "clipcat-menu")
@@ -142,7 +142,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
     -- Quit xmonad
-    , ((modm .|. shiftMask, xK_x     ), io (exitWith ExitSuccess))
+    , ((modm .|. shiftMask, xK_x     ), io exitSuccess)
 
     -- Restart xmonad
     , ((modm .|. shiftMask, xK_r     ), spawn "xmonad --recompile; xmonad --restart")
@@ -232,6 +232,7 @@ myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
+    , className =? "mpv"            --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 
