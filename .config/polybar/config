@@ -719,12 +719,12 @@ font-4 = "FontAwesome5Brands:size=13;0"
 
 modules-left = ewmh
 ;modules-center = kernel
-modules-right = pavolume memory2 cpu2 date
+modules-right = memory2 cpu2 date
 
 tray-detached = false
 tray-offset-x = 0
 tray-offset-y = 0
-tray-padding = 2
+tray-padding = 8
 tray-maxsize = 20
 tray-scale = 1.0
 tray-position = right
