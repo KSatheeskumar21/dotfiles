@@ -1,14 +1,14 @@
 
-xmonad.hs:209:16: warning: [-Wdeprecations]
+xmonad.hs:213:16: warning: [-Wdeprecations]
     In the use of ‘spacing’ (imported from XMonad.Layout.Spacing):
     Deprecated: "Use spacingRaw instead."
     |
-209 |      tiled   = spacing 5 $ Tall nmaster delta ratio
+213 |      tiled   = spacing 5 $ Tall nmaster delta ratio
     |                ^^^^^^^
 
-xmonad.hs:272:1: warning: [-Wtabs]
-    Tab character found here, and in 7 further locations.
+xmonad.hs:309:1: warning: [-Wtabs]
+    Tab character found here, and in one further location.
     Please use spaces instead.
     |
-272 |         spawnOnce "picom --experimental-backends &"
+309 |         manageHook         = myManageHook,
     | ^^^^^^^^

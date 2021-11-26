@@ -8,6 +8,9 @@ import System.Exit
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
+-- Extras
+import System.IO
+
 -- XMonad Utilties
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
@@ -16,6 +19,7 @@ import XMonad.Util.Dmenu
 -- Hooks
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.DynamicLog
 
 -- Layouts & Layout modifiers
 import XMonad.Layout.Spacing
@@ -33,7 +37,7 @@ myLauncher = "dmenu_run -p 'Run:' -h 24"
 myBrowser = "brave"
 
 -- Preferred Text editor
-myEditor = spawn "emacsclient -c -a 'emacs'"
+myEditor = "emacsclient -c -a 'emacs'"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -130,7 +134,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
     -- Spawn Emacsclient
-    , ((modm .|. shiftMask, xK_e), myEditor)
+    , ((mod1Mask .|. shiftMask, xK_e), spawn myEditor)
 
     -- Spawn Thunar
     , ((modm .|. shiftMask, xK_f), spawn "thunar")
@@ -269,13 +273,13 @@ myLogHook = return ()
 -- By default, do nothing.
 myStartupHook = do
         spawnOnce "nitrogen --restore &"
-	spawnOnce "picom --experimental-backends &"
-	spawn "/usr/bin/emacs --daemon &"
-	spawn "dunst &"
-	spawn "clipcatd"
-	spawn "~/.config/polybar/launch.sh"
-	spawn "volumeicon &"
-	spawn "nm-applet &"
+        spawnOnce "picom --experimental-backends &"
+        spawnOnce "/usr/bin/emacs --daemon &"
+        spawnOnce "dunst &"
+        spawnOnce "clipcatd"
+        spawn "~/.config/polybar/launch.sh"
+        spawnOnce "volumeicon &"
+        spawnOnce "nm-applet &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -283,16 +287,8 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-       -- xmproc0 <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/doom-one-xmobarrc"
-       xmonad $ ewmh $ docks defaults
-
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
--- No need to modify this.
---
-defaults = def {
+       -- xmproc <- spawnPipe "/usr/bin/xmobar" 
+       xmonad $ ewmh $ docks $ def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -312,7 +308,7 @@ defaults = def {
         layoutHook         = gaps [(U, 5), (R, 5)] $ myLayout, 
 	manageHook         = myManageHook,
         handleEventHook    = myEventHook,
-        logHook            = myLogHook,
+	logHook            = myLogHook,
         startupHook        = myStartupHook
     }
 

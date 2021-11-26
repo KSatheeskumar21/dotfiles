@@ -321,4 +321,4 @@ alias config="/usr/bin/git --git-dir=$HOME/.cfg --work-tree=$HOME"
 #cpufetch
 #colorscript random
 eval "$(starship init bash)"
-pokemon-colorscripts -r
+#pokemon-colorscripts -r

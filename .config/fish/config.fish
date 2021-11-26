@@ -63,6 +63,6 @@ alias tosddm="sudo pacman -S sddm --noconfirm --needed ; sudo systemctl enable s
 alias neofetch="neofetch --kitty"
 
 # Startup stuff
-set -g fish_greeting
 pokemon-colorscripts -r
+set -g fish_greeting
 starship init fish | source
