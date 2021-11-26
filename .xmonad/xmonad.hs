@@ -57,6 +57,7 @@ myBorderWidth   = 1
 -- "windows key" is usually mod4Mask.
 --
 myModMask       = mod4Mask
+altMask         = mod1Mask
 
 -- The default number of workspaces (virtual screens) and their names.
 -- By default we use numeric strings, but any string may be used as a
@@ -134,7 +135,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
     -- Spawn Emacsclient
-    , ((mod1Mask .|. shiftMask, xK_e), spawn myEditor)
+    , ((altMask .|. shiftMask, xK_e), spawn myEditor)
 
     -- Spawn Thunar
     , ((modm .|. shiftMask, xK_f), spawn "thunar")
@@ -152,7 +153,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_x     ), io exitSuccess)
 
     -- Restart xmonad
-    , ((modm .|. shiftMask, xK_r     ), spawn "xmonad --recompile; xmonad --restart")
+    , ((altMask .|. shiftMask, xK_r     ), spawn "xmonad --recompile; xmonad --restart")
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
     , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
@@ -277,10 +278,9 @@ myStartupHook = do
         spawnOnce "/usr/bin/emacs --daemon &"
         spawnOnce "dunst &"
         spawnOnce "clipcatd"
-        -- spawnOnce "~/.config/polybar/launch.sh"
+        spawnOnce "~/.config/polybar/launch.sh"
         spawnOnce "volumeicon &"
         spawnOnce "nm-applet &"
-        spawnOnce "xmobar -x 0 $HOME/.config/xmobar/doom-one-xmobarrc"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -288,7 +288,7 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-       xmproc0 <- spawnPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/doom-one-xmobarrc" 
+       -- xmproc0 <- spawnPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/doom-one-xmobarrc" 
        xmonad $ ewmh $ docks $ def {
       -- simple stuff
         terminal           = myTerminal,
