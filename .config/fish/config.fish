@@ -14,6 +14,8 @@ set -x MANPAGER '/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft
 
 # Functions
 
+# Functions End
+
 # Aliases
 
 ## Config Aliases
@@ -62,7 +64,9 @@ alias tosddm="sudo pacman -S sddm --noconfirm --needed ; sudo systemctl enable s
 # Neofetch
 alias neofetch="neofetch --kitty"
 
+# Aliases End
+
 # Startup stuff
-pokemon-colorscripts -r
+#pokemon-colorscripts -r
 set -g fish_greeting
-starship init fish | source
+#starship init fish | source

@@ -1837,11 +1837,12 @@ label-monitor = %name%
 label-active = %name%
 label-active-foreground = ${colors.foreground}
 label-active-background = ${colors.background}
-label-active-underline= #6790eb
+label-active-underline = ${colors.primary}
 label-active-padding = 2
 
 label-occupied = %name%
 label-occupied-background = ${colors.background}
+label-occupied-underline = ${colors.secondary}
 label-occupied-padding = 2
 
 label-urgent = %name%
@@ -1849,7 +1850,6 @@ label-urgent-foreground = ${colors.foreground}
 label-urgent-background = ${colors.alert}
 label-urgent-underline = ${colors.alert}
 label-urgent-padding = 2
-
 
 label-empty = %name%
 label-empty-foreground = ${colors.foreground}
