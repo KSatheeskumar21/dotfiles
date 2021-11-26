@@ -37,6 +37,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'kovetskiy/sxhkd-vim'
 	Plug 'vim-python/python-syntax'
 	Plug 'ap/vim-css-color'
+	Plug 'rstacruz/vim-closer'
+	Plug 'tpope/vim-endwise'
 
 call plug#end()
 
