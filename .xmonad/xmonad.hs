@@ -277,9 +277,10 @@ myStartupHook = do
         spawnOnce "/usr/bin/emacs --daemon &"
         spawnOnce "dunst &"
         spawnOnce "clipcatd"
-        spawn "~/.config/polybar/launch.sh"
+        -- spawnOnce "~/.config/polybar/launch.sh"
         spawnOnce "volumeicon &"
         spawnOnce "nm-applet &"
+        spawnOnce "xmobar -x 0 $HOME/.config/xmobar/doom-one-xmobarrc"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -287,7 +288,7 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-       -- xmproc <- spawnPipe "/usr/bin/xmobar" 
+       xmproc0 <- spawnPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/doom-one-xmobarrc" 
        xmonad $ ewmh $ docks $ def {
       -- simple stuff
         terminal           = myTerminal,

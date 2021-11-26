@@ -6,9 +6,9 @@ xmonad.hs:213:16: warning: [-Wdeprecations]
 213 |      tiled   = spacing 5 $ Tall nmaster delta ratio
     |                ^^^^^^^
 
-xmonad.hs:309:1: warning: [-Wtabs]
+xmonad.hs:310:1: warning: [-Wtabs]
     Tab character found here, and in one further location.
     Please use spaces instead.
     |
-309 |         manageHook         = myManageHook,
+310 |         manageHook         = myManageHook,
     | ^^^^^^^^
