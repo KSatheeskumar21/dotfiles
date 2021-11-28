@@ -38,6 +38,7 @@ myBrowser = "brave"
 
 -- Preferred Text editor
 myEditor = "emacsclient -c -a 'emacs'"
+altEditor = "code"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -136,6 +137,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Spawn Emacsclient
     , ((altMask .|. shiftMask, xK_e), spawn myEditor)
+    , ((altMask,               xK_e), spawn altEditor)
 
     -- Spawn Thunar
     , ((modm .|. shiftMask, xK_f), spawn "thunar")
@@ -156,7 +158,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((altMask .|. shiftMask, xK_r     ), spawn "xmonad --recompile; xmonad --restart")
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
-    , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
+    , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | yad --file -"))
     ]
     ++
 
@@ -240,6 +242,7 @@ myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
+    , className =? "Qalculate-gtk"     --> doFloat
     -- , className =? "mpv"            --> doFloat
     -- , className =? "Thunar"         --> doFloat
     , resource  =? "desktop_window" --> doIgnore
