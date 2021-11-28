@@ -53,7 +53,7 @@ let g:tokyonight_enable_italic = 1
 
 " Statusline theme
 let g:lightline = {
-		\ 'colorscheme': 'material',
+		\ 'colorscheme': 'darcula',
 		\}
 
 " Always show statusline
@@ -61,7 +61,7 @@ set laststatus=2
 set noshowmode
 
 " Colorscheme of choice
-colorscheme doom-one
+" colorscheme doom-one
 
 " Remapping Splits
 nnoremap <C-h> <C-w>h
