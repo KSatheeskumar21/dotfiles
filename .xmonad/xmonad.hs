@@ -292,7 +292,7 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-       h <- spawnPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/doom-one-xmobarrc" 
+       h <- spawnPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/tokyo-night-xmobarrc" 
        xmonad $ ewmh $ docks $ def {
       -- simple stuff
         terminal           = myTerminal,
