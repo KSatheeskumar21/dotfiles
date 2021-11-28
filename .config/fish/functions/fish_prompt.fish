@@ -2,11 +2,12 @@
 function fish_prompt
   set -l last_status $status
   set -l cyan (set_color -o cyan)
-  set -l yellow (set_color -o yellow)
+  set -l yellow (set_color -o bryellow)
   set -l magenta (set_color -o magenta)
-  set -g red (set_color -o red)
+  set -g red (set_color red)
   set -g blue (set_color -o blue)
   set -l green (set_color -o green)
+  set -l orange (set_color -o brred)
   set -g normal (set_color normal)
 
   set -l ahead (_git_ahead)
@@ -14,10 +15,10 @@ function fish_prompt
 
   if test $last_status = 0
     set initial_indicator "$green◆"
-    set status_indicator "$cyan❯$blue❯$magenta❯"
+    set status_indicator "$magenta❯$cyan❯$blue❯"
   else
     set initial_indicator "$red✖ $last_status"
-    set status_indicator "$red❯$red❯$red❯"
+    set status_indicator "$red❯$orange❯$yellow❯"
   end
   set -l cwd $cyan(basename (prompt_pwd))
 

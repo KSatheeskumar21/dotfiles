@@ -7,7 +7,7 @@ set VISUAL "emacs"
 fish_vi_key_bindings
 
 # PATH variable
-export PATH="$HOME/bin:/usr/local/bin:/usr/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:$PATH"
 
 # Setting Manpager
 set -x MANPAGER '/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft=man ts=8 nomod nolist norelativenumber nonu noma\" -c \"normal L\" -c \"nmap q :qa<CR>\"</dev/tty <(col -b)"'
@@ -29,7 +29,7 @@ alias vim="nvim"
 ## ls alias
 alias ls="exa -lahF --icons"
 
-alias code="codium"
+#alias code="codium"
 
 ## Git Bare repo alias
 # alias config="/usr/bin/git --git-dir=$HOME/.cfg --work-tree=$HOME"

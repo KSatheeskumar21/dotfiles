@@ -262,7 +262,7 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook = return ()
+-- myLogHook = return()
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -278,7 +278,7 @@ myStartupHook = do
         spawnOnce "/usr/bin/emacs --daemon &"
         spawnOnce "dunst &"
         spawnOnce "clipcatd"
-        spawnOnce "~/.config/polybar/launch.sh"
+        -- spawnOnce "~/.config/polybar/launch.sh"
         spawnOnce "volumeicon &"
         spawnOnce "nm-applet &"
 
@@ -288,7 +288,7 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-       -- xmproc0 <- spawnPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/doom-one-xmobarrc" 
+       h <- spawnPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/doom-one-xmobarrc" 
        xmonad $ ewmh $ docks $ def {
       -- simple stuff
         terminal           = myTerminal,
@@ -307,9 +307,10 @@ main = do
       -- hooks, layouts
         -- layoutHook         = spacingRaw True (Border 0 5 5 5) True (Border 0 5 5 5) True $ myLayout,
         layoutHook         = gaps [(U, 5), (R, 5)] $ myLayout, 
-	manageHook         = myManageHook,
+        manageHook         = myManageHook,
         handleEventHook    = myEventHook,
-	logHook            = myLogHook,
+        -- logHook            = myLogHook,
+        logHook            = dynamicLogWithPP $ def { ppOutput = hPutStrLn h },
         startupHook        = myStartupHook
     }
 
