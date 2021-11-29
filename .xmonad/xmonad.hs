@@ -38,7 +38,8 @@ myTerminal      = "alacritty"
 myLauncher = "dmenu_run -p 'Run:' -h 24"
 
 -- Preferred Browser Program
-myBrowser = "brave"
+-- myBrowser = "brave"
+myBrowser = "brave-dev"
 
 -- Preferred Text editor
 myEditor = "emacsclient -c -a 'emacs'"
@@ -142,7 +143,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Spawn Emacsclient
     , ((altMask .|. shiftMask, xK_e), spawn myEditor)
 
-    -- Spawn VSCode in Xmonad directory
+    -- Spawn VSCode
     , ((altMask,               xK_e), spawn altEditor)
 
     -- Spawn Thunar
@@ -150,6 +151,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Clipcat-menu
     , ((modm .|. shiftMask, xK_o), spawn "clipcat-menu")
+
+    -- Spawns brave browser
+    , ((altMask .|. shiftMask, xK_b), spawn myBrowser)
 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
