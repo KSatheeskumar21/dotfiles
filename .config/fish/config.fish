@@ -69,4 +69,4 @@ alias neofetch="neofetch --kitty"
 # Startup stuff
 #pokemon-colorscripts -r
 set -g fish_greeting
-#starship init fish | source
+starship init fish | source
