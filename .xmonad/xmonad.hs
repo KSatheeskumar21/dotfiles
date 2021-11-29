@@ -24,6 +24,10 @@ import XMonad.Hooks.DynamicLog
 -- Layouts & Layout modifiers
 import XMonad.Layout.Spacing
 import XMonad.Layout.Gaps
+import XMonad.Layout.SimplestFloat
+import XMonad.Layout.GridVariants(Grid(Grid))
+import XMonad.Layout.Tabbed
+import XMonad.Layout.Spiral
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -38,7 +42,7 @@ myBrowser = "brave"
 
 -- Preferred Text editor
 myEditor = "emacsclient -c -a 'emacs'"
-altEditor = "code"
+altEditor = "code .xmonad"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -137,6 +141,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Spawn Emacsclient
     , ((altMask .|. shiftMask, xK_e), spawn myEditor)
+
+    -- Spawn VSCode in Xmonad directory
     , ((altMask,               xK_e), spawn altEditor)
 
     -- Spawn Thunar
@@ -210,7 +216,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
+myLayout = avoidStruts (tiled ||| simplestFloat ||| Grid(16/10) ||| spiral(6/7) ||| simpleTabbed ||| Mirror tiled ||| Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = spacing 5 $ Tall nmaster delta ratio
@@ -281,10 +287,10 @@ myStartupHook = do
         spawnOnce "/usr/bin/emacs --daemon &"
         spawnOnce "dunst &"
         spawnOnce "clipcatd"
-        -- spawnOnce "~/.config/polybar/launch.sh"
-        spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x1a1b26 --height 22 &"
         spawnOnce "volumeicon &"
+        spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x1D252C --height 22 &"
         spawnOnce "nm-applet &"
+        -- spawnOnce "~/.config/polybar/launch.sh"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -292,7 +298,7 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-       h <- spawnPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/tokyo-night-xmobarrc" 
+       h <- spawnPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/doom-city-lights-xmobarrc" 
        xmonad $ ewmh $ docks $ def {
       -- simple stuff
         terminal           = myTerminal,
