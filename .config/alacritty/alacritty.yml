@@ -629,7 +629,7 @@ schemes:
 # *tokyo-night
 # *doom-city-lights
 
-colors: *tokyo-night
+colors: *doom-one
 
 #######################################
 ##       END OF COLOR SCHEMES        ##
