@@ -42,7 +42,7 @@ myBrowser = "brave"
 
 -- Preferred Text editor
 myEditor = "emacsclient -c -a 'emacs'"
-altEditor = "code .xmonad"
+altEditor = "code"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
