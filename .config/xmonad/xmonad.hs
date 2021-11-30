@@ -165,6 +165,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Quit xmonad
     , ((modm .|. shiftMask, xK_x     ), io exitSuccess)
+    , ((altMask .|. shiftMask, xK_q     ), spawn "lxsession-logout")
 
     -- Restart xmonad
     , ((altMask .|. shiftMask, xK_r     ), spawn "xmonad --recompile; xmonad --restart")
