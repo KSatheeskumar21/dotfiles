@@ -19,8 +19,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'ghifarit53/tokyonight-vim'
         Plug 'romgrk/doom-one.vim'
 	" Status line
-	"Plug 'vim-airline/vim-airline'
-	Plug 'itchyny/lightline.vim'
+	Plug 'vim-airline/vim-airline'
+	"Plug 'itchyny/lightline.vim'
 	" Start page
 	Plug 'mhinz/vim-startify'
 	" File manager
@@ -48,13 +48,13 @@ set termguicolors
 
 let g:tokyonight_style = 'night'
 let g:tokyonight_enable_italic = 1
-"let g:airline_theme = "tokyonight"
-"let g:airline_powerline_fonts = 0
+let g:airline_theme = "tokyonight"
+let g:airline_powerline_fonts = 0
 
 " Statusline theme
-let g:lightline = {
-		\ 'colorscheme': 'darcula',
-		\}
+" let g:lightline = {
+" 		\ 'colorscheme': 'darcula',
+" 		\}
 
 " Always show statusline
 set laststatus=2
