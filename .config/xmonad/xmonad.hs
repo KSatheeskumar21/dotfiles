@@ -152,7 +152,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((altMask,               xK_e), spawn altEditor)
 
     -- Spawn Thunar
-    , ((modm .|. shiftMask, xK_f), spawn "thunar")
+    , ((modm .|. shiftMask, xK_f), spawn "pcmanfm")
 
     -- Clipcat-menu
     , ((modm .|. shiftMask, xK_o), spawn "clipcat-menu")
@@ -322,8 +322,8 @@ main = do
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = spacingRaw True (Border 0 5 5 5) True (Border 0 5 5 5) True $ myLayout,
-        -- layoutHook         = gaps [(U, 5), (R, 5)] $ myLayout, 
+        -- layoutHook         = spacingRaw True (Border 0 5 5 5) True (Border 0 5 5 5) True $ myLayout,
+        layoutHook         = gaps [(U, 5), (R, 5)] $ myLayout, 
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         -- logHook            = myLogHook,
