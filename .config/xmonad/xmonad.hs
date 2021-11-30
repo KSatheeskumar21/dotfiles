@@ -1,5 +1,6 @@
 {-# OPTIONS_GHC -Wno-deprecations #-}
--- Xmonad Config
+-- Kishore's Xmonad Config
+-- github.com/KSatheeskumar21
 
 -- XMonad Base
 import XMonad
