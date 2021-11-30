@@ -218,14 +218,23 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 ------------------------------------------------------------------------
 -- My preferred layouts
 
-myLayout = avoidStruts (tiled ||| tiledDef ||| simplestFloat ||| Grid(16/10) ||| spiral(6/7) ||| simpleTabbed ||| Mirror tiledDef ||| Full)
+-- Extra Layouts
+
+-- Layout for working in Emacs
+-- emacsLayout = renamed [Replace "EmacsDev"] $ Mirror $ ResizableTall 3 (3/100) 1.0 []
+
+-- Golden ratio for Spiral Layout
+goldenRatio = toRational (2/(1 + sqrt 5 :: Double))
+spiralLayout = renamed [Replace "Golden Spiral"] $ spacing 5 $ spiral goldenRatio
+
+myLayout = avoidStruts (tiled ||| tiledDef ||| simplestFloat ||| Grid(16/10) ||| spiralLayout ||| simpleTabbed ||| Mirror tiledDef ||| Full)
   where
 
      -- Tiled layout (ResizableTile)
-     tiled = spacing 5 $ ResizableTall nmaster delta ratio []
+     tiled = renamed [Replace "Resizable M&Stack"] $ spacing 5 $ ResizableTall nmaster delta ratio []
      
      -- default tiling algorithm partitions the screen into two panes
-     tiledDef   = spacing 5 $ Tall nmaster delta ratio
+     tiledDef   = renamed [Replace "Master and Stack"] $ spacing 5 $ Tall nmaster delta ratio
 
      -- The default number of windows in the master pane
      nmaster = 1
