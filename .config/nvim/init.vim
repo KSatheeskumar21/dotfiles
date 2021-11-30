@@ -20,6 +20,7 @@ call plug#begin('~/.vim/plugged')
         Plug 'romgrk/doom-one.vim'
 	" Status line
 	Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
 	"Plug 'itchyny/lightline.vim'
 	" Start page
 	Plug 'mhinz/vim-startify'
@@ -49,6 +50,7 @@ set termguicolors
 let g:tokyonight_style = 'night'
 let g:tokyonight_enable_italic = 1
 let g:airline_theme = "tokyonight"
+" Set this to 1 for arrows 
 let g:airline_powerline_fonts = 0
 
 " Statusline theme
