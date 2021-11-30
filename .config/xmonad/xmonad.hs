@@ -1,4 +1,3 @@
-{-# OPTIONS_GHC -Wno-deprecations #-}
 -- Kishore's Xmonad Config
 -- github.com/KSatheeskumar21
 
@@ -26,10 +25,14 @@ import XMonad.Hooks.DynamicLog
 -- Layouts & Layout modifiers
 import XMonad.Layout.Spacing
 import XMonad.Layout.Gaps
+import XMonad.Layout.PerWorkspace
 import XMonad.Layout.SimplestFloat
 import XMonad.Layout.GridVariants(Grid(Grid))
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Spiral
+import XMonad.Layout.Renamed
+import XMonad.Layout.Magnifier
+import XMonad.Layout.ResizableTile
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -76,7 +79,7 @@ altMask         = mod1Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
+myWorkspaces    = ["dev","www","sys","doc","vbox","chat","mus","vid","gfx"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -213,20 +216,16 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
 
 ------------------------------------------------------------------------
--- Layouts:
+-- My preferred layouts
 
--- You can specify and transform your layouts by modifying these values.
--- If you change layout bindings be sure to use 'mod-shift-space' after
--- restarting (with 'mod-q') to reset your layout state to the new
--- defaults, as xmonad preserves your old layout settings by default.
---
--- The available layouts.  Note that each layout is separated by |||,
--- which denotes layout choice.
---
-myLayout = avoidStruts (tiled ||| simplestFloat ||| Grid(16/10) ||| spiral(6/7) ||| simpleTabbed ||| Mirror tiled ||| Full)
+myLayout = avoidStruts (tiled ||| tiledDef ||| simplestFloat ||| Grid(16/10) ||| spiral(6/7) ||| simpleTabbed ||| Mirror tiledDef ||| Full)
   where
+
+     -- Tiled layout (ResizableTile)
+     tiled = spacing 5 $ ResizableTall nmaster delta ratio []
+     
      -- default tiling algorithm partitions the screen into two panes
-     tiled   = spacing 5 $ Tall nmaster delta ratio
+     tiledDef   = spacing 5 $ Tall nmaster delta ratio
 
      -- The default number of windows in the master pane
      nmaster = 1
@@ -236,7 +235,6 @@ myLayout = avoidStruts (tiled ||| simplestFloat ||| Grid(16/10) ||| spiral(6/7) 
 
      -- Percent of screen to increment by when resizing panes
      delta   = 3/100
-
 ------------------------------------------------------------------------
 -- Window rules:
 
@@ -324,8 +322,8 @@ main = do
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        -- layoutHook         = spacingRaw True (Border 0 5 5 5) True (Border 0 5 5 5) True $ myLayout,
-        layoutHook         = gaps [(U, 5), (R, 5)] $ myLayout, 
+        layoutHook         = spacingRaw True (Border 0 5 5 5) True (Border 0 5 5 5) True $ myLayout,
+        -- layoutHook         = gaps [(U, 5), (R, 5)] $ myLayout, 
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         -- logHook            = myLogHook,
