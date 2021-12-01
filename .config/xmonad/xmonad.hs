@@ -226,8 +226,9 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- Golden ratio for Spiral Layout
 goldenRatio = toRational (2/(1 + sqrt 5 :: Double))
 spiralLayout = renamed [Replace "Golden Spiral"] $ spacing 5 $ spiral goldenRatio
+floatingLayout = renamed [Replace "Floating"] simplestFloat
 
-myLayout = avoidStruts (tiled ||| tiledDef ||| simplestFloat ||| Grid(16/10) ||| spiralLayout ||| simpleTabbed ||| Mirror tiledDef ||| Full)
+myLayout = avoidStruts (tiled ||| tiledDef ||| floatingLayout ||| Grid(16/10) ||| spiralLayout ||| simpleTabbed ||| Mirror tiledDef ||| Full)
   where
 
      -- Tiled layout (ResizableTile)
