@@ -21,6 +21,7 @@ import XMonad.Util.Dmenu
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.SetWMName
 
 -- Layouts & Layout modifiers
 import XMonad.Layout.Spacing
@@ -33,6 +34,12 @@ import XMonad.Layout.Spiral
 import XMonad.Layout.Renamed
 import XMonad.Layout.Magnifier
 import XMonad.Layout.ResizableTile
+
+-- Prompts
+-- import XMonad.Prompt
+-- import XMonad.Prompt.AppLauncher
+-- import XMonad.Prompt.Man
+-- import XMonad.Prompt.Shell
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -97,6 +104,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch dmenu
     , ((modm .|. shiftMask,               xK_Return     ), spawn myLauncher)
 
+    -- Keybinding Group - Xmonad.Prompt
+    -- , ((altMask .|. shiftMask,                 xK_Return), shellPrompt def)
+    -- , ((altMask, xK_m), manPrompt def)
+
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
 
@@ -122,7 +133,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_m     ), windows W.focusMaster  )
 
     -- Swap the focused window and the master window
-    -- , ((modm,               xK_Return), windows W.swapMaster)
+    , ((altMask,               xK_Return), windows W.shiftMaster)
 
     -- Swap the focused window with the next window
     , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
@@ -131,19 +142,19 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
 
     -- Shrink the master area
-    , ((modm,               xK_h     ), sendMessage Shrink)
+    -- , ((modm,               xK_h     ), sendMessage Shrink)
 
     -- Expand the master area
-    , ((modm,               xK_l     ), sendMessage Expand)
+    -- , ((modm,               xK_l     ), sendMessage Expand)
 
     -- Push window back into tiling
     , ((modm,               xK_t     ), withFocused $ windows . W.sink)
 
     -- Increment the number of windows in the master area
-    , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
+    -- , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
 
     -- Deincrement the number of windows in the master area
-    , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
+    -- , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
     -- Spawn Emacsclient
     , ((altMask .|. shiftMask, xK_e), spawn myEditor)
@@ -220,15 +231,13 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
 -- Extra Layouts
 
--- Layout for working in Emacs
--- emacsLayout = renamed [Replace "EmacsDev"] $ Mirror $ ResizableTall 3 (3/100) 1.0 []
 
 -- Golden ratio for Spiral Layout
 goldenRatio = toRational (2/(1 + sqrt 5 :: Double))
 spiralLayout = renamed [Replace "Golden Spiral"] $ spacing 5 $ spiral goldenRatio
 floatingLayout = renamed [Replace "Floating"] simplestFloat
 
-myLayout = avoidStruts (tiled ||| tiledDef ||| floatingLayout ||| Grid(16/10) ||| spiralLayout ||| simpleTabbed ||| Mirror tiledDef ||| Full)
+myLayout = avoidStruts (tiled ||| tiledDef ||| floatingLayout ||| emacsLayout ||| Grid(16/10) ||| spiralLayout ||| simpleTabbed ||| Mirror tiledDef ||| Full)
   where
 
      -- Tiled layout (ResizableTile)
@@ -236,6 +245,9 @@ myLayout = avoidStruts (tiled ||| tiledDef ||| floatingLayout ||| Grid(16/10) ||
      
      -- default tiling algorithm partitions the screen into two panes
      tiledDef   = renamed [Replace "Master and Stack"] $ spacing 5 $ Tall nmaster delta ratio
+
+     -- Layout for working in Emacs
+     emacsLayout = renamed [Replace "EmacsDev"] $ spacing 5 $ Mirror $ Tall nmaster delta ratio
 
      -- The default number of windows in the master pane
      nmaster = 1
@@ -307,6 +319,7 @@ myStartupHook = do
         spawnOnce "nm-applet &"
         spawnOnce "xfce4-power-manager &"
         spawnOnce "lxsession &"
+        setWMName "nintenno-xmonad"
         -- spawnOnce "~/.config/polybar/launch.sh"
 
 ------------------------------------------------------------------------
@@ -333,7 +346,7 @@ main = do
 
       -- hooks, layouts
         -- layoutHook         = spacingRaw True (Border 0 5 5 5) True (Border 0 5 5 5) True $ myLayout,
-        layoutHook         = gaps [(U, 5), (R, 5)] $ myLayout, 
+        layoutHook         = gaps [(U, 8), (R, 8)] myLayout,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         -- logHook            = myLogHook,
