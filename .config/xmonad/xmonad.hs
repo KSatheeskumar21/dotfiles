@@ -16,6 +16,7 @@ import System.IO
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import XMonad.Util.Dmenu
+import XMonad.Util.EZConfig
 
 -- Hooks
 import XMonad.Hooks.ManageDocks
@@ -34,6 +35,9 @@ import XMonad.Layout.Spiral
 import XMonad.Layout.Renamed
 import XMonad.Layout.Magnifier
 import XMonad.Layout.ResizableTile
+
+-- Actions
+import XMonad.Actions.MouseResize
 
 -- Prompts
 -- import XMonad.Prompt
@@ -96,50 +100,51 @@ myFocusedBorderColor = "#ff0000"
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
-myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
+myKeys :: [(String, X ())]
+myKeys =
 
     -- launch a terminal
-    [ ((modm, xK_Return), spawn myTerminal)
+    [ ("M-<Return>", spawn myTerminal)
 
     -- launch dmenu
-    , ((modm .|. shiftMask,               xK_Return     ), spawn myLauncher)
+    , ("M-S-<Return>", spawn myLauncher)
 
     -- Keybinding Group - Xmonad.Prompt
     -- , ((altMask .|. shiftMask,                 xK_Return), shellPrompt def)
     -- , ((altMask, xK_m), manPrompt def)
 
     -- close focused window
-    , ((modm .|. shiftMask, xK_c     ), kill)
+    , ("M-S-c", kill)
 
      -- Rotate through the available layout algorithms
-    , ((modm,               xK_space ), sendMessage NextLayout)
+    , ("M-<Space>", sendMessage NextLayout)
 
     --  Reset the layouts on the current workspace to default
-    , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
+    -- , ("M-S-<Space>", setLayout $ XMonad.layoutHook conf)
 
     -- Resize viewed windows to the correct size
-    , ((modm,               xK_n     ), refresh)
+    , ("M-n", refresh)
 
     -- Move focus to the next window
-    , ((modm,               xK_Tab   ), windows W.focusDown)
+    , ("M-<Tab>", windows W.focusDown)
 
     -- Move focus to the next window
-    , ((modm,               xK_j     ), windows W.focusDown)
+    , ("M-j", windows W.focusDown)
 
     -- Move focus to the previous window
-    , ((modm,               xK_k     ), windows W.focusUp  )
+    , ("M-k", windows W.focusUp  )
 
     -- Move focus to the master window
-    , ((modm,               xK_m     ), windows W.focusMaster  )
+    , ("M-m", windows W.focusMaster  )
 
     -- Swap the focused window and the master window
-    , ((altMask,               xK_Return), windows W.shiftMaster)
+    , ("M1-<Return>", windows W.shiftMaster)
 
     -- Swap the focused window with the next window
-    , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
+    , ("M-S-j", windows W.swapDown  )
 
     -- Swap the focused window with the previous window
-    , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
+    , ("M-S-k", windows W.swapUp    )
 
     -- Shrink the master area
     -- , ((modm,               xK_h     ), sendMessage Shrink)
@@ -148,7 +153,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm,               xK_l     ), sendMessage Expand)
 
     -- Push window back into tiling
-    , ((modm,               xK_t     ), withFocused $ windows . W.sink)
+    , ("M-t", withFocused $ windows . W.sink)
 
     -- Increment the number of windows in the master area
     -- , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
@@ -157,19 +162,19 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
     -- Spawn Emacsclient
-    , ((altMask .|. shiftMask, xK_e), spawn myEditor)
+    , ("M1-S-e", spawn myEditor)
 
     -- Spawn VSCode
-    , ((altMask,               xK_e), spawn altEditor)
+    , ("M1-e", spawn altEditor)
 
     -- Spawn Thunar
-    , ((modm .|. shiftMask, xK_f), spawn "pcmanfm")
+    , ("M-S-f", spawn "pcmanfm")
 
     -- Clipcat-menu
-    , ((modm .|. shiftMask, xK_o), spawn "clipcat-menu")
+    , ("M-S-o", spawn "clipcat-menu")
 
     -- Spawns brave browser
-    , ((altMask .|. shiftMask, xK_b), spawn myBrowser)
+    , ("M1-S-b", spawn myBrowser)
 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
@@ -178,53 +183,33 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
     -- Quit xmonad
-    , ((modm .|. shiftMask, xK_x     ), io exitSuccess)
-    , ((altMask .|. shiftMask, xK_q     ), spawn "lxsession-logout")
+    , ("M-S-x", io exitSuccess)
+    , ("M1-S-q", spawn "lxsession-logout")
 
     -- Restart xmonad
-    , ((altMask .|. shiftMask, xK_r     ), spawn "xmonad --recompile; xmonad --restart")
+    , ("M1-S-r", spawn "xmonad --recompile; xmonad --restart")
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
-    , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | yad --file -"))
+    , ("M-S-/", spawn ("echo \"" ++ help ++ "\" | yad --file -"))
     ]
-    ++
 
     --
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
     --
-    [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-    ++
+    -- [((m .|. modm, k), windows $ f i)
+    --    | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
+    --    , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+    -- ++
 
     --
     -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
     --
-    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    -- [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+    --     | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
+    --     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
-
-------------------------------------------------------------------------
--- Mouse bindings: default actions bound to mouse events
---
-myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
-
-    -- mod-button1, Set the window to floating mode and move by dragging
-    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
-                                       >> windows W.shiftMaster))
-
-    -- mod-button2, Raise the window to the top of the stack
-    , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
-
-    -- mod-button3, Set the window to floating mode and resize by dragging
-    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
-                                       >> windows W.shiftMaster))
-
-    -- you may also bind events to the mouse scroll wheel (button4 and button5)
-    ]
 
 ------------------------------------------------------------------------
 -- My preferred layouts
@@ -233,11 +218,13 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
 
 -- Golden ratio for Spiral Layout
-goldenRatio = toRational (2/(1 + sqrt 5 :: Double))
-spiralLayout = renamed [Replace "Golden Spiral"] $ spacing 5 $ spiral goldenRatio
+-- goldRatio = toRational (2/(1 + sqrt 5 :: Double))
+-- spiralLayout = renamed [Replace "Golden Spiral"] $ spacing 5 $ spiral goldRatio
+
+-- Floating Layout
 floatingLayout = renamed [Replace "Floating"] simplestFloat
 
-myLayout = avoidStruts (tiled ||| tiledDef ||| floatingLayout ||| emacsLayout ||| Grid(16/10) ||| spiralLayout ||| simpleTabbed ||| Mirror tiledDef ||| Full)
+myLayout = mouseResize $ avoidStruts (tiled ||| tiledDef ||| floatingLayout ||| emacsLayout ||| Grid(16/10) ||| simpleTabbed ||| Mirror tiledDef ||| Full)
   where
 
      -- Tiled layout (ResizableTile)
@@ -341,8 +328,8 @@ main = do
         focusedBorderColor = myFocusedBorderColor,
 
       -- key bindings
-        keys               = myKeys,
-        mouseBindings      = myMouseBindings,
+        -- keys               = myKeybindings,
+        -- mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
         -- layoutHook         = spacingRaw True (Border 0 5 5 5) True (Border 0 5 5 5) True $ myLayout,
@@ -352,7 +339,7 @@ main = do
         -- logHook            = myLogHook,
         logHook            = dynamicLogWithPP $ def { ppOutput = hPutStrLn h },
         startupHook        = myStartupHook
-    }
+    } `additionalKeysP` myKeys
 
 -- | Finally, a copy of the default bindings in simple textual tabular format.
 help :: String
