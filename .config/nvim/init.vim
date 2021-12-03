@@ -1,6 +1,7 @@
 set nocompatible
 set splitbelow splitright
 set number
+set undodir=~/.config/nvim/undodir
 filetype off
 
 if empty(glob('~/.vim/autoload/plug.vim'))
