@@ -1,4 +1,4 @@
 configuration {
-	theme: "~/.config/rofi/themes/tokyo-night-center.rasi";
+icon-theme: "BeautyLine";
 }
-
+@theme "~/.config/rofi/themes/tokyo-night-center.rasi"
