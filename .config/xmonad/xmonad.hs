@@ -332,8 +332,8 @@ main = do
         -- mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        -- layoutHook         = spacingRaw True (Border 0 5 5 5) True (Border 0 5 5 5) True $ myLayout,
-        layoutHook         = gaps [(U, 8), (R, 8)] myLayout,
+        layoutHook         = spacingRaw True (Border 0 5 5 5) True (Border 0 5 5 5) True myLayout,
+        -- layoutHook         = gaps [(U, 5), (R, 5)] myLayout,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         -- logHook            = myLogHook,
