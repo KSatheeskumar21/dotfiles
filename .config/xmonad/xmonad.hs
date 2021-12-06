@@ -23,6 +23,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
+-- import XMonad.Hooks.StatusBar
 
 -- Layouts & Layout modifiers
 import XMonad.Layout.Spacing
@@ -296,16 +297,22 @@ myEventHook = mempty
 --
 -- By default, do nothing.
 myStartupHook = do
+        -- Spawn the emacs daemon
+        spawn "/usr/bin/emacs --daemon &"
+        -- Set a wallpaper and enable compositor
         spawnOnce "nitrogen --restore &"
         spawnOnce "picom --experimental-backends &"
-        spawnOnce "/usr/bin/emacs --daemon &"
+        -- Notifications and clipboard
         spawnOnce "dunst &"
         spawnOnce "clipcatd"
+        -- System tray stuff, power management (laptop only)
         spawnOnce "volumeicon &"
         spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x1D252C --height 22 &"
         spawnOnce "nm-applet &"
         spawnOnce "xfce4-power-manager &"
+        -- Polkit app
         spawnOnce "lxsession &"
+        -- WM name
         setWMName "nintenno-xmonad"
         -- spawnOnce "~/.config/polybar/launch.sh"
 
@@ -315,6 +322,7 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
+       -- Xmobar
        h <- spawnPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/doom-city-lights-xmobarrc" 
        xmonad $ ewmh $ docks $ def {
       -- simple stuff
