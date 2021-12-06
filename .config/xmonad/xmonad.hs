@@ -302,7 +302,7 @@ myStartupHook = do
         -- Set a wallpaper and enable compositor
         spawnOnce "nitrogen --restore &"
         -- spawnOnce "picom --experimental-backends --config ~/.config/picom/picom.conf &"
-	spawnOnce "picom --config ~/.config/picom/picom.conf &"
+	spawnOnce "picom &"
         -- Notifications and clipboard
         spawnOnce "dunst &"
         -- spawnOnce "clipcatd"
