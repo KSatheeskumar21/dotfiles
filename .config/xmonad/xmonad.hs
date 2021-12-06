@@ -301,7 +301,8 @@ myStartupHook = do
         spawn "/usr/bin/emacs --daemon &"
         -- Set a wallpaper and enable compositor
         spawnOnce "nitrogen --restore &"
-        spawnOnce "picom --experimental-backends &"
+        -- spawnOnce "picom --experimental-backends --config ~/.config/picom/picom.conf &"
+	spawnOnce "picom --config ~/.config/picom/picom.conf &"
         -- Notifications and clipboard
         spawnOnce "dunst &"
         -- spawnOnce "clipcatd"
