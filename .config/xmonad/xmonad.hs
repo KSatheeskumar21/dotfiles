@@ -229,13 +229,13 @@ myLayout = mouseResize $ avoidStruts (tiled ||| tiledDef ||| floatingLayout ||| 
   where
 
      -- Tiled layout (ResizableTile)
-     tiled = renamed [Replace "Resizable M&Stack"] $ spacing 5 $ ResizableTall nmaster delta ratio []
+     tiled = renamed [Replace "Resizable M&Stack"] $ spacing 10 $ ResizableTall nmaster delta ratio []
      
      -- default tiling algorithm partitions the screen into two panes
-     tiledDef   = renamed [Replace "Master and Stack"] $ spacing 5 $ Tall nmaster delta ratio
+     tiledDef   = renamed [Replace "Master and Stack"] $ spacing 10 $ Tall nmaster delta ratio
 
      -- Layout for working in Emacs
-     emacsLayout = renamed [Replace "EmacsDev"] $ spacing 5 $ Mirror $ Tall nmaster delta ratio
+     emacsLayout = renamed [Replace "EmacsDev"] $ spacing 10 $ Mirror $ Tall nmaster delta ratio
 
      -- The default number of windows in the master pane
      nmaster = 1
@@ -340,7 +340,7 @@ main = do
         -- mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = spacingRaw True (Border 0 5 5 5) True (Border 0 5 5 5) True myLayout,
+        layoutHook         = spacingRaw True (Border 0 10 10 10) True (Border 0 10 10 10) True myLayout,
         -- layoutHook         = gaps [(U, 5), (R, 5)] myLayout,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
