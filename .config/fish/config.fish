@@ -14,6 +14,12 @@ set -x MANPAGER '/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft
 
 # Functions
 
+## Fish greeting
+function fish_greeting
+	pokemon-colorscripts -r
+	echo (set_color brred) "Welcome to your fish shell!"
+end
+
 # Functions End
 
 # Aliases
@@ -67,6 +73,5 @@ alias neofetch="neofetch --kitty"
 # Aliases End
 
 # Startup stuff
-#pokemon-colorscripts -r
-set -g fish_greeting
+#set -g fish_greeting
 starship init fish | source
