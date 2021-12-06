@@ -172,7 +172,7 @@ myKeys =
     , ("M-S-f", spawn "pcmanfm")
 
     -- Clipcat-menu
-    , ("M-S-o", spawn "clipcat-menu")
+    -- , ("M-S-o", spawn "clipcat-menu")
 
     -- Spawns brave browser
     , ("M1-S-b", spawn myBrowser)
@@ -304,7 +304,7 @@ myStartupHook = do
         spawnOnce "picom --experimental-backends &"
         -- Notifications and clipboard
         spawnOnce "dunst &"
-        spawnOnce "clipcatd"
+        -- spawnOnce "clipcatd"
         spawnOnce "xfce4-clipman &"
         -- System tray stuff, power management (laptop only)
         spawnOnce "volumeicon &"
