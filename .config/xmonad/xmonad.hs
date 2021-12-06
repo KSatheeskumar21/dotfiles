@@ -305,6 +305,7 @@ myStartupHook = do
         -- Notifications and clipboard
         spawnOnce "dunst &"
         spawnOnce "clipcatd"
+        spawnOnce "xfce4-clipman &"
         -- System tray stuff, power management (laptop only)
         spawnOnce "volumeicon &"
         spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x1D252C --height 22 &"
