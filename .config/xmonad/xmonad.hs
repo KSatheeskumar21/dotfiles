@@ -283,7 +283,8 @@ myManageHook = composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = ewmhDesktopsEventHook
+-- myEventHook :: XConfig a -> XConfig a
+-- myEventHook = ewmhDesktopsEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -351,7 +352,7 @@ main = do
         -- layoutHook         = gaps [(U, 8), (R, 8)] myLayout,
         layoutHook         = spacingWithEdge 5 myLayout,
         manageHook         = myManageHook,
-        handleEventHook    = myEventHook,
+        -- handleEventHook    = ewmh,
         -- logHook            = myLogHook,
         logHook            = workspaceHistoryHook <+> dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn h
                                                        , ppCurrent = xmobarColor "#7aa2f7" "" . wrap "[" "]"
