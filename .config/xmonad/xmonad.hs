@@ -22,6 +22,7 @@ import XMonad.Util.EZConfig
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.WorkspaceHistory
 import XMonad.Hooks.SetWMName
 -- import XMonad.Hooks.StatusBar
 
@@ -38,7 +39,11 @@ import XMonad.Layout.Magnifier
 import XMonad.Layout.ResizableTile
 
 -- Actions
+import XMonad.Actions.GroupNavigation
+import XMonad.Actions.CycleWS
 import XMonad.Actions.MouseResize
+import XMonad.Layout.Spacing (spacingRaw)
+import System.Posix (BaudRate(B600))
 
 -- Prompts
 -- import XMonad.Prompt
@@ -188,10 +193,10 @@ myKeys =
     , ("M1-S-q", spawn "lxsession-logout")
 
     -- Restart xmonad
-    , ("M1-S-r", spawn "xmonad --recompile; xmonad --restart")
+    , ("M-S-r", spawn "xmonad --recompile; xmonad --restart")
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
-    , ("M-S-/", spawn ("echo \"" ++ help ++ "\" | yad --file -"))
+    -- , ("M-S-/", spawn ("echo \"" ++ help ++ "\" | yad "))
     ]
 
     --
@@ -229,13 +234,13 @@ myLayout = mouseResize $ avoidStruts (tiled ||| tiledDef ||| floatingLayout ||| 
   where
 
      -- Tiled layout (ResizableTile)
-     tiled = renamed [Replace "Resizable M&Stack"] $ spacing 8 $ ResizableTall nmaster delta ratio []
+     tiled = renamed [Replace "Resizable M&Stack"] $ ResizableTall nmaster delta ratio []
      
      -- default tiling algorithm partitions the screen into two panes
-     tiledDef   = renamed [Replace "Master and Stack"] $ spacing 8 $ Tall nmaster delta ratio
+     tiledDef   = renamed [Replace "Master and Stack"] $ Tall nmaster delta ratio
 
      -- Layout for working in Emacs
-     emacsLayout = renamed [Replace "EmacsDev"] $ spacing 8 $ Mirror $ Tall nmaster delta ratio
+     emacsLayout = renamed [Replace "EmacsDev"] $ Mirror $ Tall nmaster delta ratio
 
      -- The default number of windows in the master pane
      nmaster = 1
@@ -278,7 +283,7 @@ myManageHook = composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = mempty
+myEventHook = ewmhDesktopsEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -302,7 +307,7 @@ myStartupHook = do
         -- Set a wallpaper and enable compositor
         spawnOnce "nitrogen --restore &"
         -- spawnOnce "picom --experimental-backends --config ~/.config/picom/picom.conf &"
-	spawnOnce "picom &"
+        -- spawnOnce "picom --config ~/.config/picom/vm-picom.conf &"
         -- Notifications and clipboard
         spawnOnce "dunst &"
         -- spawnOnce "clipcatd"
@@ -342,62 +347,23 @@ main = do
         -- mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = spacingRaw True (Border 0 8 8 8) True (Border 0 8 8 8) True myLayout,
-        -- layoutHook         = gaps [(U, 5), (R, 5)] myLayout,
+        -- layoutHook         = spacingRaw True (Border 0 8 8 8) True (Border 0 8 8 8) True myLayout,
+        -- layoutHook         = gaps [(U, 8), (R, 8)] myLayout,
+        layoutHook         = spacingWithEdge 5 myLayout,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         -- logHook            = myLogHook,
-        logHook            = dynamicLogWithPP $ def { ppOutput = hPutStrLn h },
+        logHook            = workspaceHistoryHook <+> dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn h
+                                                       , ppCurrent = xmobarColor "#7aa2f7" "" . wrap "[" "]"
+                                                       , ppVisible = xmobarColor "#7aa2f7" ""
+                                                       , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""
+                                                       , ppHiddenNoWindows = xmobarColor "#F07178" ""
+                                                       , ppTitle = xmobarColor "#f8f8f2" "" . shorten 60
+                                                       , ppSep = "<fc=#666666> | </fc>"
+                                                       , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
+                                                       -- , ppExtras = [windowCount]
+                                                       , ppOrder = \(ws:l:t:ex) -> [ws,l]++ex++[t]
+                                                       },
         startupHook        = myStartupHook
     } `additionalKeysP` myKeys
 
--- | Finally, a copy of the default bindings in simple textual tabular format.
-help :: String
-help = unlines ["The default modifier key is 'alt'. Default keybindings:",
-    "",
-    "-- launching and killing programs",
-    "mod-Shift-Enter  Launch xterminal",
-    "mod-p            Launch dmenu",
-    "mod-Shift-p      Launch gmrun",
-    "mod-Shift-c      Close/kill the focused window",
-    "mod-Space        Rotate through the available layout algorithms",
-    "mod-Shift-Space  Reset the layouts on the current workSpace to default",
-    "mod-n            Resize/refresh viewed windows to the correct size",
-    "",
-    "-- move focus up or down the window stack",
-    "mod-Tab        Move focus to the next window",
-    "mod-Shift-Tab  Move focus to the previous window",
-    "mod-j          Move focus to the next window",
-    "mod-k          Move focus to the previous window",
-    "mod-m          Move focus to the master window",
-    "",
-    "-- modifying the window order",
-    "mod-Return   Swap the focused window and the master window",
-    "mod-Shift-j  Swap the focused window with the next window",
-    "mod-Shift-k  Swap the focused window with the previous window",
-    "",
-    "-- resizing the master/slave ratio",
-    "mod-h  Shrink the master area",
-    "mod-l  Expand the master area",
-    "",
-    "-- floating layer support",
-    "mod-t  Push window back into tiling; unfloat and re-tile it",
-    "",
-    "-- increase or decrease number of windows in the master area",
-    "mod-comma  (mod-,)   Increment the number of windows in the master area",
-    "mod-period (mod-.)   Deincrement the number of windows in the master area",
-    "",
-    "-- quit, or restart",
-    "mod-Shift-q  Quit xmonad",
-    "mod-q        Restart xmonad",
-    "mod-[1..9]   Switch to workSpace N",
-    "",
-    "-- Workspaces & screens",
-    "mod-Shift-[1..9]   Move client to workspace N",
-    "mod-{w,e,r}        Switch to physical/Xinerama screens 1, 2, or 3",
-    "mod-Shift-{w,e,r}  Move client to screen 1, 2, or 3",
-    "",
-    "-- Mouse bindings: default actions bound to mouse events",
-    "mod-button1  Set the window to floating mode and move by dragging",
-    "mod-button2  Raise the window to the top of the stack",
-    "mod-button3  Set the window to floating mode and resize by dragging"]
