@@ -24,8 +24,8 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.WorkspaceHistory
 import XMonad.Hooks.SetWMName
-import XMonad.Hooks.StatusBar
-import XMonad.Hooks.StatusBar.PP
+-- import XMonad.Hooks.StatusBar
+-- import XMonad.Hooks.StatusBar.PP
 
 -- Layouts & Layout modifiers
 import XMonad.Layout.Spacing
@@ -332,12 +332,14 @@ myStartupHook = do
 --
 
 -- Xmobar
--- myStatusBar = statusBarProp "xmobar -x 0 /home/kishore/.config/xmobar/doom-city-lights-xmobarrc" (pure xmobarPP)
+-- myStatusBarPP = dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn xmproc0 }
 
 main = do
        -- Xmobar
-       mySB <- statusBarPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/doom-city-lights-xmobarrc" (pure xmobarPP)
-       xmonad $ withSB mySB $ ewmh $ docks $ def {
+       -- mySB <- statusBarPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/doom-city-lights-xmobarrc" (pure xmobarPP)
+       mySB <- spawnPipe "xmobar -x 0 /home/kishore/.config/xmobar/doom-city-lights-xmobarrc"
+       -- xmonad $ withSB mySB $ ewmh $ docks $ def {
+       xmonad $ ewmh $ docks $ def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -359,17 +361,17 @@ main = do
         manageHook         = myManageHook,
         -- handleEventHook    = ewmh,
         -- logHook            = myLogHook,
-        -- logHook            = workspaceHistoryHook <+> dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn mySB
-        --                                               , ppCurrent = xmobarColor "#7aa2f7" "" . wrap "[" "]"
-        --                                               , ppVisible = xmobarColor "#7aa2f7" ""
-        --                                               , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""
-        --                                               , ppHiddenNoWindows = xmobarColor "#F07178" ""
-        --                                               , ppTitle = xmobarColor "#f8f8f2" "" . shorten 60
-        --                                               , ppSep = "<fc=#666666> | </fc>"
-        --                                               , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
-                                                   -- , ppExtras = [windowCount]
-        --                                               , ppOrder = \(ws:l:t:ex) -> [ws,l]++ex++[t]
-        --                                               },
+        logHook            = workspaceHistoryHook <+> dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn mySB
+                                                      , ppCurrent = xmobarColor "#7aa2f7" "" . wrap "[" "]"
+                                                      , ppVisible = xmobarColor "#7aa2f7" ""
+                                                      , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""
+                                                      , ppHiddenNoWindows = xmobarColor "#F07178" ""
+                                                      , ppTitle = xmobarColor "#f8f8f2" "" . shorten 60
+                                                      , ppSep = "<fc=#666666> | </fc>"
+                                                      , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
+                                                      -- , ppExtras = [windowCount]
+                                                      , ppOrder = \(ws:l:t:ex) -> [ws,l]++ex++[t]
+                                                      },
         startupHook        = myStartupHook
     } `additionalKeysP` myKeys
 
