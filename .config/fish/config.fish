@@ -17,7 +17,7 @@ set -x MANPAGER '/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft
 ## Fish greeting
 function fish_greeting
 	pokemon-colorscripts -r
-	echo (set_color brred) "Welcome to your fish shell!"
+	# echo (set_color brred) "Welcome to your fish shell!"
 end
 
 # Functions End
