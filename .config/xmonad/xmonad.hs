@@ -43,7 +43,6 @@ import XMonad.Layout.ResizableTile
 import XMonad.Actions.GroupNavigation
 import XMonad.Actions.CycleWS
 import XMonad.Actions.MouseResize
-import XMonad.Layout.Spacing (spacingRaw)
 import System.Posix (BaudRate(B600))
 
 -- Prompts
@@ -97,7 +96,18 @@ altMask         = mod1Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["dev","www","sys","doc","vbox","chat","mus","vid","gfx"]
+-- xmobarEscape :: String -> String
+xmobarEscape = concatMap doubleLts
+  where
+         doubleLts '<' = "<<"
+         doubleLts x = [x]
+
+myWorkspaces :: [String]
+myWorkspaces    = clickable . map xmobarEscape $ ["dev","www","sys","doc","vbox","chat","mus","vid","gfx"]
+  where
+        clickable l = [ "<action=xdotool key super +" ++ show n ++ ">" ++ ws ++ "</action>" |
+                            (i,ws) <- zip [1..9] l,
+                           let n = i ]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -236,7 +246,7 @@ myLayout = mouseResize $ avoidStruts (tiled ||| tiledDef ||| floatingLayout ||| 
 
      -- Tiled layout (ResizableTile)
      tiled = renamed [Replace "Resizable M&Stack"] $ ResizableTall nmaster delta ratio []
-     
+
      -- default tiling algorithm partitions the screen into two panes
      tiledDef   = renamed [Replace "Master and Stack"] $ Tall nmaster delta ratio
 
