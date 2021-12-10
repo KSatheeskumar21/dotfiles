@@ -179,10 +179,13 @@ myKeys =
     -- , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
     -- Spawn Emacsclient
-    , ("M-S-e", spawn myEditor)
+    -- , ("C-e e", spawn (myEditor ++ ("--eval '(dashboard-refresh-buffer)'")))
+    -- , ("C-e v", spawn (myEditor ++ ("--eval '(+vterm/toggle nil)'")))
 
     -- Spawn VSCode
-    , ("M-e", spawn altEditor)
+    , ("M1-e", spawn altEditor)
+    -- , ("M1-e x", spawn (altEditor ++ ".config/xmonad"))
+    -- , ("M1-e a", spawn (altEditor ++ ".config/alacritty"))
 
     -- Spawn Thunar
     , ("M-S-f", spawn "pcmanfm")
@@ -372,10 +375,10 @@ main = do
         -- handleEventHook    = ewmh,
         -- logHook            = myLogHook,
         logHook            = workspaceHistoryHook <+> dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn mySB
-                                                      , ppCurrent = xmobarColor "#7aa2f7" "" . wrap "[" "]"
+                                                      , ppCurrent = xmobarColor "#F07178" "" . wrap "[" "]"
                                                       , ppVisible = xmobarColor "#7aa2f7" ""
                                                       , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""
-                                                      , ppHiddenNoWindows = xmobarColor "#F07178" ""
+                                                      , ppHiddenNoWindows = xmobarColor "#7aa2f7" ""
                                                       , ppTitle = xmobarColor "#f8f8f2" "" . shorten 60
                                                       , ppSep = "<fc=#666666> | </fc>"
                                                       , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
