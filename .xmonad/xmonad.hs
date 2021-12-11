@@ -9,10 +9,9 @@ import System.Exit
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
--- Extras
 import System.IO
 
--- XMonad Utilties
+-- Utilties
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import XMonad.Util.Dmenu
