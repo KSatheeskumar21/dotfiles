@@ -29,7 +29,7 @@ Config { font            = "xft:JetBrains Mono:weight=bold:pixelsize=9:antialias
        , hideOnStart  = False
        , allDesktops  = True
        , persistent   = True
-       , iconRoot     = ".config/xmonad/xpm/"  -- default: "."
+       , iconRoot     = ".xmonad/xpm/"  -- default: "."
        , commands = [
                         -- Echos a "penguin" icon in front of the kernel output.
                       Run Com "echo" ["<fn=3>\xf17c</fn>"] "penguin" 3600
