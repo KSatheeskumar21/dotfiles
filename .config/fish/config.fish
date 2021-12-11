@@ -1,7 +1,7 @@
 # Setting Editor and Visual variables
 set TERM "xterm-256color"
-set EDITOR "emacs"
-set VISUAL "emacs"
+set EDITOR "nvim"
+set VISUAL "emacsclient -c -a 'emacs'"
 
 # Fish Vi keybindings
 fish_vi_key_bindings
@@ -69,6 +69,9 @@ alias tosddm="sudo pacman -S sddm --noconfirm --needed ; sudo systemctl enable s
 
 # Neofetch
 alias neofetch="neofetch --kitty"
+
+# Sudo alias
+alias sudo="doas --"
 
 # Aliases End
 
