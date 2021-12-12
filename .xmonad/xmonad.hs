@@ -179,7 +179,7 @@ myKeys =
     -- , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
     -- Spawn Emacsclient
-    -- , ("C-e e", spawn (myEditor ++ ("--eval '(dashboard-refresh-buffer)'")))
+    , ("M-S-e", spawn myEditor)
     -- , ("C-e v", spawn (myEditor ++ ("--eval '(+vterm/toggle nil)'")))
 
     -- Spawn VSCode
@@ -207,7 +207,7 @@ myKeys =
     , ("M1-S-q", spawn "lxsession-logout")
 
     -- Restart xmonad
-    , ("M-S-r", spawn "xmonad --recompile; xmonad --restart")
+    , ("M1-S-r", spawn "xmonad --recompile; xmonad --restart")
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
     -- , ("M-S-/", spawn ("echo \"" ++ help ++ "\" | yad "))
