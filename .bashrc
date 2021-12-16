@@ -298,7 +298,7 @@ alias rmgitcache="rm -r ~/.cache/git"
 alias personal='cp -Rf /personal/* ~'
 
 # Config alias
-alias config="/usr/bin/git --git-dir=$HOME/.cfg --work-tree=$HOME"
+alias config="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 
 #create a file called .bashrc-personal and put all your personal aliases
 #in there. They will not be overwritten by skel.
