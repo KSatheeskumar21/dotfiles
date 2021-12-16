@@ -16,7 +16,7 @@ export HISTCONTROL=ignoreboth:erasedups
 
 # Make emacs the default editor
 
-export EDITOR="emacsclient -c -a 'emacs'"
+export EDITOR="nvim"
 export VISUAL="emacsclient -c -a 'emacs'"
 
 #PS1='[\u@\h \W]\$ '
