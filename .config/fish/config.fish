@@ -77,4 +77,4 @@ alias sudo="doas --"
 
 # Startup stuff
 #set -g fish_greeting
-starship init fish | source
+# starship init fish | source
