@@ -27,7 +27,7 @@ alias tofish="sudo chsh $USER -s /bin/fish && echo 'Done...'"
 
 # Sourcing Plugins
 source ~/.zsh/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting.zsh
+source ~/.zsh/fast-syntax-highlighting.plugin.zsh
 source ~/.zsh/compleat.plugin.zsh
 
 # Lines configured by zsh-newuser-install
