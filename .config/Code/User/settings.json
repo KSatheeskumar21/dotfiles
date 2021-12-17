@@ -1,0 +1,10 @@
+{
+    "workbench.colorTheme": "Tokyo Night Storm",
+    "window.menuBarVisibility": "toggle",
+    "vim.enableNeovim": true,
+    "vim.neovimConfigPath": "~/.config/nvim/init.vim",
+    "vim.neovimPath": "/usr/bin/nvim",
+    "vim.neovimUseConfigFile": true,
+    "editor.minimap.enabled": false,
+    "files.autoSave": "afterDelay"
+}
