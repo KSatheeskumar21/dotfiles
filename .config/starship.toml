@@ -16,9 +16,9 @@ disabled = true
 # disabled = false
 
 [character]
-# success_symbol = "[λ](bold green)"
-# error_symbol = "[λ](bold red)"
-# vicmd_symbol = "[λ](bold blue)"
+success_symbol = "[λ](bold green)"
+error_symbol = "[λ](bold red)"
+vicmd_symbol = "[λ](bold blue)"
 
 # success_symbol = "[→](bold blue)"
 # error_symbol = "[→](bold red)"

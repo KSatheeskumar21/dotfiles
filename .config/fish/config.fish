@@ -68,7 +68,7 @@ alias tolightdm="sudo pacman -S lightdm lightdm-gtk-greeter lightdm-gtk-greeter-
 alias tosddm="sudo pacman -S sddm --noconfirm --needed ; sudo systemctl enable sddm.service -f ; echo 'Sddm is active - reboot now'"
 
 # Neofetch
-alias neofetch="neofetch --kitty"
+# alias neofetch="neofetch --kitty"
 
 # Sudo alias
 alias sudo="doas --"
@@ -76,5 +76,5 @@ alias sudo="doas --"
 # Aliases End
 
 # Startup stuff
-#set -g fish_greeting
-# starship init fish | source
+# set -g fish_greeting
+starship init fish | source
