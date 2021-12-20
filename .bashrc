@@ -300,6 +300,9 @@ alias personal='cp -Rf /personal/* ~'
 # Config alias
 alias config="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 
+# Neovim alias
+# alias vim="nvim"
+
 #create a file called .bashrc-personal and put all your personal aliases
 #in there. They will not be overwritten by skel.
 

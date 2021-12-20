@@ -24,8 +24,8 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.WorkspaceHistory
 import XMonad.Hooks.SetWMName
-import XMonad.Hooks.StatusBar
-import XMonad.Hooks.StatusBar.PP
+-- import XMonad.Hooks.StatusBar
+-- import XMonad.Hooks.StatusBar.PP
 
 -- Layouts & Layout modifiers
 import XMonad.Layout.Spacing
@@ -347,39 +347,39 @@ myStartupHook = do
 -- Xmobar
 -- myStatusBarPP = dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn xmproc0 }
 
-myXmobarPP :: PP
-myXmobarPP = def { ppCurrent = red . wrap "[" "]"
-                 , ppTitleSanitize = xmobarStrip
-                 , ppVisible = blue
-                 , ppHidden = xmobarColor "#82AAFF" "" . wrap "(" ")"
-                 , ppHiddenNoWindows = blue
-                 , ppTitle = white . shorten 60
-                 , ppSep = magenta "<fc=#666666> | </fc>"
-                 , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
-                 , ppExtras = [logTitles formatFocused formatUnfocused]
-                 , ppOrder = \(ws:l:t:ex) -> [ws,l]++ex++[t]
-                 }
-  where 
-       formatFocused = wrap (white "[") (white "]") . magenta . ppWindow
-       formatUnfocused = wrap (lowWhite "[") (lowWhite "]") . blue . ppWindow
+-- myXmobarPP :: PP
+-- myXmobarPP = def { ppCurrent = red . wrap "[" "]"
+--                 , ppTitleSanitize = xmobarStrip
+--                 , ppVisible = blue
+--                 , ppHidden = xmobarColor "#82AAFF" "" . wrap "(" ")"
+--                 , ppHiddenNoWindows = blue
+--                 , ppTitle = white . shorten 60
+--                 , ppSep = magenta "<fc=#666666> | </fc>"
+--                 , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
+--                 , ppExtras = [logTitles formatFocused formatUnfocused]
+--                 , ppOrder = \(ws:l:t:ex) -> [ws,l]++ex++[t]
+--                 }
+--  where 
+--       formatFocused = wrap (white "[") (white "]") . magenta . ppWindow
+--       formatUnfocused = wrap (lowWhite "[") (lowWhite "]") . blue . ppWindow
 
-       ppWindow :: String -> String
-       ppWindow = xmobarRaw . (\w -> if null w then "untitled" else w) . shorten 30
+--      ppWindow :: String -> String
+--       ppWindow = xmobarRaw . (\w -> if null w then "untitled" else w) . shorten 30
 
-       blue, lowWhite, magenta, red, white, yellow :: String -> String
-       magenta = xmobarColor "#ff79c6" ""
-       blue = xmobarColor "#7aa2f7" ""
-       white = xmobarColor "#f8f8f2" ""
-       yellow = xmobarColor "#f1fa8c" ""
-       red = xmobarColor "#F07178" ""
-       lowWhite = xmobarColor "#bbbbbb" ""
+--       blue, lowWhite, magenta, red, white, yellow :: String -> String
+--       magenta = xmobarColor "#ff79c6" ""
+--       blue = xmobarColor "#7aa2f7" ""
+--       white = xmobarColor "#f8f8f2" ""
+--       yellow = xmobarColor "#f1fa8c" ""
+--       red = xmobarColor "#F07178" ""
+--       lowWhite = xmobarColor "#bbbbbb" ""
 
 main = do
        -- Xmobar
-       mySB <- statusBarPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/doom-city-lights-xmobarrc" (pure myXmobarPP)
-       -- mySB <- spawnPipe "xmobar -x 0 /home/kishore/.config/xmobar/doom-city-lights-xmobarrc"
-       xmonad $ withSB mySB $ ewmh $ docks $ def {
-       -- xmonad $ ewmh $ docks $ def {
+       -- mySB <- statusBarPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/doom-city-lights-xmobarrc" (pure myXmobarPP)
+       mySB <- spawnPipe "xmobar -x 0 /home/kishore/.config/xmobar/doom-city-lights-xmobarrc"
+       -- xmonad $ withSB mySB $ ewmh $ docks $ def {
+       xmonad $ ewmh $ docks $ def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -401,17 +401,17 @@ main = do
         manageHook         = myManageHook,
         -- handleEventHook    = ewmh,
         -- logHook            = myLogHook,
-        -- logHook            = workspaceHistoryHook <+> dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn mySB
-        --                                              , ppCurrent = xmobarColor "#F07178" "" . wrap "[" "]"
-        --                                              , ppVisible = xmobarColor "#7aa2f7" ""
-        --                                              , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""
-        --                                              , ppHiddenNoWindows = xmobarColor "#7aa2f7" ""
-        --                                              , ppTitle = xmobarColor "#f8f8f2" "" . shorten 60
-        --                                              , ppSep = "<fc=#666666> | </fc>"
-        --                                              , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
-                                                      -- , ppExtras = [windowCount]
-        --                                              , ppOrder = \(ws:l:t:ex) -> [ws,l]++ex++[t]
-        --                                              },
+        logHook            = workspaceHistoryHook <+> dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn mySB
+                                                     , ppCurrent = xmobarColor "#F07178" "" . wrap "[" "]"
+                                                     , ppVisible = xmobarColor "#7aa2f7" ""
+                                                     , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""
+                                                     , ppHiddenNoWindows = xmobarColor "#7aa2f7" ""
+                                                     , ppTitle = xmobarColor "#f8f8f2" "" . shorten 60
+                                                     , ppSep = "<fc=#666666> | </fc>"
+                                                     , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
+                                                   -- , ppExtras = [windowCount]
+                                                     , ppOrder = \(ws:l:t:ex) -> [ws,l]++ex++[t]
+                                                     },
         startupHook        = myStartupHook
     } `additionalKeysP` myKeys
 
