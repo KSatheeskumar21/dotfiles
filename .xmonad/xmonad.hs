@@ -334,6 +334,8 @@ myStartupHook = do
         spawnOnce "xfce4-power-manager &"
         -- Polkit app
         spawnOnce "lxsession &"
+	-- Setting Mouse Cursor
+	spawnOnce "xsetroot -cursor_name left_ptr"
         -- WM name
         setWMName "nintenno-xmonad"
         -- spawnOnce "~/.config/polybar/launch.sh"

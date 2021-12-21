@@ -87,6 +87,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Mouse
+set mouse=nicr
+set mouse=a
+
 " Nerdtree 
 " autocmd vimenter * NERDTree
 nnoremap <C-n> :NERDTree<CR>
