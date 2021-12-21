@@ -1,0 +1,10 @@
+elpa/
+snippets/
+emojis/
+auto-save-list/
+recentf
+*\~
+smex-items
+url/
+.cache/
+.lsp-session-v1

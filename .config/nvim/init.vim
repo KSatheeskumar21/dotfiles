@@ -91,6 +91,9 @@ nnoremap <C-l> <C-w>l
 set mouse=nicr
 set mouse=a
 
+" Cursor Style
+set guicursor=
+
 " Nerdtree 
 " autocmd vimenter * NERDTree
 nnoremap <C-n> :NERDTree<CR>
