@@ -71,7 +71,7 @@ alias tosddm="sudo pacman -S sddm --noconfirm --needed ; sudo systemctl enable s
 # alias neofetch="neofetch --kitty"
 
 # Sudo alias
-alias sudo="doas --"
+# alias sudo="doas --"
 
 # Aliases End
 
