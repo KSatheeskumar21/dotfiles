@@ -244,8 +244,8 @@
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
   (setq dashboard-banner-logo-title "Emacs, the apex Text editor")
-  (setq dashboard-startup-banner 'logo)
-  ;;(setq dashboard-startup-banner "~/.emacs.d/emacs-dash.png")
+  ;;(setq dashboard-startup-banner 'logo)
+  (setq dashboard-startup-banner "~/.emacs.d/emacs-dash.png")
   (setq dashboard-center-content nil)
 
   :config

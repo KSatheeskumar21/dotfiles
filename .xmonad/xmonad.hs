@@ -197,7 +197,7 @@ myKeys =
     , ("M1-S-q", spawn "lxsession-logout")
 
     -- Restart xmonad
-    , ("M1-S-r", spawn "xmonad --recompile; xmonad --restart")
+    , ("M-S-r", spawn "xmonad --recompile; xmonad --restart")
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
     -- , ("M-S-/", spawn ("echo \"" ++ help ++ "\" | yad "))

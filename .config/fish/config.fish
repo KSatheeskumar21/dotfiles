@@ -33,7 +33,7 @@ alias pacmanedit="sudoedit /etc/pacman.conf"
 alias vim="nvim"
 
 ## ls alias
-alias ls="exa -lahF --icons"
+alias ls="exa -lahF --icons --group-directories-first -s name"
 
 #alias code="codium"
 
