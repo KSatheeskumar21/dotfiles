@@ -96,18 +96,8 @@ altMask         = mod1Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
--- xmobarEscape :: String -> String
-xmobarEscape = concatMap doubleLts
-  where
-         doubleLts '<' = "<<"
-         doubleLts x = [x]
-
 myWorkspaces :: [String]
-myWorkspaces    = clickable . map xmobarEscape $ ["dev","www","sys","doc","vbox","chat","mus","vid","gfx"]
-  where
-        clickable l = [ "<action=xdotool key super +" ++ show n ++ ">" ++ ws ++ "</action>" |
-                            (i,ws) <- zip [1..9] l,
-                           let n = i ]
+myWorkspaces    = ["dev","www","sys","doc","vbox","chat","mus","vid","gfx"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
