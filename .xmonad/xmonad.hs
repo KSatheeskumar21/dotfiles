@@ -3,6 +3,7 @@
 
 -- XMonad Base
 import XMonad
+import Data.Maybe
 import Data.Monoid
 import System.Exit
 
@@ -38,6 +39,7 @@ import XMonad.Layout.Spiral
 import XMonad.Layout.Renamed
 import XMonad.Layout.Magnifier
 import XMonad.Layout.ResizableTile
+import XMonad.Layout.LayoutModifier
 
 -- Actions
 import XMonad.Actions.GroupNavigation
@@ -54,7 +56,7 @@ import System.Posix (BaudRate(B600))
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "alacritty"
+myTerminal      = "alacritty -t Terminal"
 
 -- Preferred Run launcher
 myLauncher = "dmenu_run -p 'Run:' -h 24"
@@ -96,8 +98,12 @@ altMask         = mod1Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces :: [String]
+-- myWorkspaces :: [String]
 myWorkspaces    = ["dev","www","sys","doc","vbox","chat","mus","vid","gfx"]
+myWorkspaceIndices = M.fromList $ zipWith(,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
+
+clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
+    where i = fromJust $ M.lookup ws myWorkspaceIndices
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -234,17 +240,20 @@ myKeys =
 -- Floating Layout
 floatingLayout = renamed [Replace "Floating"] simplestFloat
 
-myLayout = mouseResize $ avoidStruts (tiled ||| tiledDef ||| floatingLayout ||| emacsLayout ||| Grid(16/10) ||| simpleTabbed ||| Mirror tiledDef ||| Full)
+mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
+mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True 
+
+myLayout = mouseResize $ avoidStruts (tall ||| floatingLayout ||| emacsLayout ||| Grid(16/10) ||| simpleTabbed ||| Mirror tall ||| Full)
   where
 
      -- Tiled layout (ResizableTile)
-     tiled = renamed [Replace "Resizable M&Stack"] $ ResizableTall nmaster delta ratio []
+     tall = renamed [Replace "Tall"] $ mySpacing 8 $ ResizableTall nmaster delta ratio []
 
      -- default tiling algorithm partitions the screen into two panes
-     tiledDef   = renamed [Replace "Master and Stack"] $ Tall nmaster delta ratio
+     -- tiledDef   = renamed [Replace "Tall"] $ Tall nmaster delta ratio
 
      -- Layout for working in Emacs
-     emacsLayout = renamed [Replace "EmacsDev"] $ Mirror $ Tall nmaster delta ratio
+     emacsLayout = renamed [Replace "Emacs"] $ Mirror $ mySpacing 8 $ Tall nmaster delta ratio
 
      -- The default number of windows in the master pane
      nmaster = 1
@@ -389,7 +398,7 @@ main = do
       -- hooks, layouts
         -- layoutHook         = spacingRaw True (Border 0 8 8 8) True (Border 0 8 8 8) True myLayout,
         -- layoutHook         = gaps [(U, 8), (R, 8)] myLayout,
-        layoutHook         = spacingWithEdge 5 myLayout,
+        layoutHook         = myLayout,
         manageHook         = myManageHook,
         -- handleEventHook    = ewmh,
         -- logHook            = myLogHook,
