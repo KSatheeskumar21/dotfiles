@@ -2,6 +2,7 @@
 set TERM "xterm-256color"
 set EDITOR "nvim"
 set VISUAL "emacsclient -c -a 'emacs'"
+set XDG_CONFIG_HOME "/home/kishore/.config"
 
 # Fish Vi keybindings
 fish_vi_key_bindings
@@ -72,6 +73,9 @@ alias tosddm="sudo pacman -S sddm --noconfirm --needed ; sudo systemctl enable s
 
 # Sudo alias
 # alias sudo="doas --"
+
+# Youtube-dl alias
+alias mp3-download="youtube-dl -x --audio-format mp3 --embed-thumbnail"
 
 # Aliases End
 

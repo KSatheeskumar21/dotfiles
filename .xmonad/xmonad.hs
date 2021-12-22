@@ -192,6 +192,20 @@ myKeys =
     -- Spawns brave browser
     , ("M-S-b", spawn myBrowser)
 
+    -- KB_GROUP -> dmscripts
+    , ("M-p h", spawn "dm-hub")
+    , ("M-p b", spawn "dm-setbg")
+    , ("M-p S-b", spawn "dm-bookman")
+    , ("M-p c", spawn "dm-confedit")
+    , ("M-p i", spawn "dm-ip")
+    , ("M-p s", spawn "dm-maim")
+    , ("M-p k", spawn "dm-kill")
+    , ("M-p q", spawn "dm-logout")
+    , ("M-p S-m", spawn "dm-man")
+    , ("M-p S-s", spawn "dm-websearch")
+    , ("M-p y", spawn "dm-youtube")
+    , ("M-S-m", spawn (myTerminal ++ " -e mocp"))
+
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
@@ -318,15 +332,20 @@ myManageHook = composeAll
 myStartupHook = do
         -- Spawn the emacs daemon
         spawn "/usr/bin/emacs --daemon &"
-        -- Set a wallpaper and enable compositor, I have now switched to dmscripts to manage my wallpapers
+        -- Set a wallpaper and enable compositor, I have now switched to dmscripts (dm-setbg) to manage my wallpapers
         -- spawnOnce "nitrogen --restore &"
-	spawnOnce "xargs xwallpaper --stretch < ~/.cache/wall"
+        spawnOnce "xargs xwallpaper --stretch < ~/.cache/wall"
         -- spawnOnce "picom --experimental-backends --config ~/.config/picom/picom.conf &"
         -- spawnOnce "picom --config ~/.config/picom/vm-picom.conf &"
+        spawnOnce "picom &"
         -- Notifications and clipboard
         spawnOnce "dunst &"
         -- spawnOnce "clipcatd"
         spawnOnce "xfce4-clipman &"
+        spawnOnce "xclip &"
+	-- Music Daemon
+	spawnOnce "mpd --kill && --systemd &"
+	spawnOnce "mocicon &"
         -- System tray stuff, power management (laptop only)
         spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x1D252C --height 22 &"
         spawnOnce "volumeicon &"
@@ -334,8 +353,8 @@ myStartupHook = do
         spawnOnce "xfce4-power-manager &"
         -- Polkit app
         spawnOnce "lxsession &"
-	-- Setting Mouse Cursor
-	spawnOnce "xsetroot -cursor_name left_ptr"
+        -- Setting Mouse Cursor
+        spawnOnce "xsetroot -cursor_name left_ptr"
         -- WM name
         setWMName "nintenno-xmonad"
         -- spawnOnce "~/.config/polybar/launch.sh"

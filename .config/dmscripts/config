@@ -177,6 +177,8 @@ websearch[stackoverflow]="https://stackoverflow.com/search?q="
 
 declare -A youtube_channels
 youtube_channels[distrotube]="https://www.youtube.com/c/DistroTube/featured"
+youtube_channels[forrestknight]="https://www.youtube.com/c/FKnight"
+youtube_channels[fireship]="https://www.youtube.com/c/Fireship"
 
 # dm-colpick config
 declare -A colpick_list
