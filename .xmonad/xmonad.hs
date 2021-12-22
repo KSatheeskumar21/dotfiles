@@ -57,13 +57,13 @@ import System.Posix (BaudRate(B600))
 -- certain contrib modules.
 --
 myTerminal      = "alacritty -t Terminal"
+altTerminal     = "st"
 
 -- Preferred Run launcher
 myLauncher = "dmenu_run -p 'Run:' -h 24"
 
 -- Preferred Browser Program
--- myBrowser = "brave"
-myBrowser = "brave-dev"
+myBrowser = "brave"
 
 -- Preferred Text editor
 myEditor = "emacsclient -c -a 'emacs'"
@@ -204,7 +204,9 @@ myKeys =
     , ("M-p S-m", spawn "dm-man")
     , ("M-p S-s", spawn "dm-websearch")
     , ("M-p y", spawn "dm-youtube")
-    , ("M-S-m", spawn (myTerminal ++ " -e mocp"))
+
+    -- Music Player
+    , ("M-S-m", spawn (altTerminal ++ " -e mocp"))
 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
@@ -296,7 +298,10 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , className =? "Qalculate-gtk"     --> doFloat
-    -- , className =? "mpv"            --> doFloat
+    , className =? "st-256color"       --> doShift ( myWorkspaces !! 6 )
+    , className =? "Xterm"             --> doShift ( myWorkspaces !! 6 )
+    , className =? "mpv"               --> doShift ( myWorkspaces !! 7 )
+    , className =? "Brave-browser"     --> doShift ( myWorkspaces !! 1 )
     -- , className =? "Thunar"         --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]

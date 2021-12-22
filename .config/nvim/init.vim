@@ -79,7 +79,7 @@ set laststatus=2
 set noshowmode
 
 " Colorscheme of choice
-colorscheme doom-one
+" colorscheme doom-one
 
 " Remapping Splits
 nnoremap <C-h> <C-w>h
