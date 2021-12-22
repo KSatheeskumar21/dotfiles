@@ -83,3 +83,22 @@ Dec 22 18:36 : player: played "Jonas Blue, Liam Payne, Lennon Stella - Polaroid 
 Dec 22 18:41 : player: played "poke_and_chill.mp3"
 ALSA lib pcm_dmix.c:1032:(snd_pcm_dmix_open) unable to open slave
 Dec 22 18:43 : exception: Failed to open "mpd alsamixer-output" (alsa); Failed to open ALSA device "default": Device or resource busy
+Dec 22 18:58 : player: played "Jonas Blue - Mama ft. William Singe (Official Video).mp3"
+Dec 22 19:01 : player: played "Jonas Blue, Liam Payne, Lennon Stella - Polaroid (Official Lyric Video).mp3"
+Dec 22 19:04 : player: played "Avicii - The Nights.mp3"
+Dec 22 19:09 : player: played "Jonas Blue - Rise ft. Jack & Jack (Official Video).mp3"
+Dec 22 19:16 : player: played "Jonas Blue - Mama ft. William Singe (Official Video).mp3"
+Dec 22 19:23 : player: played "Jonas Blue, Liam Payne, Lennon Stella - Polaroid (Official Lyric Video).mp3"
+Dec 22 19:26 : player: played "Jonas Blue, Liam Payne, Lennon Stella - Polaroid (Official Lyric Video).mp3"
+Dec 22 19:38 : player: played "Jonas Blue, Liam Payne, Lennon Stella - Polaroid (Official Lyric Video).mp3"
+Dec 22 19:42 : player: played "Jonas Blue, Liam Payne, Lennon Stella - Polaroid (Official Lyric Video).mp3"
+Dec 22 19:46 : player: played "Jonas Blue, Liam Payne, Lennon Stella - Polaroid (Official Lyric Video).mp3"
+Dec 22 19:47 : player: played "Jonas Blue, Liam Payne, Lennon Stella - Polaroid (Official Lyric Video).mp3"
+Dec 22 20:15 : player: played "Jonas Blue, Liam Payne, Lennon Stella - Polaroid (Official Lyric Video).mp3"
+Dec 22 21:41 : player: played "Jonas Blue, Liam Payne, Lennon Stella - Polaroid (Official Lyric Video).mp3"
+Dec 22 21:45 : player: played "Jonas Blue, Liam Payne, Lennon Stella - Polaroid (Official Lyric Video).mp3"
+Dec 22 21:48 : player: played "Jonas Blue, Liam Payne, Lennon Stella - Polaroid (Official Lyric Video).mp3"
+Dec 22 21:49 : player: played "Jonas Blue - Mama ft. William Singe (Official Video).mp3"
+ALSA lib pcm_dmix.c:1032:(snd_pcm_dmix_open) unable to open slave
+Dec 22 21:51 : exception: Failed to open "mpd alsamixer-output" (alsa); Failed to open ALSA device "default": Device or resource busy
+Dec 22 21:55 : player: played "Jonas Blue - Mama ft. William Singe (Official Video).mp3"

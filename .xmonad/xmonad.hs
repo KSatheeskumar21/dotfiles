@@ -351,6 +351,7 @@ myStartupHook = do
         spawnOnce "xclip &"
 	-- Music Daemon
 	spawnOnce "[ ! -s ~/.config/mpd/pid ] && mpd"
+	-- spawnOnce "mopidy &"
         -- System tray stuff, power management (laptop only)
         spawnOnce "xfce4-power-manager &"
         spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x1D252C --height 22 &"
