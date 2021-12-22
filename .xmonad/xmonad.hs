@@ -318,8 +318,9 @@ myManageHook = composeAll
 myStartupHook = do
         -- Spawn the emacs daemon
         spawn "/usr/bin/emacs --daemon &"
-        -- Set a wallpaper and enable compositor
-        spawnOnce "nitrogen --restore &"
+        -- Set a wallpaper and enable compositor, I have now switched to dmscripts to manage my wallpapers
+        -- spawnOnce "nitrogen --restore &"
+	spawnOnce "xargs xwallpaper --stretch < ~/.cache/wall"
         -- spawnOnce "picom --experimental-backends --config ~/.config/picom/picom.conf &"
         -- spawnOnce "picom --config ~/.config/picom/vm-picom.conf &"
         -- Notifications and clipboard
