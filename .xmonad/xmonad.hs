@@ -201,12 +201,14 @@ myKeys =
     , ("M-p s", spawn "dm-maim")
     , ("M-p k", spawn "dm-kill")
     , ("M-p q", spawn "dm-logout")
+    , ("M-p m", spawn "dm-music")
     , ("M-p S-m", spawn "dm-man")
     , ("M-p S-s", spawn "dm-websearch")
     , ("M-p y", spawn "dm-youtube")
 
-    -- Music Player
-    , ("M-S-m", spawn (altTerminal ++ " -e mocp"))
+    -- Music Player ( I use dm-music but if I want to visually manage my tracks I use this binding)
+    -- , ("M-S-m", spawn (altTerminal ++ " -e mocp"))
+    , ("M1-m", spawn (altTerminal ++ " -e ncmpcpp"))
 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
@@ -300,6 +302,7 @@ myManageHook = composeAll
     , className =? "Qalculate-gtk"     --> doFloat
     , className =? "st-256color"       --> doShift ( myWorkspaces !! 6 )
     , className =? "Xterm"             --> doShift ( myWorkspaces !! 6 )
+    , className =? "Deadbeef"          --> doShift ( myWorkspaces !! 6 )
     , className =? "mpv"               --> doShift ( myWorkspaces !! 7 )
     , className =? "Brave-browser"     --> doShift ( myWorkspaces !! 1 )
     -- , className =? "Thunar"         --> doFloat
@@ -340,8 +343,6 @@ myStartupHook = do
         -- Set a wallpaper and enable compositor, I have now switched to dmscripts (dm-setbg) to manage my wallpapers
         -- spawnOnce "nitrogen --restore &"
         spawnOnce "xargs xwallpaper --stretch < ~/.cache/wall"
-        -- spawnOnce "picom --experimental-backends --config ~/.config/picom/picom.conf &"
-        -- spawnOnce "picom --config ~/.config/picom/vm-picom.conf &"
         spawnOnce "picom &"
         -- Notifications and clipboard
         spawnOnce "dunst &"
@@ -349,19 +350,20 @@ myStartupHook = do
         spawnOnce "xfce4-clipman &"
         spawnOnce "xclip &"
 	-- Music Daemon
-	spawnOnce "mpd --kill && --systemd &"
-	spawnOnce "mocicon &"
+	spawnOnce "[ ! -s ~/.config/mpd/pid ] && mpd"
         -- System tray stuff, power management (laptop only)
+        spawnOnce "xfce4-power-manager &"
         spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x1D252C --height 22 &"
         spawnOnce "volumeicon &"
         spawnOnce "nm-applet &"
-        spawnOnce "xfce4-power-manager &"
         -- Polkit app
         spawnOnce "lxsession &"
         -- Setting Mouse Cursor
         spawnOnce "xsetroot -cursor_name left_ptr"
         -- WM name
         setWMName "nintenno-xmonad"
+
+	-- Polybar, which I don't use anymore
         -- spawnOnce "~/.config/polybar/launch.sh"
 
 ------------------------------------------------------------------------
