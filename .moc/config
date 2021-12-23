@@ -183,18 +183,18 @@ Sort = FileName
 #ShowHiddenFiles = no
 
 # Hide file name extensions?
-#HideFileExtension = no
+HideFileExtension = no
 
 # Show file format in menu?
-#ShowFormat = yes
+ShowFormat = yes
 
 # Show file time in menu?  Possible values: 'yes', 'no' and 'IfAvailable'
 # (meaning show the time only when it is already known, which often works
 # faster).
-#ShowTime = IfAvailable
+ShowTime = IfAvailable
 
 # Show time played as a percentage in the time progress bar.
-#ShowTimePercent = no
+ShowTimePercent = yes
 
 # Values of the TERM environment variable which are deemed to be managed by
 # screen(1).  If you are setting a specific terminal using screen(1)'s
@@ -234,7 +234,7 @@ AutoLoadLyrics = yes
 
 # MOC directory (where pid file, socket and state files are stored).
 # You can use ~ at the beginning.
-MOCDir = ~/.moc
+MOCDir = ~/.config/moc
 
 # Use mmap() to read files.  mmap() is much slower on NFS.
 #UseMMap = no
@@ -274,7 +274,7 @@ MOCDir = ~/.moc
 
 # When using more than one client (interface) at a time, do they share
 # the playlist?
-#SyncPlaylist = yes
+SyncPlaylist = yes
 
 # Choose a keymap file (relative to '~/.moc/' or using an absolute path).
 # An annotated example keymap file is included ('keymap.example').
@@ -435,7 +435,7 @@ MOCDir = ~/.moc
 #TagsCacheSize = 256
 
 # Number items in the playlist.
-#PlaylistNumbering = yes
+PlaylistNumbering = yes
 
 # Main window layouts can be configured.  You can change the position and
 # size of the menus (directory and playlist).  You have three layouts and

@@ -102,3 +102,21 @@ Dec 22 21:49 : player: played "Jonas Blue - Mama ft. William Singe (Official Vid
 ALSA lib pcm_dmix.c:1032:(snd_pcm_dmix_open) unable to open slave
 Dec 22 21:51 : exception: Failed to open "mpd alsamixer-output" (alsa); Failed to open ALSA device "default": Device or resource busy
 Dec 22 21:55 : player: played "Jonas Blue - Mama ft. William Singe (Official Video).mp3"
+Dec 22 21:58 : player: played "Jonas Blue, Liam Payne, Lennon Stella - Polaroid (Official Lyric Video).mp3"
+Dec 22 21:59 : player: played "Pokémon Lofi Music ~ 1 Hour Mix.mp3"
+ALSA lib pcm_dmix.c:1032:(snd_pcm_dmix_open) unable to open slave
+Dec 22 22:15 : exception: Failed to open "mpd alsamixer-output" (alsa); Failed to open ALSA device "default": Device or resource busy
+Dec 22 22:31 : player: played "Pokémon Lofi Music ~ 1 Hour Mix.mp3"
+Dec 22 22:35 : player: played "Avicii - The Nights.mp3"
+Dec 22 22:38 : player: played "Jonas Blue - Rise ft. Jack & Jack (Official Video).mp3"
+Dec 22 22:44 : player: played "Jonas Blue - Mama ft. William Singe (Official Video).mp3"
+Dec 22 22:50 : player: played "Jonas Blue - Mama ft. William Singe (Official Video).mp3"
+Dec 22 22:53 : player: played "Jonas Blue - Mama ft. William Singe (Official Video).mp3"
+Dec 22 22:57 : player: played "Jonas Blue - Mama ft. William Singe (Official Video).mp3"
+Dec 22 23:02 : player: played "Jonas Blue - Mama ft. William Singe (Official Video).mp3"
+Dec 23 09:37 : player: played "Jonas Blue - Mama ft. William Singe (Official Video).mp3"
+Dec 23 09:51 : player: played "Jonas Blue - Mama ft. William Singe (Official Video).mp3"
+Dec 23 09:59 : player: played "Jonas Blue - Mama ft. William Singe (Official Video).mp3"
+Dec 23 10:31 : player: played "Jonas Blue - Mama ft. William Singe (Official Video).mp3"
+Dec 23 10:35 : player: played "Jonas Blue, Liam Payne, Lennon Stella - Polaroid (Official Lyric Video).mp3"
+Dec 23 11:11 : player: played "Jonas Blue, Liam Payne, Lennon Stella - Polaroid (Official Lyric Video).mp3"

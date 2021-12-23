@@ -304,6 +304,7 @@ myManageHook = composeAll
     , className =? "Xterm"             --> doShift ( myWorkspaces !! 6 )
     , className =? "Deadbeef"          --> doShift ( myWorkspaces !! 6 )
     , className =? "mpv"               --> doShift ( myWorkspaces !! 7 )
+    , className =? "Olivia"            --> doShift ( myWorkspaces !! 7 )
     , className =? "Brave-browser"     --> doShift ( myWorkspaces !! 1 )
     -- , className =? "Thunar"         --> doFloat
     , resource  =? "desktop_window" --> doIgnore
@@ -343,7 +344,7 @@ myStartupHook = do
         -- Set a wallpaper and enable compositor, I have now switched to dmscripts (dm-setbg) to manage my wallpapers
         -- spawnOnce "nitrogen --restore &"
         spawnOnce "xargs xwallpaper --stretch < ~/.cache/wall"
-        spawnOnce "picom &"
+        spawnOnce "picom --experimental-backends &"
         -- Notifications and clipboard
         spawnOnce "dunst &"
         -- spawnOnce "clipcatd"
@@ -351,7 +352,7 @@ myStartupHook = do
         spawnOnce "xclip &"
 	-- Music Daemon
 	spawnOnce "[ ! -s ~/.config/mpd/pid ] && mpd"
-	-- spawnOnce "mopidy &"
+	spawnOnce "mopidy &"
         -- System tray stuff, power management (laptop only)
         spawnOnce "xfce4-power-manager &"
         spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x1D252C --height 22 &"
