@@ -6,6 +6,6 @@ Here you'll find my [[.config/i3][i3]] config, my [[.config/spectrwm][spectrwm]]
 I also have my Emacs config in this repo.
 
 * Xmonad Scrots
-[[Screenshots/maim-full-20211222-110339.png]]
+[[Screenshots/xmonad-no-windows-scrot.png]]
 
-[[Screenshots/maim-full-20211222-215415.png]]
+[[Screenshots/xmonad-windows-scrot.png]]
