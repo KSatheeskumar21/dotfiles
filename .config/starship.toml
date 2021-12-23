@@ -12,7 +12,7 @@ show_always = true
 
 [hostname]
 ssh_only = false
-format = "[$user](bold yellow)@[$hostname](bold magenta) in "
+format = "[$user](blue bold)@[$hostname](green bold) "
 disabled = false
 
 [character]

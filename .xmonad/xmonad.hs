@@ -39,6 +39,7 @@ import XMonad.Layout.Spiral
 import XMonad.Layout.Renamed
 import XMonad.Layout.Magnifier
 import XMonad.Layout.ResizableTile
+import XMonad.Layout.ShowWName
 import XMonad.Layout.LayoutModifier
 
 -- Actions
@@ -184,7 +185,10 @@ myKeys =
     -- , ("M1-e a", spawn (altEditor ++ ".config/alacritty"))
 
     -- Spawn Thunar
-    , ("M-S-f", spawn "pcmanfm")
+    -- , ("M-S-f", spawn "pcmanfm")
+    --
+    -- Spawn ranger
+    , ("M-S-f", spawn (myTerminal ++ " -e ranger"))
 
     -- Clipcat-menu
     -- , ("M-S-o", spawn "clipcat-menu")
@@ -214,7 +218,7 @@ myKeys =
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
     --
-    -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
+    , ("M-b", sendMessage ToggleStruts)
 
     -- Quit xmonad
     , ("M-S-x", io exitSuccess)
@@ -260,6 +264,16 @@ floatingLayout = renamed [Replace "Floating"] simplestFloat
 
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
 mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True 
+
+
+-- ShowWName Config
+showWNameTheme :: SWNConfig
+showWNameTheme = def
+  { swn_font   = "xft:JetBrains Mono:bold:size=60"
+  , swn_fade   = 0.8
+  , swn_bgcolor = "#1D252C"
+  , swn_color = "#ffffff"
+  }
 
 myLayout = mouseResize $ avoidStruts (tall ||| floatingLayout ||| emacsLayout ||| Grid(16/10) ||| simpleTabbed ||| Mirror tall ||| Full)
   where
@@ -427,7 +441,7 @@ main = do
       -- hooks, layouts
         -- layoutHook         = spacingRaw True (Border 0 8 8 8) True (Border 0 8 8 8) True myLayout,
         -- layoutHook         = gaps [(U, 8), (R, 8)] myLayout,
-        layoutHook         = myLayout,
+        layoutHook         = showWName' showWNameTheme $ myLayout,
         manageHook         = myManageHook,
         -- handleEventHook    = ewmh,
         -- logHook            = myLogHook,
