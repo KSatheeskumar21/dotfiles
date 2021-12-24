@@ -13,16 +13,16 @@ local theme = {}
 
 theme.font          = "SauceCodePro Nerd Font 9"
 
-theme.bg_normal     = "#1d1f21"
-theme.bg_focus      = "#333333"
-theme.bg_urgent     = "#ff0000"
-theme.bg_minimize   = "#444444"
+theme.bg_normal     = "#282c34"
+theme.bg_focus      = "#51afef"
+theme.bg_urgent     = "#C45500"
+theme.bg_minimize   = "#51afef"
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#aaaaaa"
-theme.fg_focus      = "#ffffff"
-theme.fg_urgent     = "#ffffff"
-theme.fg_minimize   = "#ffffff"
+theme.fg_normal     = "#dfdfdf"
+theme.fg_focus      = "#dfdfdf"
+theme.fg_urgent     = "#dfdfdf"
+theme.fg_minimize   = "#dfdfdf"
 
 theme.useless_gap   = dpi(0)
 theme.border_width  = dpi(2)

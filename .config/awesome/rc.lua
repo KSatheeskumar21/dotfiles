@@ -43,14 +43,18 @@ do
 end
 -- }}}
 
+-- Gaps
+beautiful.useless_gap = 3
+beautiful.gap_single_client = true
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
-filemanager = "alacritty -e ranger"
-clock = "alacritty -e tty-clock -c"
+filemanager = "alacritty -t 'File Manager' -e ranger" 
+clock = "alacritty -t 'Clock' -e tty-clock -c"
 editor = "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
