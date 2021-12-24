@@ -2,7 +2,7 @@
 
 This is my new repo for my dotfiles, because I want to move everything from GitLab over to GitHub.
 
-Here you'll find my [[.config/i3][i3]] config, my [[.config/spectrwm][spectrwm]] config, my [[.config/xmonad/][XMonad]] config, and a new LeftWM theme because I wasn't happy with my previous theme.
+Here you'll find my [[.config/awesome][Awesome]] config, my [[.config/spectrwm][spectrwm]] config, my [[.xmonad/][XMonad]] config, and a new LeftWM theme because I wasn't happy with my previous theme.
 I also have my Emacs config in this repo.
 
 * Xmonad Scrots
