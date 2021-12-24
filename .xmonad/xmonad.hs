@@ -117,21 +117,12 @@ myFocusedBorderColor = "#B62D65"
 myKeys :: [(String, X ())]
 myKeys =
 
+    -- KB_BEGIN
+    
+    -- KB_GROUP -> Window management
     -- launch a terminal
-    [ ("M-<Return>", spawn myTerminal)
-
-    -- launch dmenu
-    , ("M-S-<Return>", spawn myLauncher)
-
-    -- Keybinding Group - Xmonad.Prompt
-    -- , ((altMask .|. shiftMask,                 xK_Return), shellPrompt def)
-    -- , ((altMask, xK_m), manPrompt def)
-
-    -- close focused window
-    , ("M-S-c", kill)
-
-     -- Rotate through the available layout algorithms
-    , ("M-<Space>", sendMessage NextLayout)
+    -- Rotate through the available layout algorithms
+    [ ("M-<Space>", sendMessage NextLayout)
 
     --  Reset the layouts on the current workspace to default
     -- , ("M-S-<Space>", setLayout $ XMonad.layoutHook conf)
@@ -174,6 +165,16 @@ myKeys =
 
     -- Deincrement the number of windows in the master area
     -- , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
+    
+    -- KB_GROUP -> Applications
+    -- Alacritty
+    , ("M-<Return>", spawn myTerminal)
+
+    -- launch dmenu
+    , ("M-S-<Return>", spawn myLauncher)
+
+    -- close focused window
+    , ("M-S-c", kill)
 
     -- Spawn Emacsclient
     , ("M-S-e", spawn myEditor)
@@ -218,6 +219,8 @@ myKeys =
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
     --
+
+    -- KB_GROUP -> Xmonad
     , ("M-b", sendMessage ToggleStruts)
 
     -- Quit xmonad
@@ -227,8 +230,9 @@ myKeys =
     -- Restart xmonad
     , ("M-S-r", spawn "xmonad --recompile; xmonad --restart")
 
-    -- Run xmessage with a summary of the default keybindings (useful for beginners)
-    -- , ("M-S-/", spawn ("echo \"" ++ help ++ "\" | yad "))
+    -- Help Script
+    -- , ("M-S-/", spawn "~/.xmonad/xmonad-keys.sh"))
+    -- KB_END
     ]
 
     --
