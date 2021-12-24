@@ -48,15 +48,7 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.MouseResize
 import System.Posix (BaudRate(B600))
 
--- Prompts
--- import XMonad.Prompt
--- import XMonad.Prompt.AppLauncher
--- import XMonad.Prompt.Man
--- import XMonad.Prompt.Shell
-
--- The preferred terminal program, which is used in a binding below and by
--- certain contrib modules.
---
+-- Preferred Terminal
 myTerminal      = "alacritty -t Terminal"
 altTerminal     = "st"
 
@@ -72,15 +64,15 @@ altEditor = "code"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = True
+myFocusFollowsMouse = False
 
 -- Whether clicking on a window to focus also passes the click to the window
 myClickJustFocuses :: Bool
-myClickJustFocuses = False
+myClickJustFocuses = True
 
 -- Width of the window border in pixels.
 --
-myBorderWidth   = 1
+myBorderWidth   = 2
 
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -99,12 +91,12 @@ altMask         = mod1Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
--- myWorkspaces :: [String]
+myWorkspaces :: [String]
 myWorkspaces    = ["dev","www","sys","doc","vbox","chat","mus","vid","gfx"]
-myWorkspaceIndices = M.fromList $ zipWith(,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
-
+myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
     where i = fromJust $ M.lookup ws myWorkspaceIndices
+
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -324,6 +316,9 @@ myManageHook = composeAll
     , className =? "mpv"               --> doShift ( myWorkspaces !! 7 )
     , className =? "Olivia"            --> doShift ( myWorkspaces !! 7 )
     , className =? "Brave-browser"     --> doShift ( myWorkspaces !! 1 )
+    , className =? "firefox"           --> doShift ( myWorkspaces !! 1 )
+    , className =? "tabbed-surf"       --> doShift ( myWorkspaces !! 1 )
+    , className =? "qutebrowser"       --> doShift ( myWorkspaces !! 1 )
     -- , className =? "Thunar"         --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
@@ -373,7 +368,7 @@ myStartupHook = do
 	spawnOnce "mopidy &"
         -- System tray stuff, power management (laptop only)
         spawnOnce "xfce4-power-manager &"
-        spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x1D252C --height 22 &"
+        spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x282c34 --height 22 &"
         spawnOnce "volumeicon &"
         spawnOnce "nm-applet &"
         -- Polkit app
@@ -425,7 +420,7 @@ myStartupHook = do
 main = do
        -- Xmobar
        -- mySB <- statusBarPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/doom-city-lights-xmobarrc" (pure myXmobarPP)
-       mySB <- spawnPipe "xmobar -x 0 /home/kishore/.config/xmobar/doom-city-lights-xmobarrc"
+       mySB <- spawnPipe "xmobar -x 0 /home/kishore/.config/xmobar/doom-one-xmobarrc"
        -- xmonad $ withSB mySB $ ewmh $ docks $ def {
        xmonad $ ewmh $ docks $ def {
       -- simple stuff
@@ -450,11 +445,11 @@ main = do
         -- handleEventHook    = ewmh,
         -- logHook            = myLogHook,
         logHook            = workspaceHistoryHook <+> dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn mySB
-                                                     , ppCurrent = xmobarColor "#F07178" "" . wrap "[" "]"
-                                                     , ppVisible = xmobarColor "#7aa2f7" ""
-                                                     , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""
-                                                     , ppHiddenNoWindows = xmobarColor "#7aa2f7" ""
-                                                     , ppTitle = xmobarColor "#f8f8f2" "" . shorten 60
+                                                     , ppCurrent = xmobarColor "#c678dd" "" . wrap "[" "]"
+                                                     , ppVisible = xmobarColor "#c678dd" "" . clickable
+                                                     , ppHidden = xmobarColor "#51afef" "" . wrap "*" "" . clickable
+                                                     , ppHiddenNoWindows = xmobarColor "#51afef" "" . clickable
+                                                     , ppTitle = xmobarColor "#dfdfdf" "" . shorten 60
                                                      , ppSep = "<fc=#666666> | </fc>"
                                                      , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
                                                    -- , ppExtras = [windowCount]

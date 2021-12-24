@@ -103,7 +103,7 @@
 (use-package doom-themes)
 (setq doom-themes-enable-italic t
       doom-themes-enable-bold t)
-(load-theme 'doom-city-lights t)
+(load-theme 'doom-one t)
 
 ;; All the Icons
 (use-package all-the-icons)

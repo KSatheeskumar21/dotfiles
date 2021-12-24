@@ -143,3 +143,13 @@ Dec 23 17:11 : player: played "Maroon 5 - Payphone ft. Wiz Khalifa (Explicit) (O
 Dec 23 17:48 : player: played "Maroon 5 - Payphone ft. Wiz Khalifa (Explicit) (Official Music Video).mp3"
 Dec 23 18:08 : player: played "Maroon 5 - Payphone ft. Wiz Khalifa (Explicit) (Official Music Video).mp3"
 Dec 23 18:08 : player: played "Avicii - Wake Me Up.mp3"
+Dec 24 14:06 : player: played "Jonas Blue - Rise ft. Jack & Jack (Official Video).mp3"
+ALSA lib pcm_dmix.c:1032:(snd_pcm_dmix_open) unable to open slave
+Dec 24 14:06 : exception: Failed to open "mpd alsamixer-output" (alsa); Failed to open ALSA device "default": Device or resource busy
+Dec 24 14:11 : player: played "心予報 - Eve MV.mp3"
+Dec 24 14:19 : player: played "Avicii - Wake Me Up.mp3"
+Dec 24 14:23 : player: played "Jonas Blue, Liam Payne, Lennon Stella - Polaroid (Official Lyric Video).mp3"
+Dec 24 14:28 : player: played "Avicii - Wake Me Up.mp3"
+Dec 24 14:31 : player: played "心予報 - Eve MV.mp3"
+Dec 24 14:35 : player: played "心予報 - Eve MV.mp3"
+Dec 24 14:40 : player: played "Maroon 5 - Payphone ft. Wiz Khalifa (Explicit) (Official Music Video).mp3"

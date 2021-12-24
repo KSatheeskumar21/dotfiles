@@ -1,2 +1,3 @@
 21-12-2021: Life is super fun
 24-12-2021: sed -n '/KB_BEGIN/,/KB_END/p' ~/.xmonad/xmonad.hs | grep '("' | grep -v '\-\- , ("'
+24-12-2021: WM_CLASS -> "qutebrowser", "tabbed-surf"

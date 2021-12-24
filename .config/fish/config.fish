@@ -17,8 +17,9 @@ set -x MANPAGER '/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft
 
 ## Fish greeting
 function fish_greeting
-	pokemon-colorscripts -r
+	# pokemon-colorscripts -r
 	# echo (set_color brred) "Welcome to your fish shell!"
+	python3 ~/.local/bin/random-script.py
 end
 
 # Functions End
@@ -76,6 +77,14 @@ alias tosddm="sudo pacman -S sddm --noconfirm --needed ; sudo systemctl enable s
 
 # Youtube-dl alias
 alias mp3-download="youtube-dl -x --audio-format mp3 --embed-thumbnail"
+
+# Devour alias
+alias mpv="devour mpv"
+alias sxiv="devour sxiv"
+alias zathura="devour zathura"
+
+# Rickrollrc alias
+alias rr="curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash"
 
 # Aliases End
 

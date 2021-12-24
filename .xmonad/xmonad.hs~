@@ -48,15 +48,7 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.MouseResize
 import System.Posix (BaudRate(B600))
 
--- Prompts
--- import XMonad.Prompt
--- import XMonad.Prompt.AppLauncher
--- import XMonad.Prompt.Man
--- import XMonad.Prompt.Shell
-
--- The preferred terminal program, which is used in a binding below and by
--- certain contrib modules.
---
+-- Preferred Terminal
 myTerminal      = "alacritty -t Terminal"
 altTerminal     = "st"
 
@@ -72,15 +64,15 @@ altEditor = "code"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = True
+myFocusFollowsMouse = False
 
 -- Whether clicking on a window to focus also passes the click to the window
 myClickJustFocuses :: Bool
-myClickJustFocuses = False
+myClickJustFocuses = True
 
 -- Width of the window border in pixels.
 --
-myBorderWidth   = 1
+myBorderWidth   = 2
 
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -99,12 +91,12 @@ altMask         = mod1Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
--- myWorkspaces :: [String]
+myWorkspaces :: [String]
 myWorkspaces    = ["dev","www","sys","doc","vbox","chat","mus","vid","gfx"]
-myWorkspaceIndices = M.fromList $ zipWith(,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
-
+myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
     where i = fromJust $ M.lookup ws myWorkspaceIndices
+
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -117,21 +109,12 @@ myFocusedBorderColor = "#B62D65"
 myKeys :: [(String, X ())]
 myKeys =
 
+    -- KB_BEGIN
+    
+    -- KB_GROUP -> Window management
     -- launch a terminal
-    [ ("M-<Return>", spawn myTerminal)
-
-    -- launch dmenu
-    , ("M-S-<Return>", spawn myLauncher)
-
-    -- Keybinding Group - Xmonad.Prompt
-    -- , ((altMask .|. shiftMask,                 xK_Return), shellPrompt def)
-    -- , ((altMask, xK_m), manPrompt def)
-
-    -- close focused window
-    , ("M-S-c", kill)
-
-     -- Rotate through the available layout algorithms
-    , ("M-<Space>", sendMessage NextLayout)
+    -- Rotate through the available layout algorithms
+    [ ("M-<Space>", sendMessage NextLayout)
 
     --  Reset the layouts on the current workspace to default
     -- , ("M-S-<Space>", setLayout $ XMonad.layoutHook conf)
@@ -174,6 +157,16 @@ myKeys =
 
     -- Deincrement the number of windows in the master area
     -- , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
+    
+    -- KB_GROUP -> Applications
+    -- Alacritty
+    , ("M-<Return>", spawn myTerminal)
+
+    -- launch dmenu
+    , ("M-S-<Return>", spawn myLauncher)
+
+    -- close focused window
+    , ("M-S-c", kill)
 
     -- Spawn Emacsclient
     , ("M-S-e", spawn myEditor)
@@ -218,7 +211,9 @@ myKeys =
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
     --
-    -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
+
+    -- KB_GROUP -> Xmonad
+    , ("M-b", sendMessage ToggleStruts)
 
     -- Quit xmonad
     , ("M-S-x", io exitSuccess)
@@ -227,8 +222,9 @@ myKeys =
     -- Restart xmonad
     , ("M-S-r", spawn "xmonad --recompile; xmonad --restart")
 
-    -- Run xmessage with a summary of the default keybindings (useful for beginners)
-    -- , ("M-S-/", spawn ("echo \"" ++ help ++ "\" | yad "))
+    -- Help Script
+    -- , ("M-S-/", spawn "~/.xmonad/xmonad-keys.sh"))
+    -- KB_END
     ]
 
     --
@@ -271,8 +267,8 @@ showWNameTheme :: SWNConfig
 showWNameTheme = def
   { swn_font   = "xft:JetBrains Mono:bold:size=60"
   , swn_fade   = 0.8
-  , swn_bgcolor = #1D252C
-  , swn_color = #ffffff
+  , swn_bgcolor = "#1D252C"
+  , swn_color = "#ffffff"
   }
 
 myLayout = mouseResize $ avoidStruts (tall ||| floatingLayout ||| emacsLayout ||| Grid(16/10) ||| simpleTabbed ||| Mirror tall ||| Full)
@@ -320,6 +316,7 @@ myManageHook = composeAll
     , className =? "mpv"               --> doShift ( myWorkspaces !! 7 )
     , className =? "Olivia"            --> doShift ( myWorkspaces !! 7 )
     , className =? "Brave-browser"     --> doShift ( myWorkspaces !! 1 )
+    , className =? "firefox"           --> doShift ( myWorkspaces !! 1 )
     -- , className =? "Thunar"         --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
@@ -369,7 +366,7 @@ myStartupHook = do
 	spawnOnce "mopidy &"
         -- System tray stuff, power management (laptop only)
         spawnOnce "xfce4-power-manager &"
-        spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x1D252C --height 22 &"
+        spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x2D2A2E --height 22 &"
         spawnOnce "volumeicon &"
         spawnOnce "nm-applet &"
         -- Polkit app
@@ -421,7 +418,7 @@ myStartupHook = do
 main = do
        -- Xmobar
        -- mySB <- statusBarPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/doom-city-lights-xmobarrc" (pure myXmobarPP)
-       mySB <- spawnPipe "xmobar -x 0 /home/kishore/.config/xmobar/doom-city-lights-xmobarrc"
+       mySB <- spawnPipe "xmobar -x 0 /home/kishore/.config/xmobar/monokai-pro-xmobarrc"
        -- xmonad $ withSB mySB $ ewmh $ docks $ def {
        xmonad $ ewmh $ docks $ def {
       -- simple stuff
@@ -447,9 +444,9 @@ main = do
         -- logHook            = myLogHook,
         logHook            = workspaceHistoryHook <+> dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn mySB
                                                      , ppCurrent = xmobarColor "#F07178" "" . wrap "[" "]"
-                                                     , ppVisible = xmobarColor "#7aa2f7" ""
-                                                     , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""
-                                                     , ppHiddenNoWindows = xmobarColor "#7aa2f7" ""
+                                                     , ppVisible = xmobarColor "#7aa2f7" "" . clickable
+                                                     , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" "" . clickable
+                                                     , ppHiddenNoWindows = xmobarColor "#7aa2f7" "" . clickable
                                                      , ppTitle = xmobarColor "#f8f8f2" "" . shorten 60
                                                      , ppSep = "<fc=#666666> | </fc>"
                                                      , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
