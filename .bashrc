@@ -14,13 +14,14 @@
 
 export HISTCONTROL=ignoreboth:erasedups
 
-# Make emacs the default editor
-
 export EDITOR="nvim"
 export VISUAL="emacsclient -c -a 'emacs'"
 
 #PS1='[\u@\h \W]\$ '
-PS1='\W \$ '
+PS1="(Time: \t)\n\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
+
+# Vi mode
+set -o vi
 
 if [ -d "$HOME/.bin" ] ;
   then PATH="$HOME/.bin:$PATH"
@@ -301,28 +302,7 @@ alias personal='cp -Rf /personal/* ~'
 alias config="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 
 # Neovim alias
-# alias vim="nvim"
+alias vim="nvim"
 
-#create a file called .bashrc-personal and put all your personal aliases
-#in there. They will not be overwritten by skel.
-
-[[ -f ~/.bashrc-personal ]] && . ~/.bashrc-personal
-
-# reporting tools - install when not installed
-#neofetch
-#screenfetch
-#alsi
-#paleofetch
-#fetch
-#hfetch
-#sfetch
-#ufetch
-#ufetch-arco
-#pfetch
-#sysinfo
-#sysinfo-retro
-#cpufetch
-#colorscript random
-eval "$(starship init bash)"
-#pokemon-colorscripts -r
-python3 ~/.local/bin/random-script.py
+# eval "$(starship init bash)"
+random-script.py
