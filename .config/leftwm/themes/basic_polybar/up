@@ -16,14 +16,14 @@ xfce4-clipman &
 /usr/bin/emacs --daemon &
 nitrogen --restore &
 dunst &
-
+picom --experimental-backends &
 
 #boot picom or compton if it exists
-if [ -x "$(command -v picom)" ]; then
-  picom &> /dev/null & 
-elif [ -x "$(command -v compton)" ]; then
-  compton &> /dev/null & 
-fi
+#if [ -x "$(command -v picom)" ]; then
+#  picom &> /dev/null & 
+#elif [ -x "$(command -v compton)" ]; then
+#  compton &> /dev/null & 
+#fi
 
 #set the theme.toml config
 echo "LoadTheme $SCRIPTPATH/theme.toml" > $XDG_RUNTIME_DIR/leftwm/commands.pipe

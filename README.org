@@ -10,8 +10,14 @@ I also have my Emacs config in this repo.
 
 [[Screenshots/xmonad-windows-scrot.png]]
 
-* Awesome Scrot
+* Awesome Scrots
 
 [[Screenshots/awesome-no-windows-scrot.png]]
 
 [[Screenshots/awesome-windows-scrot.png]]
+
+* LeftWM Scrots
+
+[[Screenshots/leftwm-no-windows-scrot.png]]
+
+[[Screenshots/leftwm-windows-scrot.png]]
