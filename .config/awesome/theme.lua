@@ -30,6 +30,9 @@ theme.border_normal = "#000000"
 theme.border_focus  = "#327bd1"
 theme.border_marked = "#91231c"
 
+theme.flash_focus_start_opacity = 0.6
+theme.flash_focus_step = 0.01
+
 -- There are other variable sets
 -- overriding the default one when
 -- defined, the sets are:

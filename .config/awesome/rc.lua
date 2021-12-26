@@ -44,12 +44,14 @@ end
 -- }}}
 
 -- Gaps
-beautiful.useless_gap = 5
+beautiful.useless_gap = 8
 beautiful.gap_single_client = true
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
+
+local bling = require("bling")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
@@ -78,7 +80,7 @@ awful.layout.layouts = {
     -- awful.layout.suit.spiral.dwindle,
     -- awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
+    -- awful.layout.suit.magnifier,
     awful.layout.suit.floating,
     -- awful.layout.suit.corner.nw,
     -- awful.layout.suit.corner.ne,
@@ -234,6 +236,8 @@ root.buttons(gears.table.join(
 ))
 -- }}}
 
+bling.module.flash_focus.enable()
+
 -- {{{ Key bindings
 globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
@@ -248,12 +252,14 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
+	    bling.module.flash_focus.flashfocus(client.focus)
         end,
         {description = "focus next by index", group = "client"}
     ),
     awful.key({ modkey,           }, "k",
         function ()
             awful.client.focus.byidx(-1)
+	    bling.module.flash_focus.flashfocus(client.focus)
         end,
         {description = "focus previous by index", group = "client"}
     ),
@@ -571,8 +577,10 @@ awful.spawn.with_shell("dunst")
 awful.spawn.with_shell("xfce4-clipman")
 awful.spawn.with_shell("xclip")
 awful.spawn.with_shell("[ ! -s ~/.config/mpd/pid ] && mpd")
-awful.spawn.with_shell("killall volumeicon")
+awful.spawn.with_shell("pkill volumeicon ; sleep 2")
 awful.spawn.with_shell("volumeicon")
 awful.spawn.with_shell("nm-applet")
 awful.spawn.with_shell("xsetroot -cursor_name left_ptr")
 awful.spawn.with_shell("awesome-appmenu")
+bling.module.window_swallowing.stop()
+bling.module.window_swallowing.start()
