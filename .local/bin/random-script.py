@@ -11,7 +11,7 @@ import random
 import os
 
 def randomInteger():
-    randomInteger.random_number = random.randint(1,3)
+    randomInteger.random_number = random.randint(1,4)
     return randomInteger.random_number
 
 randomInteger()
@@ -24,3 +24,6 @@ elif randomInteger.random_number == 2:
 
 elif randomInteger.random_number == 3:
     os.system("colorscript random")
+
+elif randomInteger.random_number == 4:
+    os.system("neofetch | lolcat")

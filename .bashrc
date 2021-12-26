@@ -325,3 +325,4 @@ alias config="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 #colorscript random
 eval "$(starship init bash)"
 #pokemon-colorscripts -r
+python3 ~/.local/bin/random-script.py

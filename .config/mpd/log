@@ -164,3 +164,4 @@ ALSA lib pcm_dmix.c:1032:(snd_pcm_dmix_open) unable to open slave
 Dec 24 20:06 : exception: Failed to open "mpd alsamixer-output" (alsa); Failed to open ALSA device "default": Device or resource busy
 Dec 24 20:06 : player: played "Jonas Blue - Mama ft. William Singe (Official Video).mp3"
 Dec 24 20:12 : player: played "Jonas Blue - Mama ft. William Singe (Official Video).mp3"
+                                                                                                          

@@ -44,7 +44,7 @@ end
 -- }}}
 
 -- Gaps
-beautiful.useless_gap = 3
+beautiful.useless_gap = 5
 beautiful.gap_single_client = true
 
 -- {{{ Variable definitions
@@ -105,8 +105,8 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                   }
                         })
 
--- mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
---                                      menu = mymainmenu })
+mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+                                     menu = mymainmenu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -322,7 +322,7 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey, "Shift" },            "Return",     function () awful.spawn.with_shell("dmenu_run -p 'Run:' -h 24") end,
+    awful.key({ modkey, "Shift" },            "Return",     function () awful.spawn.with_shell("dmenu_run -p 'Run:' -h 27") end,
               {description = "run prompt", group = "launcher"})
 )
 
@@ -571,6 +571,7 @@ awful.spawn.with_shell("dunst")
 awful.spawn.with_shell("xfce4-clipman")
 awful.spawn.with_shell("xclip")
 awful.spawn.with_shell("[ ! -s ~/.config/mpd/pid ] && mpd")
+awful.spawn.with_shell("killall volumeicon")
 awful.spawn.with_shell("volumeicon")
 awful.spawn.with_shell("nm-applet")
 awful.spawn.with_shell("xsetroot -cursor_name left_ptr")
