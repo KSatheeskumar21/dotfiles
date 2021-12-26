@@ -9,3 +9,9 @@ I also have my Emacs config in this repo.
 [[Screenshots/xmonad-no-windows-scrot.png]]
 
 [[Screenshots/xmonad-windows-scrot.png]]
+
+* Awesome Scrot
+
+[[Screenshots/awesome-no-windows-scrot.png]]
+
+[[Screenshots/awesome-windows-scrot.png]]
