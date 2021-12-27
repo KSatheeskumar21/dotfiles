@@ -27,7 +27,6 @@ alias tofish="sudo chsh $USER -s /bin/fish && echo 'Done...'"
 
 # Sourcing Plugins
 source ~/.zsh/zsh-autosuggestions.zsh
-source ~/.zsh/fast-syntax-highlighting.plugin.zsh
 source ~/.zsh/compleat.plugin.zsh
 
 # Lines configured by zsh-newuser-install
@@ -44,5 +43,6 @@ compinit
 # End of lines added by compinstall
 
 # Autostart
-pokemon-colorscripts -r
-eval "$(starship init zsh)"
+# pokemon-colorscripts -r
+random-script.py
+# eval "$(starship init zsh)"

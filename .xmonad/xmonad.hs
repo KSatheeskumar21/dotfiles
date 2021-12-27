@@ -442,7 +442,7 @@ main = do
         -- layoutHook         = gaps [(U, 8), (R, 8)] myLayout,
         layoutHook         = showWName' showWNameTheme $ myLayout,
         manageHook         = myManageHook,
-        -- handleEventHook    = ewmh,
+        handleEventHook    = ewmhDesktopsEventHook,
         -- logHook            = myLogHook,
         logHook            = workspaceHistoryHook <+> dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn mySB
                                                      , ppCurrent = xmobarColor "#c678dd" "" . wrap "[" "]"
