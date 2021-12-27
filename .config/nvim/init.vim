@@ -35,8 +35,8 @@ Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 
 " Completion
-" Plug 'nvim-lua/completion-nvim'
-" Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
+Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter'
 
 Plug 'neoclide/coc.nvim', { 'branch': 'master', 'do': 'yarn install --frozen-lockfile' }
@@ -60,6 +60,9 @@ Plug 'ap/vim-css-color'
 Plug 'rstacruz/vim-closer'
 Plug 'tpope/vim-endwise'
 
+" Polyglot (tryna get the whole Neovim IDE thing going)
+Plug 'sheerun/vim-polyglot'
+
 call plug#end()
 
 filetype plugin indent on
@@ -71,11 +74,6 @@ let g:tokyonight_enable_italic = 1
 let g:airline_theme = "tokyonight"
 " Set this to 1 for arrows 
 let g:airline_powerline_fonts = 1
-
-" Statusline theme
-" let g:lightline = {
-" 		\ 'colorscheme': 'darcula',
-" 		\}
 
 " Always show statusline
 set laststatus=2
@@ -133,42 +131,17 @@ let NERDTreeWinSize = 38
 " autocmd BufEnter * lua require 'completion'.on_attach()
 
 " Nvim-lspconfig
-" lua << EOF
-" require'lspconfig'.pyright.setup{}
-" require'lspconfig'.rust_analyzer.setup{}
-" require'lspconfig'.haskell-language-server.setup{}
-" require'lspconfig'.gopls.setup{}
-" require'lspconfig'.tsserver.setup{}
-" EOF
+lua << EOF
+require'lspconfig'.pyright.setup{}
+require'lspconfig'.rust_analyzer.setup{}
+-- require'lspconfig'.haskell-language-server.setup{}
+require'lspconfig'.gopls.setup{}
+require'lspconfig'.tsserver.setup{}
+EOF
 
-" let g:completion_enable_snippet = 'NeoSnippets'
+let g:completion_enable_snippet = 'NeoSnippets'
 
 " Completion
-
-" vim-lsp-settings won't detect hls automatically as of today (2020-10-26). Let's teach it:
-if (executable('haskell-language-server-wrapper'))
-  au User lsp_setup call lsp#register_server({
-      \ 'name': 'haskell-language-server-wrapper',
-      \ 'cmd': {server_info->['haskell-language-server-wrapper', '--lsp']},
-      \ 'whitelist': ['haskell'],
-      \ })
-endif
-
-" Decorations
-augroup lsp_install
-    au!
-    let g:lsp_signs_enabled = 1         " enable signs
-    let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
-    let g:lsp_signs_error = {'text': '✗'}
-    let g:lsp_signs_warning = {'text': '‼'}
-    let g:lsp_highlight_references_enabled = 1
-    highlight clear LspWarningLine
-    highlight lspReference ctermfg=red guifg=red ctermbg=green guibg=green
-    highlight lspReference guibg=#303010
-
-    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
 
 lua <<EOF
 require 'nvim-treesitter.configs'.setup {
@@ -186,7 +159,3 @@ autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 
 " Other
 let g:python_highlight_all = 1
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
-au BufEnter *.org	     call org#SetOrgFileType()
-" set guifont=Mononoki\ Nerd\ Font:h15
-" let g:neovide_transparency=0.95
