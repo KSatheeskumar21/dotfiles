@@ -66,7 +66,7 @@ filetype plugin indent on
 
 set termguicolors
 
-let g:tokyonight_style = 'storm'
+let g:tokyonight_style = 'night'
 let g:tokyonight_enable_italic = 1
 let g:airline_theme = "tokyonight"
 " Set this to 1 for arrows 
@@ -82,7 +82,7 @@ set laststatus=2
 set noshowmode
 
 " Colorscheme of choice
-colorscheme doom-one
+colorscheme tokyonight
 
 " Remapping Splits
 nnoremap <C-h> <C-w>h

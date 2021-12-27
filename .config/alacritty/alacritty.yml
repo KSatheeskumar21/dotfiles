@@ -32,11 +32,11 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 6
-    y: 6
+    x: 1
+    y: 1
 
   # Spread additional padding evenly around the terminal content.
-  dynamic_padding: false
+  dynamic_padding: true
 
   # Window decorations
   #
@@ -629,7 +629,7 @@ schemes:
 # *tokyo-night
 # *doom-city-lights
 
-colors: *doom-one
+colors: *tokyo-night
 
 #######################################
 ##       END OF COLOR SCHEMES        ##
