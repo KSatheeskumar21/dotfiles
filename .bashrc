@@ -40,7 +40,7 @@ bind "set completion-ignore-case on"
 #alias ll='ls -la'
 #alias l='ls'
 #alias l.="ls -A | egrep '^\.'"
-alias ls="exa -lahF"
+alias ls="exa -lahF --icons"
 
 #fix obvious typo's
 alias cd..='cd ..'
@@ -303,6 +303,9 @@ alias config="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 
 # Neovim alias
 alias vim="nvim"
+
+# Npm alias
+alias npm="sudo npm"
 
 # eval "$(starship init bash)"
 random-script.py

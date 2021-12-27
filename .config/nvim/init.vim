@@ -36,7 +36,7 @@ Plug 'ryanoasis/vim-devicons'
 
 " Completion
 " Plug 'nvim-lua/completion-nvim'
-" Plug 'neovim/nvim-lspconfig'
+Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter'
 
 " NeOrg
@@ -57,6 +57,7 @@ Plug 'vim-python/python-syntax'
 Plug 'ap/vim-css-color'
 Plug 'rstacruz/vim-closer'
 Plug 'tpope/vim-endwise'
+
 call plug#end()
 
 filetype plugin indent on
@@ -67,7 +68,7 @@ let g:tokyonight_style = 'night'
 let g:tokyonight_enable_italic = 1
 let g:airline_theme = "tokyonight"
 " Set this to 1 for arrows 
-let g:airline_powerline_fonts = 0
+let g:airline_powerline_fonts = 1
 
 " Statusline theme
 " let g:lightline = {
@@ -129,12 +130,21 @@ let g:startify_session_dir="~/.config/nvim/session"
 " Completion-nvim
 " autocmd BufEnter * lua require 'completion'.on_attach()
 
+" Nvim-lspconfig
+lua << EOF
+require'lspconfig'.pyright.setup{}
+require'lspconfig'.rust_analyzer.setup{}
+require'lspconfig'.haskell_language_server.setup{}
+require'lspconfig'.gopls.setup{}
+require'lspconfig'.tsserver.setup{}
+EOF
+
 " let g:completion_enable_snippet = 'NeoSnippets'
 
 " Completion
 lua <<EOF
 require 'nvim-treesitter.configs'.setup {
-	ensure_installed = "python", "haskell", "go", "rust",
+	ensure_installed = "python", "haskell", "go", "rust", "typescript",
 	sync_install = false,
 	highlight = {
 		enable = true,
