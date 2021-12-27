@@ -10,6 +10,6 @@ sed -n '/KB_BEGIN/,/KB_END/p' ~/.xmonad/xmonad.hs | \
 	sed -e 's/^[ \t]*//' \
 	-e 's/, (/(/' \
 	-e 's/\[ (/(/' \
-	-e 's/-- KB_GROUP /\n/' \
+	-e 's/-- KB_GROUP /\nGroup /' \
 	-e 's/", /" -> /' | \
 	yad --text-info
