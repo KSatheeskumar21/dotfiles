@@ -343,7 +343,7 @@ myStartupHook = do
         spawnOnce "[ ! -s ~/.config/mpd/pid ] && mpd"
         -- System tray stuff, power management (laptop only)
         spawnOnce "xfce4-power-manager &"
-        spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x282c34 --height 22 &"
+        spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x1E1E28 --height 22 &"
         spawnOnce "volumeicon &"
         spawnOnce "nm-applet &"
         -- Polkit app
@@ -395,7 +395,7 @@ main = do
        -- Xmonad 0.17 stuff
        -- Xmobar
        -- mySB <- statusBarPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/doom-city-lights-xmobarrc" (pure myXmobarPP)
-       mySB <- spawnPipe "xmobar -x 0 /home/kishore/.config/xmobar/doom-one-xmobarrc"
+       mySB <- spawnPipe "xmobar -x 0 /home/kishore/.config/xmobar/catppuccin-xmobarrc"
        -- xmonad $ withSB mySB $ ewmh $ docks $ def {
        xmonad $ ewmh $ docks $ def {
       -- simple stuff
@@ -414,13 +414,13 @@ main = do
         handleEventHook    = ewmhDesktopsEventHook,
         -- logHook            = myLogHook,
         logHook            = workspaceHistoryHook <+> dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn mySB
-                                                     , ppCurrent = xmobarColor "#c678dd" "" . wrap "[" "]"
-                                                     , ppVisible = xmobarColor "#c678dd" "" . clickable
-                                                     , ppHidden = xmobarColor "#51afef" "" . wrap "*" "" . clickable
-                                                     , ppHiddenNoWindows = xmobarColor "#51afef" "" . clickable
-                                                     , ppTitle = xmobarColor "#dfdfdf" "" . shorten 60
+                                                     , ppCurrent = xmobarColor "#C6AAE8" "" . wrap "[" "]"
+                                                     , ppVisible = xmobarColor "#C6AAE8" "" . clickable
+                                                     , ppHidden = xmobarColor "#A4B9EF" "" . wrap "*" "" . clickable
+                                                     , ppHiddenNoWindows = xmobarColor "#A4B9EF" "" . clickable
+                                                     , ppTitle = xmobarColor "#DADAE8" "" . shorten 60
                                                      , ppSep = "<fc=#666666> | </fc>"
-                                                     , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
+                                                     , ppUrgent = xmobarColor "#E38C8F" "" . wrap "!" "!"
                                                    -- , ppExtras = [windowCount]
                                                      , ppOrder = \(ws:l:t:ex) -> [ws,l]++ex++[t]
                                                      },

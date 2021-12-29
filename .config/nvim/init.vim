@@ -29,7 +29,7 @@ Plug 'vim-airline/vim-airline-themes'
 "Plug 'itchyny/lightline.vim'
 
 " Start page
-" Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify'
 
 " File manager
 Plug 'preservim/nerdtree'
@@ -72,9 +72,9 @@ set termguicolors
 
 let g:tokyonight_style = 'night'
 let g:tokyonight_enable_italic = 1
-let g:airline_theme = "tokyonight"
+let g:airline_theme = "base16_dracula"
 " Set this to 1 for arrows 
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 
 " Always show statusline
 set laststatus=2
@@ -108,25 +108,25 @@ let NERDTreeMinimalUI = 1
 let NERDTreeWinSize = 38
 
 " Startify Stuff
+
 " Session Directory
-" let g:startify_session_dir="~/.config/nvim/session"
+let g:startify_session_dir="~/.config/nvim/session"
 
 " Home page
-" let g:startify_lists = [
-" 			\ { 'type' : 'files',   'header': [' Files' ] },
-" 			\ { 'type' : 'sessions',     'header': [' Sessions' ] },
-" 			\ { 'type' : 'bookmarks',     'header': [' Bookmarks' ] },
-" 			\ ]
+let g:startify_lists = [
+			\ { 'type' : 'files',   'header': [' Files' ] },
+			\ { 'type' : 'sessions',     'header': [' Sessions' ] },
+			\ { 'type' : 'bookmarks',    'header': [' Bookmarks' ] },
+			\ ]
 " Bookmarks
-" let g:startify_bookmarks = [
-" 			\ { 'l' : '~/.config/leftwm/config.toml' },
-" 			\ { 'i' : '~/.config/nvim/init.vim' },
-" 			\ { 'f' : '~/.config/fish/config.fish' },
-" 			\ { 'p' : '~/.config/qtile/config.py' },
-" 			\ { 'a' : '~/.config/alacritty/alacritty.yml' },
-" 			\ ]
+let g:startify_bookmarks = [
+			\ { 'l' : '~/.config/leftwm/config.toml' },
+			\ { 'i' : '~/.config/nvim/init.vim' },
+			\ { 'f' : '~/.config/fish/config.fish' },
+			\ { 'a' : '~/.config/alacritty/alacritty.yml' },
+			\ ]
 
-" let g:startify_session_reload = 1
+let g:startify_session_reload = 1
 
 " Completion-nvim
 " autocmd BufEnter * lua require 'completion'.on_attach()

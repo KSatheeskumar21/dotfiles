@@ -24,7 +24,10 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.WorkspaceHistory
+import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
+
+-- Xmonad 0.17
 -- import XMonad.Hooks.StatusBar
 -- import XMonad.Hooks.StatusBar.PP
 
@@ -82,15 +85,8 @@ myBorderWidth   = 2
 myModMask       = mod4Mask
 altMask         = mod1Mask
 
--- The default number of workspaces (virtual screens) and their names.
--- By default we use numeric strings, but any string may be used as a
--- workspace name. The number of workspaces is determined by the length
--- of this list.
---
--- A tagging example:
---
--- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
---
+-- Workspace Names
+
 myWorkspaces :: [String]
 myWorkspaces    = ["dev","www","sys","doc","vbox","chat","mus","vid","gfx"]
 myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
@@ -99,20 +95,19 @@ clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
 
 
 -- Border colors for unfocused and focused windows, respectively.
---
+
 myNormalBorderColor  = "#cccccc"
 myFocusedBorderColor = "#B62D65"
 
 ------------------------------------------------------------------------
--- Key bindings. Add, modify or remove key bindings here.
---
+-- Key bindings.
+
 myKeys :: [(String, X ())]
 myKeys =
 
     -- KB_BEGIN
     
     -- KB_GROUP -> Window management
-    -- launch a terminal
     -- Rotate through the available layout algorithms
     [ ("M-<Space>", sendMessage NextLayout)
 
@@ -124,6 +119,9 @@ myKeys =
 
     -- Move focus to the next window
     , ("M-<Tab>", windows W.focusDown)
+
+    -- Move focus to previous window
+    , ("M-S-<Tab?", windows W.focusUp)
 
     -- Move focus to the next window
     , ("M-j", windows W.focusDown)
@@ -144,10 +142,10 @@ myKeys =
     , ("M-S-k", windows W.swapUp    )
 
     -- Shrink the master area
-    -- , ((modm,               xK_h     ), sendMessage Shrink)
+    , ("M-h", sendMessage Shrink)
 
     -- Expand the master area
-    -- , ((modm,               xK_l     ), sendMessage Expand)
+    , ("M-l", sendMessage Expand)
 
     -- Push window back into tiling
     , ("M-t", withFocused $ windows . W.sink)
@@ -177,16 +175,13 @@ myKeys =
     -- , ("M1-e x", spawn (altEditor ++ ".config/xmonad"))
     -- , ("M1-e a", spawn (altEditor ++ ".config/alacritty"))
 
-    -- Spawn Thunar
+    -- Spawn PcManFM
     -- , ("M-S-f", spawn "pcmanfm")
-    --
+    
     -- Spawn ranger
     , ("M-S-f", spawn (myTerminal ++ " -e ranger"))
 
-    -- Clipcat-menu
-    -- , ("M-S-o", spawn "clipcat-menu")
-
-    -- Spawns brave browser
+    -- Spawns preferred browser
     , ("M-S-b", spawn myBrowser)
 
     -- KB_GROUP -> dmscripts
@@ -204,13 +199,8 @@ myKeys =
     , ("M-p y", spawn "dm-youtube")
 
     -- Music Player ( I use dm-music but if I want to visually manage my tracks I use this binding)
-    -- , ("M-S-m", spawn (altTerminal ++ " -e mocp"))
+    , ("M-S-m", spawn (altTerminal ++ " -e mocp"))
     , ("M1-m", spawn (altTerminal ++ " -e ncmpcpp"))
-
-    -- Toggle the status bar gap
-    -- Use this binding with avoidStruts from Hooks.ManageDocks.
-    -- See also the statusBar function from Hooks.DynamicLog.
-    --
 
     -- KB_GROUP -> Xmonad
     , ("M-b", sendMessage ToggleStruts)
@@ -223,7 +213,7 @@ myKeys =
     , ("M-S-r", spawn "xmonad --recompile; xmonad --restart")
 
     -- Help Script
-    -- , ("M-S-/", spawn "~/.xmonad/xmonad-keys.sh"))
+    , ("M-S-/", spawn "xmonad-keys")
     -- KB_END
     ]
 
@@ -244,16 +234,12 @@ myKeys =
     --     | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
     --     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
-
 ------------------------------------------------------------------------
 -- My preferred layouts
 
 -- Extra Layouts
 
 
--- Golden ratio for Spiral Layout
--- goldRatio = toRational (2/(1 + sqrt 5 :: Double))
--- spiralLayout = renamed [Replace "Golden Spiral"] $ spacing 5 $ spiral goldRatio
 
 -- Floating Layout
 floatingLayout = renamed [Replace "Floating"] simplestFloat
@@ -261,6 +247,9 @@ floatingLayout = renamed [Replace "Floating"] simplestFloat
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
 mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True 
 
+-- Golden ratio for Spiral Layout
+goldRatio = toRational (2/(1 + sqrt 5 :: Double))
+spiralLayout = renamed [Replace "Golden Spiral"] $ mySpacing 5 $ spiral goldRatio
 
 -- ShowWName Config
 showWNameTheme :: SWNConfig
@@ -271,7 +260,7 @@ showWNameTheme = def
   , swn_color = "#ffffff"
   }
 
-myLayout = mouseResize $ avoidStruts (tall ||| floatingLayout ||| emacsLayout ||| Grid(16/10) ||| simpleTabbed ||| Mirror tall ||| Full)
+myLayout = mouseResize $ avoidStruts (tall ||| floatingLayout ||| Grid(16/10) ||| simpleTabbed ||| spiralLayout ||| Full)
   where
 
      -- Tiled layout (ResizableTile)
@@ -279,9 +268,6 @@ myLayout = mouseResize $ avoidStruts (tall ||| floatingLayout ||| emacsLayout ||
 
      -- default tiling algorithm partitions the screen into two panes
      -- tiledDef   = renamed [Replace "Tall"] $ Tall nmaster delta ratio
-
-     -- Layout for working in Emacs
-     emacsLayout = renamed [Replace "Emacs"] $ Mirror $ mySpacing 8 $ Tall nmaster delta ratio
 
      -- The default number of windows in the master pane
      nmaster = 1
@@ -294,10 +280,8 @@ myLayout = mouseResize $ avoidStruts (tall ||| floatingLayout ||| emacsLayout ||
 ------------------------------------------------------------------------
 -- Window rules:
 
--- Execute arbitrary actions and WindowSet manipulations when managing
--- a new window. You can use this to, for example, always float a
--- particular program, or have a client always appear on a particular
--- workspace.
+-- Mainpulate certain windows, e.g., force it to float, or move it to
+-- a different workspace
 --
 -- To find the property name associated with a program, use
 -- > xprop | grep WM_CLASS
@@ -305,33 +289,27 @@ myLayout = mouseResize $ avoidStruts (tall ||| floatingLayout ||| emacsLayout ||
 --
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
---
+
 myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
-    , className =? "Gimp"           --> doFloat
-    , className =? "Qalculate-gtk"     --> doFloat
+    [ className =? "MPlayer"        --> doCenterFloat
+    , className =? "Gimp"           --> doCenterFloat
+    , className =? "Qalculate-gtk"     --> doCenterFloat
+    -- Terminals for music players
     , className =? "st-256color"       --> doShift ( myWorkspaces !! 6 )
     , className =? "Xterm"             --> doShift ( myWorkspaces !! 6 )
+    -- GUI Music player
     , className =? "Deadbeef"          --> doShift ( myWorkspaces !! 6 )
+    -- Move video players to workspace 8
     , className =? "mpv"               --> doShift ( myWorkspaces !! 7 )
     , className =? "Olivia"            --> doShift ( myWorkspaces !! 7 )
+    -- Move browsers to workspace 2
     , className =? "Brave-browser"     --> doShift ( myWorkspaces !! 1 )
     , className =? "firefox"           --> doShift ( myWorkspaces !! 1 )
+    , className =? "tabbed-surf"       --> doShift ( myWorkspaces !! 1 )
+    , className =? "qutebrowser"       --> doShift ( myWorkspaces !! 1 )
     -- , className =? "Thunar"         --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
-
-------------------------------------------------------------------------
--- Event handling
-
--- * EwmhDesktops users should change this to ewmhDesktopsEventHook
---
--- Defines a custom handler function for X Events. The function should
--- return (All True) if the default handler is to be run afterwards. To
--- combine event hooks use mappend or mconcat from Data.Monoid.
---
--- myEventHook :: XConfig a -> XConfig a
--- myEventHook = ewmhDesktopsEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -361,12 +339,11 @@ myStartupHook = do
         -- spawnOnce "clipcatd"
         spawnOnce "xfce4-clipman &"
         spawnOnce "xclip &"
-	-- Music Daemon
-	spawnOnce "[ ! -s ~/.config/mpd/pid ] && mpd"
-	spawnOnce "mopidy &"
+        -- Music Daemon
+        spawnOnce "[ ! -s ~/.config/mpd/pid ] && mpd"
         -- System tray stuff, power management (laptop only)
         spawnOnce "xfce4-power-manager &"
-        spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x2D2A2E --height 22 &"
+        spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x1E1E28 --height 22 &"
         spawnOnce "volumeicon &"
         spawnOnce "nm-applet &"
         -- Polkit app
@@ -376,15 +353,12 @@ myStartupHook = do
         -- WM name
         setWMName "nintenno-xmonad"
 
-	-- Polybar, which I don't use anymore
-        -- spawnOnce "~/.config/polybar/launch.sh"
-
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
 
--- Run xmonad with the settings you specify. No need to modify this.
---
+-- Runs Xmonad with the settings aforementioned as well as others defined in the 'main' block
 
+-- Xmonad 0.17
 -- Xmobar
 -- myStatusBarPP = dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn xmproc0 }
 
@@ -415,10 +389,13 @@ myStartupHook = do
 --       red = xmobarColor "#F07178" ""
 --       lowWhite = xmobarColor "#bbbbbb" ""
 
+
+-- Main block
 main = do
+       -- Xmonad 0.17 stuff
        -- Xmobar
        -- mySB <- statusBarPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/doom-city-lights-xmobarrc" (pure myXmobarPP)
-       mySB <- spawnPipe "xmobar -x 0 /home/kishore/.config/xmobar/monokai-pro-xmobarrc"
+       mySB <- spawnPipe "xmobar -x 0 /home/kishore/.config/xmobar/catppuccin-xmobarrc"
        -- xmonad $ withSB mySB $ ewmh $ docks $ def {
        xmonad $ ewmh $ docks $ def {
       -- simple stuff
@@ -431,23 +408,17 @@ main = do
         normalBorderColor  = myNormalBorderColor,
         focusedBorderColor = myFocusedBorderColor,
 
-      -- key bindings
-        -- keys               = myKeybindings,
-        -- mouseBindings      = myMouseBindings,
-
-      -- hooks, layouts
-        -- layoutHook         = spacingRaw True (Border 0 8 8 8) True (Border 0 8 8 8) True myLayout,
-        -- layoutHook         = gaps [(U, 8), (R, 8)] myLayout,
+        -- hooks, layouts
         layoutHook         = showWName' showWNameTheme $ myLayout,
         manageHook         = myManageHook,
-        -- handleEventHook    = ewmh,
+        handleEventHook    = ewmhDesktopsEventHook,
         -- logHook            = myLogHook,
         logHook            = workspaceHistoryHook <+> dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn mySB
-                                                     , ppCurrent = xmobarColor "#F07178" "" . wrap "[" "]"
-                                                     , ppVisible = xmobarColor "#7aa2f7" "" . clickable
-                                                     , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" "" . clickable
-                                                     , ppHiddenNoWindows = xmobarColor "#7aa2f7" "" . clickable
-                                                     , ppTitle = xmobarColor "#f8f8f2" "" . shorten 60
+                                                     , ppCurrent = xmobarColor "#c678dd" "" . wrap "[" "]"
+                                                     , ppVisible = xmobarColor "#c678dd" "" . clickable
+                                                     , ppHidden = xmobarColor "#51afef" "" . wrap "*" "" . clickable
+                                                     , ppHiddenNoWindows = xmobarColor "#51afef" "" . clickable
+                                                     , ppTitle = xmobarColor "#dfdfdf" "" . shorten 60
                                                      , ppSep = "<fc=#666666> | </fc>"
                                                      , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
                                                    -- , ppExtras = [windowCount]
@@ -455,4 +426,3 @@ main = do
                                                      },
         startupHook        = myStartupHook
     } `additionalKeysP` myKeys
-
