@@ -1,17 +1,4 @@
--- Xmobar (http://projects.haskell.org/xmobar/)
--- This is one of the xmobar configurations for DTOS.
--- This config is packaged in the DTOS repo as 'dtos-xmobar'
--- Color scheme: Tomorrow Night
--- Dependencies: 
-   -- otf-font-awesome 
-   -- ttf-mononoki 
-   -- ttf-ubuntu-font-family
-   -- htop
-   -- emacs
-   -- pacman (Arch Linux)
-   -- trayer
-   -- 'dtos-local-bin' (from dtos-core-repo)
-
+-- Tomorrow Night Xmobar
 Config { font            = "xft:Ubuntu:weight=bold:pixelsize=11:antialias=true:hinting=true"
        , additionalFonts = [ "xft:Mononoki:pixelsize=11:antialias=true:hinting=true"
                            , "xft:Font Awesome 5 Free Solid:pixelsize=12"

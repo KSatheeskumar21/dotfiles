@@ -612,6 +612,37 @@ schemes:
         cyan: '#77EEEE'
         white: '#7788AA'
 
+    catpuccin:
+      &catpuccin
+      primary: 
+        background: '#1E1E28'
+        foreground: '#DADAE8'
+
+      cursor:
+        text: '#1E1E28'
+        cursor: '#B1E3AD'
+
+      normal:
+        black: '#6E6C7E'
+        red: '#E38C8F'
+        green: '#B1E3AD'
+        yellow: '#EBDDAA'
+        blue: '#A4B9EF'
+        magenta: '#C6AAE8'
+        cyan: '#E5B4E2'
+        white: '#DADAE8'
+
+      bright:  
+        black: '#6E6C7E'
+        red: '#E38C8F'
+        green: '#B1E3AD'
+        yellow: '#EBDDAA'
+        blue: '#A4B9EF'
+        magenta: '#C6AAE8'
+        cyan: '#E5B4E2'
+        white: '#DADAE8'
+        
+
 ######################################################################
 ## SET THEME: Choose ONE color scheme from those in the above list. ##
 ## ###################################################################
@@ -628,8 +659,9 @@ schemes:
 # *tomorrow-night
 # *tokyo-night
 # *doom-city-lights
+# *catpuccin
 
-colors: *tokyo-night
+colors: *catpuccin
 
 #######################################
 ##       END OF COLOR SCHEMES        ##
