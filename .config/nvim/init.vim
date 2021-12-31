@@ -70,11 +70,16 @@ filetype plugin indent on
 
 set termguicolors
 
+" Tokyonight stuff
 let g:tokyonight_style = 'night'
 let g:tokyonight_enable_italic = 1
-let g:airline_theme = "base16_dracula"
+
+" Airline
+let g:airline_theme = "tokyonight"
 " Set this to 1 for arrows 
-let g:airline_powerline_fonts = 0
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+
 
 " Always show statusline
 set laststatus=2
@@ -124,6 +129,15 @@ let g:startify_bookmarks = [
 			\ { 'i' : '~/.config/nvim/init.vim' },
 			\ { 'f' : '~/.config/fish/config.fish' },
 			\ { 'a' : '~/.config/alacritty/alacritty.yml' },
+			\ ]
+
+let g:startify_custom_header = [
+			\ '                                                     ███╗   ██╗██╗   ██╗██╗███╗   ███╗⠀                            ',
+			\ '                                                     ████╗  ██║██║   ██║██║████╗ ████║⠀ 														',
+			\ '                                                     ██╔██╗ ██║██║   ██║██║██╔████╔██║                             ',
+			\ '                                                     ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║                             ',
+			\ '                                                     ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║                             ',
+			\ '                                                     ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝                             ',
 			\ ]
 
 let g:startify_session_reload = 1
