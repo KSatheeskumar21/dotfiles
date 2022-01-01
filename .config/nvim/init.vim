@@ -22,6 +22,7 @@ Plug 'gmarik/Vundle.vim' " Vundle
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'romgrk/doom-one.vim'
 Plug 'catppuccin/nvim'
+Plug 'rose-pine/neovim'
 
 " Status line
 Plug 'vim-airline/vim-airline'
@@ -86,7 +87,7 @@ set laststatus=2
 set noshowmode
 
 " Colorscheme of choice
-colorscheme catppuccin
+colorscheme rose-pine
 
 " Remapping Splits
 nnoremap <C-h> <C-w>h

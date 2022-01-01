@@ -1,0 +1,28 @@
+{
+  "languageserver": {
+    "haskell": {
+      "command": "haskell-language-server-wrapper",
+      "args": [
+        "--lsp"
+      ],
+      "rootPatterns": [
+        ".stack.yaml",
+        ".hie-bios",
+        "BUILD.bazel",
+        "cabal.config",
+        "package.yaml"
+      ],
+      "filetypes": [
+        "hs",
+        "lhs",
+        "haskell"
+      ]
+    },
+    "go": {
+    	"command": "gopls",
+	"rootPatterns": ["go.mod"],
+	"trace.server": "verbose",
+	"filetypes": ["go"]
+    }
+  }
+}
