@@ -22,7 +22,7 @@ _msg="Options  -  yes / y / no / n"
 chosen="$(echo -e "$options" | $rofi_command -p "UP - $uptime" -dmenu -selected-row 2)"
 case $chosen in
     $shutdown)
-		ans=$($HOME/.config/rofi/scripts/asroot.sh)
+		ans=$($HOME/.config/rofi/scripts/asroot-xmonad.sh)
 		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
         systemctl poweroff
 		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
@@ -32,7 +32,7 @@ case $chosen in
         fi
         ;;
     $reboot)
-		ans=$($HOME/.config/rofi/scripts/asroot.sh)
+		ans=$($HOME/.config/rofi/scripts/asroot-xmonad.sh)
 		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
         systemctl reboot
 		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
@@ -45,7 +45,7 @@ case $chosen in
         betterlockscreen -l
         ;;
     $suspend)
-		ans=$($HOME/.config/rofi/scripts/asroot.sh)
+		ans=$($HOME/.config/rofi/scripts/asroot-xmonad.sh)
 		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
         mpc -q pause
         amixer set Master mute
@@ -57,7 +57,7 @@ case $chosen in
         fi
         ;;
     $logout)
-		ans=$($HOME/.config/rofi/scripts/asroot.sh)
+		ans=$($HOME/.config/rofi/scripts/asroot-xmonad.sh)
 		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
         systemctl exit
 		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then

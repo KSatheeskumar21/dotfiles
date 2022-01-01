@@ -56,7 +56,8 @@ myTerminal      = "alacritty -t Terminal"
 altTerminal     = "st"
 
 -- Preferred Run launcher
-myLauncher = "dmenu_run -p 'Run:' -h 24"
+-- myLauncher = "dmenu_run -p 'Run:' -h 24"
+myLauncher = "~/.config/rofi/scripts/launcher-xmonad.sh"
 
 -- Preferred Browser Program
 myBrowser = "brave"
@@ -93,6 +94,9 @@ myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
     where i = fromJust $ M.lookup ws myWorkspaceIndices
 
+
+windowCount :: X (Maybe String)
+windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
 -- Border colors for unfocused and focused windows, respectively.
 
@@ -351,7 +355,7 @@ myStartupHook = do
         -- Setting Mouse Cursor
         spawnOnce "xsetroot -cursor_name left_ptr"
         -- WM name
-        setWMName "nintenno-xmonad"
+        setWMName "LG3D"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -395,8 +399,8 @@ main = do
        -- Xmonad 0.17 stuff
        -- Xmobar
        -- mySB <- statusBarPipe "/usr/bin/xmobar -x 0 /home/kishore/.config/xmobar/doom-city-lights-xmobarrc" (pure myXmobarPP)
-       mySB <- spawnPipe "xmobar -x 0 /home/kishore/.config/xmobar/catppuccin-xmobarrc"
        -- xmonad $ withSB mySB $ ewmh $ docks $ def {
+       mySB <- spawnPipe "xmobar -x 0 /home/kishore/.config/xmobar/catppuccin-xmobarrc"
        xmonad $ ewmh $ docks $ def {
       -- simple stuff
         terminal           = myTerminal,
@@ -421,7 +425,7 @@ main = do
                                                      , ppTitle = xmobarColor "#DADAE8" "" . shorten 60
                                                      , ppSep = "<fc=#666666> | </fc>"
                                                      , ppUrgent = xmobarColor "#E38C8F" "" . wrap "!" "!"
-                                                   -- , ppExtras = [windowCount]
+                                                     , ppExtras = [windowCount]
                                                      , ppOrder = \(ws:l:t:ex) -> [ws,l]++ex++[t]
                                                      },
         startupHook        = myStartupHook

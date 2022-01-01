@@ -3,12 +3,11 @@
 THEMESDIR="$HOME/.config/rofi/themes"
 
 rofi \
-	-modi drun,run,combi,ssh \
-	-combi-modi drun,run \
-	-show combi \
+	-modi drun,run,window \
+	-show drun \
 	-no-lazy-grab \
 	-scroll-method 0 \
 	-drun-match-fields all \
 	-terminal alacritty \
 	-display-combi "Run:" \
-	-theme "$THEMESDIR/tokyo-night-dmenu.rasi"
+	-theme "$THEMESDIR/tokyo-night-center-no-rounded-corners.rasi"
