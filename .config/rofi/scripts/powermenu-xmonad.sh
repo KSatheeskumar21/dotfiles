@@ -1,51 +1,52 @@
 #!/usr/bin/env bash
 
-THEMESDIR="$HOME/.config/rofi/themes"
+## Copyright (C) 2020-2021 Aditya Shakya <adi1090x@gmail.com>
+## Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
 
-ROFISCRIPTSDIR="$HOME/.config/rofi/scripts"
+DIR="$HOME/.config/"
 
-rofi_command="rofi -theme $THEMESDIR/tokyo-night-center.rasi"
+rofi_command="rofi -theme $DIR/rofi/themes/powermenu.rasi"
 
 uptime=$(uptime -p | sed -e 's/up //g')
 
-# Power Options
-shutdown="Shutdown"
-reboot="Reboot"
-lock="Lock"
-syssuspend="Sleep"
-syslogout="Log Out"
+# Options
+shutdown=""
+reboot=""
+lock=""
+suspend=""
+logout=""
 
 # Variable passed to rofi
-options="$shutdown\n$reboot\n$lock\n$syssuspend\n$syslogout"
+options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
 _msg="Options  -  yes / y / no / n"
 
 chosen="$(echo -e "$options" | $rofi_command -p "UP - $uptime" -dmenu -selected-row 2)"
 case $chosen in
     $shutdown)
-		ans=$($HOME/.config/rofi/scripts/asroot-xmonad.sh)
+		ans=$($HOME/.config/bspwm/rofi/bin/confirm)
 		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
         systemctl poweroff
 		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
         exit
         else
-        rofi -theme $THEMESDIR/askpass.rasi -e "$_msg"
+        rofi -theme ~/.config/bspwm/rofi/themes/askpass.rasi -e "$_msg"
         fi
         ;;
     $reboot)
-		ans=$($HOME/.config/rofi/scripts/asroot-xmonad.sh)
+		ans=$($HOME/.config/bspwm/rofi/bin/confirm)
 		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
         systemctl reboot
 		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
         exit
         else
-        rofi -theme $THEMESDIR/askpass.rasi -e "$_msg"
+        rofi -theme ~/.config/bspwm/rofi/themes/askpass.rasi -e "$_msg"
         fi
         ;;
     $lock)
-        betterlockscreen -l
+        bsplock
         ;;
     $suspend)
-		ans=$($HOME/.config/rofi/scripts/asroot-xmonad.sh)
+		ans=$($HOME/.config/bspwm/rofi/bin/confirm)
 		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
         mpc -q pause
         amixer set Master mute
@@ -53,17 +54,17 @@ case $chosen in
 		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
         exit
         else
-        rofi -theme $THEMESDIR/askpass.rasi -e "$_msg"
+        rofi -theme ~/.config/bspwm/rofi/themes/askpass.rasi -e "$_msg"
         fi
         ;;
     $logout)
-		ans=$($HOME/.config/rofi/scripts/asroot-xmonad.sh)
+		ans=$($HOME/.config/bspwm/rofi/bin/confirm)
 		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
-        systemctl exit
+        bspc quit
 		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
         exit
         else
-        rofi -theme ~/.config/rofi/themes/askpass.rasi -e "$_msg"
+        rofi -theme ~/.config/bspwm/rofi/themes/askpass.rasi -e "$_msg"
         fi
         ;;
 esac

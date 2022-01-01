@@ -1,9 +1,45 @@
 #!/usr/bin/env bash
 
-THEMEDIR="$HOME/.config/rofi/themes"
+## Copyright (C) 2020-2021 Aditya Shakya <adi1090x@gmail.com>
+## Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
 
-rofi -dmenu \
-	-i \
-	-no-fixed-num-lines \
-	-p "Are you sure? : " \
-	-theme $THEMEDIR/tokyo-night-center.rasi 
+DIR="$HOME/.config/"
+
+rofi_command="rofi -theme $DIR/rofi/themes/asroot.rasi"
+
+# Apps
+terminal=" Alacritty"
+files=" Pcmanfm"
+editor=" Geany"
+clifm=" Ranger"
+lpad=" Leafpad"
+vim=" Vim"
+
+# Variable passed to rofi
+options="$terminal\n$files\n$editor\n$clifm\n$lpad\n$vim"
+
+# Functions
+
+chosen="$(echo -e "$options" | $rofi_command -p "Run apps as root" -dmenu -selected-row 0)"
+case $chosen in
+    $terminal)
+        apps_as_root 'alacritty --class alacritty-float,alacritty-float --config-file /root/.config/bspwm/alacritty/alacritty.yml'
+        ;;
+    $files)
+        apps_as_root 'dbus-run-session pcmanfm'
+        ;;
+    $editor)
+        apps_as_root geany
+        ;;
+    $clifm)
+        apps_as_root 'alacritty --class alacritty-float,alacritty-float --config-file /root/.config/bspwm/alacritty/alacritty.yml -e ranger'
+        ;;
+    $lpad)
+        apps_as_root leafpad
+        ;;
+    $vim)
+        apps_as_root 'alacritty --class alacritty-float,alacritty-float --config-file /root/.config/bspwm/alacritty/alacritty.yml -e vim'
+        ;;
+esac
+
+

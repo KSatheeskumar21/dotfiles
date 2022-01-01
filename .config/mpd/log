@@ -164,4 +164,25 @@ ALSA lib pcm_dmix.c:1032:(snd_pcm_dmix_open) unable to open slave
 Dec 24 20:06 : exception: Failed to open "mpd alsamixer-output" (alsa); Failed to open ALSA device "default": Device or resource busy
 Dec 24 20:06 : player: played "Jonas Blue - Mama ft. William Singe (Official Video).mp3"
 Dec 24 20:12 : player: played "Jonas Blue - Mama ft. William Singe (Official Video).mp3"
-                                                                                                          
+                                                                                                          Jan 01 15:18 : exception: Not playing
+Jan 01 15:19 : exception: Failed to decode /home/kishore/music/Avicii - The Nights.mp3; Failed to open '/home/kishore/music/Avicii - The Nights.mp3': No such file or directory
+Jan 01 15:19 : player: played "Avicii - The Nights.mp3"
+Jan 01 15:19 : exception: Failed to decode /home/kishore/music/Avicii - The Nights.mp3; Failed to open '/home/kishore/music/Avicii - The Nights.mp3': No such file or directory
+Jan 01 15:19 : player: played "Avicii - The Nights.mp3"
+Jan 01 15:23 : exception: Failed to decode /home/kishore/music/Avicii - The Nights.mp3; Failed to open '/home/kishore/music/Avicii - The Nights.mp3': No such file or directory
+Jan 01 15:23 : player: played "Avicii - The Nights.mp3"
+Jan 01 15:23 : update: removing Avicii - The Nights.mp3
+Jan 01 15:23 : update: removing Avicii - Wake Me Up.mp3
+Jan 01 15:23 : update: removing Jonas Blue - Mama ft. William Singe (Official Video).mp3
+Jan 01 15:23 : update: removing Jonas Blue - Rise ft. Jack & Jack (Official Video).mp3
+Jan 01 15:23 : update: removing Jonas Blue, Liam Payne, Lennon Stella - Polaroid (Official Lyric Video).mp3
+Jan 01 15:23 : update: removing Maroon 5 - Payphone ft. Wiz Khalifa (Explicit) (Official Music Video).mp3
+Jan 01 15:23 : update: removing poke_and_chill.mp3
+Jan 01 15:23 : update: removing Pokémon Lofi Music ~ 1 Hour Mix.mp3
+Jan 01 15:23 : update: removing 心予報 - Eve MV.mp3
+Jan 01 15:23 : update: added /Maroon 5 - Payphone ft. Wiz Khalifa (Explicit) (Official Music Video)-KRaWnd3LJfs.mp3
+Jan 01 15:24 : alsa_output: Decoder is too slow; playing silence to avoid xrun
+Jan 01 15:24 : player: played "Maroon 5 - Payphone ft. Wiz Khalifa (Explicit) (Official Music Video)-KRaWnd3LJfs.mp3"
+Jan 01 15:24 : alsa_output: Decoder is too slow; playing silence to avoid xrun
+Jan 01 15:24 : player: played "Maroon 5 - Payphone ft. Wiz Khalifa (Explicit) (Official Music Video)-KRaWnd3LJfs.mp3"
+Jan 01 15:24 : update: added /Jonas Blue, Liam Payne, Lennon Stella - Polaroid (Official Lyric Video)-SD2-2A1027g.mp3
