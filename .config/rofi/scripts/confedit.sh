@@ -2,7 +2,7 @@
 
 themesDir="$HOME/.config/rofi/themes/"
 scriptsDir="$HOME/.config/rofi/scripts"
-rofiCommand="rofi -theme $themesDir/tokyo-night-center.rasi"
+rofiCommand="rofi -theme $themesDir/tokyo-night-center-no-rounded-corners.rasi"
 editor="emacsclient -c -a 'emacs' "
 
 declare -a configFiles=(

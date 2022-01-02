@@ -57,7 +57,7 @@ altTerminal     = "st"
 
 -- Preferred Run launcher
 -- myLauncher = "dmenu_run -p 'Run:' -h 24"
-myLauncher = "~/.config/rofi/scripts/launcher-xmonad.sh"
+myLauncher = "~/.config/rofi/scripts/launcher-xmonad-no-rounded.sh"
 
 -- Preferred Browser Program
 myBrowser = "brave"

@@ -2,4 +2,4 @@ configuration {
 icon-theme: "BeautyLine";
 terminal: "alacritty";
 }
-@theme "~/.config/rofi/themes/tokyo-night-center.rasi"
+@theme "~/.config/rofi/themes/tokyo-night-center-no-rounded-corners.rasi"

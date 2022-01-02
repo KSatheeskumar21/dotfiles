@@ -6,4 +6,4 @@ rofi -dmenu \
 	-i \
 	-no-fixed-num-lines \
 	-p "Are you sure? : " \
-	-theme $THEMEDIR/tokyo-night-center.rasi 
+	-theme $THEMEDIR/tokyo-night-center-no-rounded-corners.rasi 
