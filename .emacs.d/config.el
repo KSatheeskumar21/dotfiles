@@ -1,8 +1,3 @@
-;;; package -- Summary
-
-;;; Commentary:
-
-;;; Code:
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -20,7 +15,6 @@
 ;; Visual bell
 (setq visible-bell t)
 
-;; Zooming in and out
 ;;(global-set-key (kbd "C-=") 'text-scale-increase)
 ;;(global-set-key (kbd "C--") 'text-scale-decrease)
 (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
@@ -31,7 +25,6 @@
 
 (set-face-attribute 'default nil :font "Source Code Pro" :height 110)
 
-;; Setting up package-archives
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/")
@@ -44,7 +37,6 @@
   (package-install 'use-package))
 (setq use-package-always-ensure t)
 
-;; Evil mode
 (use-package evil
   :init      ;; tweak evil's configuration before loading it
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
@@ -58,10 +50,7 @@
   (setq evil-collection-mode-list '(dashboard dired ibuffer))
   (evil-collection-init))
 (use-package evil-tutor)
-;;(nvmap :keymaps 'override :prefix "SPC"
-;;  "f s" '(evil-save :which-key "Save file"))
 
-;; General
 (use-package general
   :config
   (general-evil-setup t))
@@ -71,44 +60,25 @@
   "SPC" '(counsel-M-x :which-key "M-x")
   "h r r" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :which-key "Reload Emacs"))
 
-;; garbage-collection
- (use-package gcmh
+(use-package gcmh
    :config
    (gcmh-mode 1))
 ;; Setting garbage collection threshold
 (setq gc-cons-threshold 402653184
       gc-cons-percentage 0.6)
 
-;; Profile emacs startup
-;;(add-hook 'emacs-startup-hook
-;;          (lambda ()
-;;            (message "Emacs loaded in %s with %d garbage collections."
-;;                     (format "%.2f seconds"
-;;                             (float-time
-;;                              (time-subtract after-init-time before-init-time)))
-;;                     gcs-done)))
-
-;; Silence compiler warnings as they can be pretty disruptive (setq comp-async-report-warnings-errors nil)
-
-;; Silence compiler warnings as they can be pretty disruptive
 (if (boundp 'comp-deferred-compilation)
     (setq comp-deferred-compilation nil)
     (setq native-comp-deferred-compilation nil))
-;; In noninteractive sessions, prioritize non-byte-compiled source files to
-;; prevent the use of stale byte-code. Otherwise, it saves us a little IO time
-;; to skip the mtime checks on every *.elc file.
-(setq load-prefer-newer noninteractive)
 
-;; Doom Themes
+(setq load-prefer-newer noninteractive)
+(setq gc-cons-threshold (* 2 1000 1000))
+
 (use-package doom-themes)
 (setq doom-themes-enable-italic t
       doom-themes-enable-bold t)
 (load-theme 'doom-one t)
 
-;; All the Icons
-(use-package all-the-icons)
-
-;; Modeline
 (use-package doom-modeline
   :ensure t)
 
@@ -152,19 +122,10 @@
 (setq doom-modeline-before-update-env-hook nil)
 (setq doom-modeline-after-update-env-hook nil)
 
-;;(use-package powerline
-;;  :config
-;;  (require 'powerline))
+(use-package elec-pair
+  :ensure t)
+(electric-pair-mode 1)
 
-;;(use-package airline-themes)
-;;(require 'airline-themes)
-;;(load-theme 'airline-ayu-dark t)
-
-;;(use-package spaceline)
-;;(require 'spaceline-config)
-;;(spaceline-emacs-theme)
-
-;; Ivy
 (use-package counsel
   :after ivy
   :config (counsel-mode))
@@ -196,10 +157,7 @@
          ("C-r" . swiper)))
 
 (setq ivy-initial-inputs-alist nil)
-;; (use-package smex
-;;   :init (smex-initalize))
 
-;; Ivy-posframe
 (use-package ivy-posframe
   :init
   (setq ivy-posframe-display-functions-alist
@@ -219,13 +177,11 @@
   :config
   (ivy-posframe-mode 1)) ; 1 enables posframe-mode, 0 disables it.
 
-;; Company mode
 (use-package company
   :init (company-mode))
 
 (add-hook 'after-init-hook 'global-company-mode)
 
-;; Tabs
 (use-package centaur-tabs)
 
 ;; Configuration
@@ -237,16 +193,17 @@
       centaur-tabs-style "bar"
       centaur-tabs-modified-marker "•")
 
-
-;; Dashboard
 (use-package dashboard
   :init
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
-  (setq dashboard-banner-logo-title "Emacs, the apex Text editor")
+  (setq dashboard-banner-logo-title "Stop procrastinating")
   ;;(setq dashboard-startup-banner 'logo)
   (setq dashboard-startup-banner "~/.emacs.d/emacs-dash.png")
-  (setq dashboard-center-content nil)
+  (setq dashboard-center-content t)
+  (setq dashboard-items '((bookmarks . 3)
+                          (agenda . 3)
+                          (projects . 3)))
 
   :config
   (dashboard-setup-startup-hook))
@@ -254,7 +211,6 @@
 ;; Sets inital buffer when opening Emacs to *dashboard*
 (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 
-;; Ibuffer
 (nvmap :prefix "SPC"
   "b i" '(ibuffer :which-key "Ibuffer")
   "b k" '(kill-current-buffer :which-key "Kill current buffer")
@@ -262,10 +218,8 @@
   "b p" '(previous-buffer :which-key "Previous buffer")
   "b K" '(kill-buffer :which-key "Kill buffer"))
 
-;; Selection mode
 (delete-selection-mode t)
 
-;; Emojis
 (use-package emojify
   :hook (after-init . global-emojify-mode))
 
@@ -274,7 +228,6 @@
   (recentf-mode))
 (use-package sudo-edit)
 
-;; Dired
 (use-package all-the-icons-dired)
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 (nvmap :states '(normal visual) :keymaps 'override :prefix "SPC"
@@ -297,13 +250,8 @@
         which-key-separator " → " ))
 (which-key-mode)
 
-;; Runtime Performance stuff
-(setq gc-cons-threshold (* 2 1000 1000))
-
-;; Writeroom
 (use-package writeroom-mode)
 
-;; Org mode
 (add-hook 'org-mode-hook 'org-indent-mode)
 (setq org-directory "~/Org/"
       org-agenda-files '("~/Org/agenda.org")
@@ -319,11 +267,9 @@
       org-edit-src-content-indentation 0)
 (setq org-support-shift-select 'always)
 
-;; Org bullets
 (use-package org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
-;; TODO Keywords
 (setq org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
         '((sequence
            "TODO(t)"           ; A task that is ready to be tackled
@@ -352,33 +298,25 @@
                                          (plain-list-item . nil))))
 
 (use-package ox-man
-  :ensure nil)
+    :ensure nil)
 
-;; Programming language stuff
-
-;; Haskell
 (use-package haskell-mode)
 
-;; Keybindings
 (nvmap :keymaps 'override :prefix "SPC"
 	   "H i n" '(haskell-navigate-imports :which-key "Navigate to imports")
 	   "H i s" '(haskell-sort-imports :which-key "Sort Imports")
 	   "H i a" '(haskell-align-imports :which-key "Align imports"))
 
-;; Markdown
 (use-package markdown-mode)
 
-;; Rust
 (use-package rust-mode)
 (nvmap :keymaps 'override :prefix "SPC"
   "R r" '(rust-run :which-key "Rust run"))
 
-;; Python
 (use-package elpy
   :ensure t
   :init (elpy-enable))
 
-;; LSP mode
 (use-package lsp-mode
   :ensure t
   :init
@@ -394,7 +332,6 @@
 (use-package lsp-ui :commands lsp-ui-mode)
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
 
-;; Python
 (use-package lsp-python-ms
   :ensure t
   :init (setq lsp-python-ms-auto-install-server t)
@@ -402,21 +339,16 @@
 			 (require 'lsp-python-ms)
 			 (lsp))))
 
-;; Haskell
 (require 'lsp)
 (require 'lsp-haskell)
 (add-hook 'haskell-mode-hook #'lsp)
 (add-hook 'haskell-literate-mode-hook #'lsp)
 
-;; Rust
 (add-hook 'before-save-hook (lambda () (when (eq 'rust-mode major-mode)
 					 (lsp-format-buffer))))
 
-;; Go
 (use-package go-mode)
 (add-hook 'go-mode-hook 'lsp-deferred)
-
-;; Prettify-symbols
 
 (defun org-icons ()
    "Beautify org mode keywords."
@@ -451,17 +383,14 @@
 
 (add-hook 'org-mode-hook 'org-icons)
 
-;; Rainbow mode
 (use-package rainbow-mode)
 (define-globalized-minor-mode global-rainbow-mode rainbow-mode
   (lambda () (rainbow-mode 1)))
 (global-rainbow-mode 1)
 
-;; Flycheck
 (use-package flycheck)
 (global-flycheck-mode)
 
-;; Eshell
 (nvmap :prefix "SPC"
   "e h" '(counsel-esh-history :which-key "Eshell history")
   "e s" '(eshell :which-key "Eshell"))
@@ -480,32 +409,6 @@
       eshell-destroy-buffer-when-process-dies t
       eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
 
-;; Vterm
 (use-package vterm)
 (setq shell-file-name "/bin/fish"
       vterm-max-scrollback 5000)
-
-;; END OF USER CONFIG
-
-;; Set by Emacs itself
-
-;; Custom.el stuff
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("cb49de022f924fee5bee2425a874009b99ce8d7ee76f84227446d037fb4298d3" "27b3336b6115451a340275d842de6e8b1c49ce0bba45210ed640902240f8961d" "6b234feec8db588ad5ec2a9d9d7b935f7a155104b25ccfb94d921c45a2ff7d22" "2ed177de0dfc32a6a32d6109ddfd1782a61bcc23916b7b967fa212666d1aa95c" "835868dcd17131ba8b9619d14c67c127aa18b90a82438c8613586331129dda63" default))
- '(org-agenda-files nil)
- '(package-selected-packages
-   '(lsp-haskell centaur-tabs prettify-symbols prettify-utils pretty-symbols flycheck elpy doom-themes doom-modeline use-package sudo-edit peep-dired general gcmh evil-tutor evil-collection emojify elfeed-goodies dired-open dashboard all-the-icons-dired)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-(provide 'init)
-;;; init.el ends here
