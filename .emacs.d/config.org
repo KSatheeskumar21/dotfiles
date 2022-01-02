@@ -32,6 +32,7 @@
   - [[#markdown][Markdown]]
   - [[#rust][Rust]]
   - [[#python][Python]]
+  - [[#yaml][YAML]]
   - [[#lsp][LSP]]
 - [[#prettify-symbols][Prettify symbols]]
 - [[#rainbow-mode][Rainbow mode]]
@@ -353,8 +354,6 @@
 (nvmap :states '(normal visual) :keymaps 'override :prefix "SPC"
        "." '(dired :which-key "Open dired"))
 
-(setq dired-listing-switches "-al --group-directories-first")
-
 ;; Which key
 (use-package which-key
   :init
@@ -489,6 +488,16 @@
 (use-package elpy
   :ensure t
   :init (elpy-enable))
+#+end_src
+
+** YAML
+
+#+begin_src emacs-lisp
+(use-package yaml
+    :ensure t)
+(use-package yaml-mode
+    :ensure t)
+;;(yaml-mode)
 #+end_src
 
 ** LSP

@@ -233,8 +233,6 @@
 (nvmap :states '(normal visual) :keymaps 'override :prefix "SPC"
        "." '(dired :which-key "Open dired"))
 
-(setq dired-listing-switches "-al --group-directories-first")
-
 ;; Which key
 (use-package which-key
   :init
@@ -318,6 +316,12 @@
 (use-package elpy
   :ensure t
   :init (elpy-enable))
+
+(use-package yaml
+    :ensure t)
+(use-package yaml-mode
+    :ensure t)
+;;(yaml-mode)
 
 (use-package lsp-mode
   :ensure t
