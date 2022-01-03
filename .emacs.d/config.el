@@ -22,7 +22,7 @@
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
-(set-face-attribute 'default nil :font "Source Code Pro" :height 90)
+(set-face-attribute 'default nil :font "Source Code Pro" :height 100)
 
 (require 'package)
 (add-to-list 'package-archives
@@ -197,9 +197,9 @@
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
   (setq dashboard-banner-logo-title "Stop procrastinating")
-  ;;(setq dashboard-startup-banner 'logo)
-  (setq dashboard-startup-banner "~/.emacs.d/emacs-dash.png")
-  (setq dashboard-center-content t)
+  (setq dashboard-startup-banner 'official)
+  ;;(setq dashboard-startup-banner "~/.emacs.d/emacs-dash.png")
+  (setq dashboard-center-content nil)
   (setq dashboard-items '((bookmarks . 3)
                           (agenda . 3)
                           (projects . 3)))

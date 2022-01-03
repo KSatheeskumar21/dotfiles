@@ -57,7 +57,8 @@ altTerminal     = "st"
 
 -- Preferred Run launcher (Currently using Rofi, probably won't switch back to dmenu)
 -- myLauncher = "dmenu_run -p 'Run:' -h 24"
-myLauncher = "~/.config/rofi/scripts/launcher-xmonad-no-rounded.sh"
+-- myLauncher = "~/.config/rofi/scripts/launcher-xmonad-no-rounded.sh"
+myLauncher = "rofi -show run -display-run 'Run:'"
 
 -- Preferred Browser Program
 myBrowser = "brave"

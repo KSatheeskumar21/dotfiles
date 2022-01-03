@@ -8,4 +8,6 @@ smex-items
 url/
 .cache/
 .lsp-session-v1
-
+tramp
+bookmarks
+projectile-bookmarks.eld
