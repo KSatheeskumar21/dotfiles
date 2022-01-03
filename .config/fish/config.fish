@@ -20,6 +20,7 @@ function fish_greeting
 	# pokemon-colorscripts -r
 	# echo (set_color brred) "Welcome to your fish shell!"
 	python3 ~/.local/bin/random-script.py
+	starship init fish | source
 end
 
 # Functions End

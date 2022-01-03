@@ -612,8 +612,8 @@ schemes:
         cyan: '#77EEEE'
         white: '#7788AA'
 
-    catpuccin:
-      &catpuccin
+    catppuccin:
+      &catppuccin
       primary: 
         background: '#1E1E28'
         foreground: '#DADAE8'
@@ -767,12 +767,12 @@ schemes:
 # *tomorrow-night
 # *tokyo-night
 # *doom-city-lights
-# *catpuccin
+# *catppuccin
 # *rose-pine
 # *rose-pine-moon
 # *rose-pine-dawn
 
-colors: *rose-pine
+colors: *catppuccin
 
 #######################################
 ##       END OF COLOR SCHEMES        ##

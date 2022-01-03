@@ -77,7 +77,7 @@
 (use-package doom-themes)
 (setq doom-themes-enable-italic t
       doom-themes-enable-bold t)
-(load-theme 'doom-one t)
+(load-theme 'doom-tokyo-night t)
 
 (use-package doom-modeline
   :ensure t)
@@ -158,6 +158,10 @@
 
 (setq ivy-initial-inputs-alist nil)
 
+(use-package smex
+    :ensure t)
+(smex-initialize)
+
 (use-package ivy-posframe
   :init
   (setq ivy-posframe-display-functions-alist
@@ -230,8 +234,6 @@
 
 (use-package all-the-icons-dired)
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-(nvmap :states '(normal visual) :keymaps 'override :prefix "SPC"
-       "." '(dired :which-key "Open dired"))
 
 ;; Which key
 (use-package which-key

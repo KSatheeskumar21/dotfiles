@@ -55,7 +55,7 @@ import System.Posix (BaudRate(B600))
 myTerminal      = "alacritty -t Terminal"
 altTerminal     = "st"
 
--- Preferred Run launcher
+-- Preferred Run launcher (Currently using Rofi, probably won't switch back to dmenu)
 -- myLauncher = "dmenu_run -p 'Run:' -h 24"
 myLauncher = "~/.config/rofi/scripts/launcher-xmonad-no-rounded.sh"
 
@@ -64,36 +64,29 @@ myBrowser = "brave"
 
 -- Preferred Text editor
 myEditor = "emacsclient -c -a 'emacs'"
-altEditor = "code"
+-- altEditor = "code"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = False
+myFocusFollowsMouse = True
 
 -- Whether clicking on a window to focus also passes the click to the window
 myClickJustFocuses :: Bool
-myClickJustFocuses = True
+myClickJustFocuses = False
 
 -- Width of the window border in pixels.
---
 myBorderWidth   = 2
 
--- modMask lets you specify which modkey you want to use. The default
--- is mod1Mask ("left alt").  You may also consider using mod3Mask
--- ("right alt"), which does not conflict with emacs keybindings. The
--- "windows key" is usually mod4Mask.
---
+-- modMask lets you specify which modkey you want to use.
 myModMask       = mod4Mask
 altMask         = mod1Mask
 
 -- Workspace Names
-
 myWorkspaces :: [String]
 myWorkspaces    = ["dev","www","sys","doc","vbox","chat","mus","vid","gfx"]
 myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
     where i = fromJust $ M.lookup ws myWorkspaceIndices
-
 
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
@@ -125,7 +118,7 @@ myKeys =
     , ("M-<Tab>", windows W.focusDown)
 
     -- Move focus to previous window
-    , ("M-S-<Tab?", windows W.focusUp)
+    , ("M-S-<Tab>", windows W.focusUp)
 
     -- Move focus to the next window
     , ("M-j", windows W.focusDown)
@@ -172,15 +165,9 @@ myKeys =
 
     -- Spawn Emacsclient
     , ("M-S-e", spawn myEditor)
-    -- , ("C-e v", spawn (myEditor ++ ("--eval '(+vterm/toggle nil)'")))
-
-    -- Spawn VSCode
-    , ("M1-e", spawn altEditor)
-    -- , ("M1-e x", spawn (altEditor ++ ".config/xmonad"))
-    -- , ("M1-e a", spawn (altEditor ++ ".config/alacritty"))
 
     -- Spawn PcManFM
-    -- , ("M-S-f", spawn "pcmanfm")
+    , ("M1-S-f", spawn "pcmanfm")
     
     -- Spawn ranger
     , ("M-S-f", spawn (myTerminal ++ " -e ranger"))
@@ -202,10 +189,18 @@ myKeys =
     , ("M-p S-s", spawn "dm-websearch")
     , ("M-p y", spawn "dm-youtube")
 
-    -- Music Player ( I use dm-music but if I want to visually manage my tracks I use this binding)
-    , ("M-S-m", spawn (altTerminal ++ " -e mocp"))
+    -- Music Player ( I use dm-music but if I want to visually manage my tracks I use this binding, assuming I'm not using mocp)
     , ("M1-m", spawn (altTerminal ++ " -e ncmpcpp"))
 
+    -- KB_GROUP -> Mocp bindings
+    , ("M-m o", spawn (altTerminal ++ " -e mocp"))
+    , ("M-m p", spawn "mocp --play")
+    , ("M-m P", spawn "mocp --pause")
+    , ("M-m u", spawn "mocp --unpause")
+    , ("M-m s", spawn "mocp --stop")
+    , ("M-m n", spawn "mocp --next")
+    , ("M-m N", spawn "mocp --previous")
+    
     -- KB_GROUP -> Xmonad
     , ("M-b", sendMessage ToggleStruts)
 
@@ -220,7 +215,6 @@ myKeys =
     , ("M-S-/", spawn "xmonad-keys")
     -- KB_END
     ]
-
     --
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
@@ -240,10 +234,6 @@ myKeys =
 
 ------------------------------------------------------------------------
 -- My preferred layouts
-
--- Extra Layouts
-
-
 
 -- Floating Layout
 floatingLayout = renamed [Replace "Floating"] simplestFloat
