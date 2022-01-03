@@ -11,7 +11,7 @@ fish_vi_key_bindings
 export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:/var/lib/snapd/snap/bin:$PATH"
 
 # Setting Manpager
-set -x MANPAGER '/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft=man ts=8 nomod nolist norelativenumber nonu noma\" -c \"normal L\" -c \"nmap q :qa<CR>\"</dev/tty <(col -b)"'
+set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
 # Functions
 
