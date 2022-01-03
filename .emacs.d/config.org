@@ -1,6 +1,9 @@
 #+title: Emacs Config
+#+author: Kishore Satheeskumar
+#+description: My GNU Emacs Configuration
 
 * Table of contents :toc:
+- [[#startup-stuff][Startup stuff]]
 - [[#ui-tweaks][UI Tweaks]]
 - [[#keybindings][Keybindings]]
 - [[#font][Font]]
@@ -8,13 +11,12 @@
 - [[#evil-mode][Evil mode]]
 - [[#general-keybindings][General keybindings]]
 - [[#startup-garbage-collection][Startup Garbage collection]]
-- [[#doom-themes][Doom themes]]
+- [[#themes][Themes]]
 - [[#all-the-icons-font][All the icons font]]
 - [[#modeline][Modeline]]
 - [[#electric-pair][Electric pair]]
 - [[#ivy-and-ivy-posframe][Ivy and Ivy posframe]]
 - [[#company-mode][Company mode]]
-- [[#tabs][Tabs]]
 - [[#dashboard][Dashboard]]
 - [[#ibuffer][Ibuffer]]
 - [[#selection-mode][Selection mode]]
@@ -40,16 +42,19 @@
 - [[#eshell][Eshell]]
 - [[#vterm][Vterm]]
 
+* Startup stuff
+
+#+begin_src emacs-lisp
+(add-to-list 'load-path "~/.emacs.d/nano-bindings.el")
+(add-to-list 'load-path "~/.emacs.d/nano-modeline.el")
+#+end_src
+
 * UI Tweaks
 
 #+begin_src emacs-lisp
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-
-;; Line numbers
-(column-number-mode)
-(global-display-line-numbers-mode t)
 
 (dolist (mode '(vterm-mode-hook
 		dashboard-mode-hook
@@ -76,7 +81,7 @@
 * Font
 
 #+begin_src emacs-lisp
-(set-face-attribute 'default nil :font "Source Code Pro" :height 110)
+(set-face-attribute 'default nil :font "Source Code Pro" :height 90)
 #+end_src
 
 * Package archives and use-package
@@ -144,17 +149,23 @@
 (setq gc-cons-threshold (* 2 1000 1000))
 #+end_src
 
-* Doom themes
+* Themes
 
 #+begin_src emacs-lisp
 (use-package doom-themes)
 (setq doom-themes-enable-italic t
       doom-themes-enable-bold t)
-(load-theme 'doom-tokyo-night t)
+
+(use-package nano-theme)
+
+;;(load-theme 'doom-one t)
+(load-theme 'nano-dark t)
+(nano-mode)
 #+end_src
 
 * All the icons font
-#+begin_src 
+
+#+begin_src emacs-lisp
 (use-package all-the-icons)
 #+end_src
 
@@ -165,7 +176,7 @@
   :ensure t)
 
 (require 'doom-modeline)
-(doom-modeline-mode 1)
+;;(doom-modeline-mode 1)
 
 ;; How tall the mode-line should be. It's only respected in GUI.
 ;; If the actual char height is larger, it respects the actual height.
@@ -212,7 +223,6 @@
   :ensure t)
 (electric-pair-mode 1)
 #+end_src
-
 
 * Ivy and Ivy posframe
 
@@ -282,21 +292,6 @@
   :init (company-mode))
 
 (add-hook 'after-init-hook 'global-company-mode)
-#+end_src
-
-* Tabs
-
-#+begin_src emacs-lisp
-(use-package centaur-tabs)
-
-;; Configuration
-(setq centaur-tabs-set-bar 'over
-      centaur-tabs-set-icons t
-      centaur-tabs-gray-out-icons 'buffer
-      centaur-tabs-height 24
-      centaur-tabs-set-modified-marker t
-      centaur-tabs-style "bar"
-      centaur-tabs-modified-marker "•")
 #+end_src
 
 * Dashboard
@@ -432,7 +427,7 @@
 #+begin_src emacs-lisp
 (setq org-src-fontify-natively t
     org-src-tab-acts-natively t
-    org-confirm-babel-evaluate nil
+    org-confirm-babel-evaluate t
     org-edit-src-content-indentation 0)
 #+end_src
 

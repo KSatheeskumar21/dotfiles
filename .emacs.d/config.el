@@ -1,10 +1,9 @@
+(add-to-list 'load-path "~/.emacs.d/nano-bindings.el")
+(add-to-list 'load-path "~/.emacs.d/nano-modeline.el")
+
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-
-;; Line numbers
-(column-number-mode)
-(global-display-line-numbers-mode t)
 
 (dolist (mode '(vterm-mode-hook
 		dashboard-mode-hook
@@ -23,7 +22,7 @@
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
-(set-face-attribute 'default nil :font "Source Code Pro" :height 110)
+(set-face-attribute 'default nil :font "Source Code Pro" :height 90)
 
 (require 'package)
 (add-to-list 'package-archives
@@ -77,13 +76,20 @@
 (use-package doom-themes)
 (setq doom-themes-enable-italic t
       doom-themes-enable-bold t)
-(load-theme 'doom-tokyo-night t)
+
+(use-package nano-theme)
+
+;;(load-theme 'doom-one t)
+(load-theme 'nano-dark t)
+(nano-mode)
+
+(use-package all-the-icons)
 
 (use-package doom-modeline
   :ensure t)
 
 (require 'doom-modeline)
-(doom-modeline-mode 1)
+;;(doom-modeline-mode 1)
 
 ;; How tall the mode-line should be. It's only respected in GUI.
 ;; If the actual char height is larger, it respects the actual height.
@@ -186,17 +192,6 @@
 
 (add-hook 'after-init-hook 'global-company-mode)
 
-(use-package centaur-tabs)
-
-;; Configuration
-(setq centaur-tabs-set-bar 'over
-      centaur-tabs-set-icons t
-      centaur-tabs-gray-out-icons 'buffer
-      centaur-tabs-height 24
-      centaur-tabs-set-modified-marker t
-      centaur-tabs-style "bar"
-      centaur-tabs-modified-marker "•")
-
 (use-package dashboard
   :init
   (setq dashboard-set-heading-icons t)
@@ -289,7 +284,7 @@
 
 (setq org-src-fontify-natively t
     org-src-tab-acts-natively t
-    org-confirm-babel-evaluate nil
+    org-confirm-babel-evaluate t
     org-edit-src-content-indentation 0)
 
 (use-package toc-org
