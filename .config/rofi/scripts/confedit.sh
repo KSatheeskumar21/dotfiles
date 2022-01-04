@@ -13,6 +13,7 @@ declare -a configFiles=(
     "Fish Prompt - $HOME/.config/fish/functions/fish_prompt.fish"
     "Awesome - $HOME/.config/awesome/rc.lua"
     "Neovim - $HOME/.config/nvim/init.vim"
+    "Emacs - $HOME/.emacs.d/config.org"
     "Quit"
 )
 
