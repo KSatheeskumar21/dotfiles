@@ -168,11 +168,8 @@ myKeys =
     , ("M-S-e", spawn myEditor)
 
     -- Spawn PcManFM
-    , ("M1-S-f", spawn "pcmanfm")
+    , ("M-S-f", spawn "pcmanfm")
     
-    -- Spawn ranger
-    , ("M-S-f", spawn (myTerminal ++ " -e ranger"))
-
     -- Spawns preferred browser
     , ("M-S-b", spawn myBrowser)
 
@@ -246,6 +243,10 @@ mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 goldRatio = toRational (2/(1 + sqrt 5 :: Double))
 spiralLayout = renamed [Replace "Golden Spiral"] $ mySpacing 5 $ spiral goldRatio
 
+myTabbed = renamed [Replace "Tabbed"] $ simpleTabbed
+
+gridWithGaps = renamed [Replace "Grid"] $ mySpacing 5 $ Grid(16/10)
+
 -- ShowWName Config
 showWNameTheme :: SWNConfig
 showWNameTheme = def
@@ -255,7 +256,7 @@ showWNameTheme = def
   , swn_color = "#ffffff"
   }
 
-myLayout = mouseResize $ avoidStruts (tall ||| floatingLayout ||| Grid(16/10) ||| simpleTabbed ||| spiralLayout ||| Full)
+myLayout = mouseResize $ avoidStruts (tall ||| floatingLayout ||| gridWithGaps ||| myTabbed ||| spiralLayout ||| Full)
   where
 
      -- Tiled layout (ResizableTile)
