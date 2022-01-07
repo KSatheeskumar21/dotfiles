@@ -41,6 +41,7 @@
 - [[#flycheck][Flycheck]]
 - [[#eshell][Eshell]]
 - [[#vterm][Vterm]]
+- [[#emacs-application-framework][Emacs Application Framework]]
 
 * Startup stuff
 
@@ -158,9 +159,7 @@
 
 (use-package nano-theme)
 
-;;(load-theme 'doom-one t)
-(load-theme 'nano-dark t)
-(nano-mode)
+(load-theme 'doom-tokyo-night t)
 #+end_src
 
 * All the icons font
@@ -176,7 +175,7 @@
   :ensure t)
 
 (require 'doom-modeline)
-;;(doom-modeline-mode 1)
+(doom-modeline-mode 1)
 
 ;; How tall the mode-line should be. It's only respected in GUI.
 ;; If the actual char height is larger, it respects the actual height.
@@ -633,4 +632,18 @@
 (use-package vterm)
 (setq shell-file-name "/bin/fish"
       vterm-max-scrollback 5000)
+#+end_src
+
+* Emacs Application Framework
+
+#+begin_src emacs-lisp
+(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
+(require 'eaf)
+(require 'eaf-browser)
+(require 'eaf-pdf-viewer)
+(require 'eaf-music-player)
+(require 'eaf-image-viewer)
+(require 'eaf-terminal)
+(require 'eaf-video-player)
+(require 'eaf-file-manager)
 #+end_src
