@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+DMENU="dmenu -l 5 -p"
+
+uptime=$(uptime -p | sed -e 's/up //g')
+
+# Options
+# shutdown=""
+# reboot=""
+# lock=""
+# suspend=""
+# logout=""
+shutdown="Shutdown"
+reboot="Reboot"
+lock="Lock"
+suspend="Suspend"
+logout="Log Out"
+
+# Variable passed to rofi
+options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
+_msg="Options  -  yes / y / no / n"
+
+chosen="$(echo -e "$options" | ${DMENU} "UP - $uptime")"
+case $chosen in
+    $shutdown)
+    ans=$(echo -e "No\nYes" | ${DMENU} "Are you sure?")
+		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
+        systemctl poweroff
+		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
+        exit
+        else
+            echo "$_msg" | ${DMENU} "Options"
+        fi
+        ;;
+    $reboot)
+    ans=$(echo -e "No\nYes" | ${DMENU} "Are you sure?")
+		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
+        systemctl reboot
+		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
+        exit
+        else
+            echo "$_msg" | ${DMENU} "Options"
+        fi
+        ;;
+    $lock)
+        betterlockscreen -l
+        ;;
+    $suspend)
+    ans=$(echo -e "No\nYes" | ${DMENU} "Are you sure?")
+		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
+        mpc -q pause
+        amixer set Master mute
+        betterlockscreen --suspend
+		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
+        exit
+        else
+            echo "$_msg" | ${DMENU} "Options"
+        fi
+        ;;
+    $logout)
+    ans=$(echo -e "No\nYes" | ${DMENU} "Are you sure?")
+		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
+        bspc quit
+		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
+        exit
+        else 
+            echo "$_msg" | ${DMENU} "Options"
+        fi
+        ;;
+esac
+

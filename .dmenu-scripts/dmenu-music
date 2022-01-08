@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Defining options for moc server to act on
+play="Play"
+pause="Pause"
+unpause="Resume"
+next="Next"
+previous="Previous"
+open_menu="Open mocp"
+toggle="Toggle Play/Pause"
+ex="Exit"
+quit="Quit"
+
+options="$play\n$pause\n$unpause\n$next\n$previous\n$open_menu\n$toggle\n$ex\n$quit"
+
+choice=$(echo -en "$options" | dmenu -p "Select:")
+case $choice in
+	$play) mocp -p ;;
+	$pause) mocp -P ;;
+	$unpause) mocp -U ;;
+	$next) mocp -f ;;
+	$previous) mocp -r ;;
+	$open_menu) st -e mocp ;;
+	$toggle) mocp -G ;;
+	$ex) mocp -x && echo "Terminated" ;;
+	$quit) echo "Terminated" && exit 1 ;;
+esac

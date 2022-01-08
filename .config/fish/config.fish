@@ -8,7 +8,7 @@ set XDG_CONFIG_HOME "/home/kishore/.config"
 fish_vi_key_bindings
 
 # PATH variable
-export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:/var/lib/snapd/snap/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:/var/lib/snapd/snap/bin:$HOME/.dmenu-scripts:$PATH"
 
 # Setting Manpager
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"

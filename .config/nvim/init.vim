@@ -87,7 +87,7 @@ set laststatus=2
 set noshowmode
 
 " Colorscheme of choice
-colorscheme catppuccin
+colorscheme tokyonight
 
 " Remapping Splits
 nnoremap <C-h> <C-w>h
