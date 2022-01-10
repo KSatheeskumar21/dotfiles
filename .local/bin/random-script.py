@@ -20,7 +20,7 @@ if randomInteger.random_number == 1:
     os.system("pokemon-colorscripts -r")
 
 elif randomInteger.random_number == 2:
-    os.system("pipes")
+    os.system("unimatrix")
 
 elif randomInteger.random_number == 3:
     os.system("colorscript random")
