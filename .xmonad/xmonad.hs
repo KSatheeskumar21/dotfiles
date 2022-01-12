@@ -52,20 +52,18 @@ import XMonad.Actions.MouseResize
 import System.Posix (BaudRate(B600))
 
 -- Preferred Terminal
-myTerminal      = "alacritty -t Terminal"
+myTerminal      = "kitty"
 altTerminal     = "st"
 
--- Preferred Run launcher (Currently using Rofi, probably won't switch back to dmenu)
--- myLauncher = "dmenu_run -p 'Run:' -h 24"
--- myLauncher = "~/.config/rofi/scripts/launcher-xmonad-no-rounded.sh"
-myLauncher = "rofi -show run -display-run 'Run:'"
+-- Preferred Run launcher (Currently using Rofi, probably won't switch back to dmenu, except I've switched back to dmenu)
+myLauncher = "dmenu_run -p 'Run:' -h 24"
+-- myLauncher = "rofi -show run -display-run 'Run:'"
 
 -- Preferred Browser Program
 myBrowser = "brave"
 
 -- Preferred Text editor
 myEditor = "emacsclient -c -a 'emacs'"
--- altEditor = "code"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -108,9 +106,6 @@ myKeys =
     -- KB_GROUP -> Window management
     -- Rotate through the available layout algorithms
     [ ("M-<Space>", sendMessage NextLayout)
-
-    --  Reset the layouts on the current workspace to default
-    -- , ("M-S-<Space>", setLayout $ XMonad.layoutHook conf)
 
     -- Resize viewed windows to the correct size
     , ("M-n", refresh)
@@ -155,7 +150,7 @@ myKeys =
     -- , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
     
     -- KB_GROUP -> Applications
-    -- Alacritty
+    -- Spawnn Kitty
     , ("M-<Return>", spawn myTerminal)
 
     -- launch dmenu
@@ -170,8 +165,9 @@ myKeys =
     -- Spawn PcManFM
     , ("M-S-f", spawn "pcmanfm")
     
-    -- Spawns preferred browser
+    -- Spawns preferred browser ( using Brave, might switch to LibreWolf, keeping a separate binding for Suckless surf )
     , ("M-S-b", spawn myBrowser)
+    , ("M1-S-b", spawn "surf-open")
 
     -- KB_GROUP -> dmscripts
     , ("M-p h", spawn "dm-hub")
@@ -327,8 +323,8 @@ myStartupHook = do
         -- Spawn the emacs daemon
         spawn "/usr/bin/emacs --daemon &"
         -- Set a wallpaper and enable compositor, I have now switched to dmscripts (dm-setbg) to manage my wallpapers
-        -- spawnOnce "nitrogen --restore &"
-        spawnOnce "xargs xwallpaper --stretch < ~/.cache/wall"
+        spawnOnce "nitrogen --restore &"
+        -- spawnOnce "xargs xwallpaper --stretch < ~/.cache/wall"
         spawnOnce "picom --experimental-backends &"
         -- Notifications and clipboard
         spawnOnce "dunst &"
