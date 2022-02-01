@@ -772,7 +772,7 @@ schemes:
 # *rose-pine-moon
 # *rose-pine-dawn
 
-colors: *catppuccin
+colors: *tokyo-night
 
 #######################################
 ##       END OF COLOR SCHEMES        ##
